@@ -28,15 +28,21 @@ public final class Constants {
         public static final int kModID = 2; // CAN adr, ID, of PDH
     }
 
-    public static class ElevatorConstants {
+    public static class ElevConstants {
+        //Hardware
         public static final int kStg1SVChnl = 0;
         public static final int kStg2SVChnl = 1;
-        public static final int kElevExecBtn = 1;
-        public static final int kElevRcvrBtn = 2;
-        public static final int kElevLvl1Btn = 3;
-        public static final int kElevLvl2Btn = 4;
-        public static final int kElevLvl3Btn = 5;
-        public static final int kElevLvl4Btn = 6;
+        //JS Buttons
+        public static final int kElevRcvrBtn = 6;
+        public static final int kElevLvl1Btn = 1;
+        public static final int kElevLvl2Btn = 2;
+        public static final int kElevLvl3Btn = 3;
+        public static final int kElevLvl4Btn = 4;
+
+        public static final int kElevExecBtn = 5;
+        public static final int kElevLowBtn = 1;
+        public static final int kElevMidBtn = 2;
+        public static final int kElevHighBtn = 3;
     }
 
 }

@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.ElevatorConstants;
+import frc.robot.Constants.ElevConstants;
 import frc.robot.Constants.RobotConstants;
 
 public class ElevatorSubsys extends SubsystemBase {
 
-    private final Solenoid stg1SV = new Solenoid(RobotConstants.kModType, ElevatorConstants.kStg1SVChnl);
-    private final Solenoid stg2SV = new Solenoid(RobotConstants.kModType, ElevatorConstants.kStg2SVChnl);
+    private final Solenoid stg1SV = new Solenoid(RobotConstants.kModType, ElevConstants.kStg1SVChnl);
+    private final Solenoid stg2SV = new Solenoid(RobotConstants.kModType, ElevConstants.kStg2SVChnl);
 
     /** Creates a new Subsystem. */
     public ElevatorSubsys() {
@@ -57,18 +57,21 @@ public class ElevatorSubsys extends SubsystemBase {
             case 2: //Level 2
             stg1SV.set(false);
             stg2SV.set(false);
+            System.out.println("Exec level: " + level);
             break;
             case 3: //Level 2
             stg1SV.set(true);
             stg2SV.set(false);
+            System.out.println("Exec level: " + level);
             break;
             case 4: //Level 2
             stg1SV.set(true);
             stg2SV.set(true);
+            System.out.println("Exec level: " + level);
             break;
             default:
-            stg1SV.set(false);
-            stg2SV.set(false);
+            stg1SV.set(true);
+            stg2SV.set(true);
             System.out.println("Error: illegal elevator stage level: " + level);
         }
     }

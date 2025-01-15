@@ -2,27 +2,33 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.elvatorCmds;
 
 import frc.robot.subsystems.ElevatorSubsys;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-/** An example command that uses an example subsystem. */
-public class ElevCommand extends Command {
+//TO DO: Need Solution
+/**
+ * This was "Suppose" to take in a level from the JS button call
+ * then pass it to elevator.  BUT level is only set during the constructor
+ * and can't be modified by the method.
+ * 
+ */
+public class ElevLvlCmd extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+
   private final ElevatorSubsys m_elevSubsys;
-  private static int level = 0;
+  private final int level;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param m_elevsubsys The subsystem used by this command.
    */
-  public ElevCommand(ElevatorSubsys m_elevSubsys, int level) {
+  public ElevLvlCmd(ElevatorSubsys m_elevSubsys, int level) {
     this.m_elevSubsys = m_elevSubsys;
     this.level = level;
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_elevSubsys);
   }
 
@@ -43,6 +49,6 @@ public class ElevCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
