@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,22 +13,22 @@ public class ElevatorSubsystem extends SubsystemBase {
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {}
 
-  private Solenoid elevSolenoid1 = new Solenoid(null, 1); //Update these later to actual solenoids
-  private Solenoid elevSolenoid2 = new Solenoid(null, 2);
+  private Solenoid elevSolenoid1 = new Solenoid(PneumaticsModuleType.CTREPCM, 0); //Update these later to actual solenoids
+  private Solenoid elevSolenoid2 = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
 
   /** Command to change elevator stage. Level 0 is coral station receiving. */
   public void PositionElevator(int level){
     if (level == 1 || level == 2 || level == 0){
       elevSolenoid1.set(false);
-      elevSolenoid1.set(false);
+      elevSolenoid2.set(false);
     }
     else if (level== 3){
       elevSolenoid1.set(true);
-      elevSolenoid1.set(false);
+      elevSolenoid2.set(false);
     }
     else if (level == 4){
       elevSolenoid1.set(true);
-      elevSolenoid1.set(true);
+      elevSolenoid2.set(true);
     }
   }
 

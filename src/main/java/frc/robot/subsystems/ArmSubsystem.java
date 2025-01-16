@@ -4,11 +4,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmSubsystem extends SubsystemBase {
-  private Solenoid arm = new Solenoid(null, 3);
+  private Solenoid arm = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
 
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {}

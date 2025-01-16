@@ -6,17 +6,20 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 
-import frc.robot.commands.Autos;
 import frc.robot.commands.ChangeBooleanCommand;
-
+import frc.robot.commands.GoToReefLocationCmd;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ChangeBooleanSubsystem;
-
+import frc.robot.subsystems.CoralSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.PositionElevatorCmd;
+import frc.robot.commands.ToggleArmCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -28,12 +31,16 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ChangeBooleanSubsystem m_changeBooleanSubsystem = new ChangeBooleanSubsystem();
+  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
+  private final CoralSubsystem m_coralSubsystem = new CoralSubsystem();
 
   private final ChangeBooleanCommand m_changeBooleanCommand = new ChangeBooleanCommand(m_changeBooleanSubsystem);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final Joystick js = new Joystick(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,6 +62,20 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    //Levels
+    new JoystickButton(js, 5).onTrue(new PositionElevatorCmd(m_elevatorSubsystem, 1));
+    new JoystickButton(js, 3).onTrue(new PositionElevatorCmd(m_elevatorSubsystem, 2));
+    new JoystickButton(js, 4).onTrue(new PositionElevatorCmd(m_elevatorSubsystem, 3));
+    new JoystickButton(js, 6).onTrue(new PositionElevatorCmd(m_elevatorSubsystem, 4));
+    //Arm
+    new JoystickButton(js, 1).onTrue(new ToggleArmCmd(m_armSubsystem));
+    //Reef
+    new JoystickButton(js, 7).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 1));
+    new JoystickButton(js, 8).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 2));
+    new JoystickButton(js, 9).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 3));
+    new JoystickButton(js, 10).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 4));
+    new JoystickButton(js, 11).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 5));
+    new JoystickButton(js, 12).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 6));
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
@@ -69,6 +90,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.
    *
