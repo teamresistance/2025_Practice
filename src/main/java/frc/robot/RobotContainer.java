@@ -24,9 +24,6 @@ import frc.robot.Constants.OperatorConstants;
 //`88b    ooo  888   888  888   888   888   888   888   888  d8(  888   888   888  888   888  o.  )88b 
 // `Y8bood8P'  `Y8bod8P' o888o o888o o888o o888o o888o o888o `Y888""8o o888o o888o `Y8bod88P" 8""888P' 
 
-// Robot-wide Commands
-import frc.robot.commands.ChangeBooleanCommand;
-
 // Command Groups
 import frc.robot.commandgroups.Level2CommandGroup;
 import frc.robot.commandgroups.Level3CommandGroup;
@@ -48,10 +45,6 @@ import frc.robot.commandgroups.Level4CommandGroup;
 //                                              .o..P'                                                            
 //                                              `Y8P'                                                             
 
-// Robot-wide Subsystems
-import frc.robot.subsystems.ChangeBooleanSubsystem;
-
-// Delicious Subsystem Imports
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ArmSubsystem;
 
@@ -72,7 +65,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 // Necessary stuff
-import edu.wpi.first.wpilibj2.command.Command;
+// import edu.wpi.first.wpilibj2.command.Command;  <------------- Uncomment this if you are using a command without a group
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -83,11 +76,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ChangeBooleanSubsystem m_changeBooleanSubsystem = new ChangeBooleanSubsystem();
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
-
-  private final ChangeBooleanCommand m_changeBooleanCommand = new ChangeBooleanCommand(m_changeBooleanSubsystem);
 
   private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_armSubsystem);
   private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_armSubsystem);
@@ -101,7 +91,6 @@ public class RobotContainer {
   }
 
   public static Joystick driverJoystick = new Joystick(OperatorConstants.kDriverControllerPort);
-  public static JoystickButton changeBooleanButton = new JoystickButton(driverJoystick, 7);
   public static JoystickButton lvl2Button = new JoystickButton(driverJoystick, 3);
   public static JoystickButton lvl3Button = new JoystickButton(driverJoystick, 4);
   public static JoystickButton lvl4Button = new JoystickButton(driverJoystick, 6);
@@ -119,16 +108,14 @@ public class RobotContainer {
     lvl2Button.onTrue(m_level2CommandGroup);
     lvl3Button.onTrue(m_level3CommandGroup);
     lvl4Button.onTrue(m_level4CommandGroup);
-
-    changeBooleanButton.onTrue(m_changeBooleanCommand);
   }
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.
    *
    * @return the command to run in teleopPeriodic
    */
-  public Command getChangeBooleanCommand() {
+  //public Command getChangeBooleanCommand() {
     // An example command will be run in autonomous
-    return new ChangeBooleanCommand(m_changeBooleanSubsystem);
-  }
+  //  return new ChangeBooleanCommand(m_changeBooleanSubsystem);
+  //}
 }
