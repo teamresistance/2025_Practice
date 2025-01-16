@@ -15,6 +15,7 @@ import frc.robot.commands.elvatorCmds.ElevLvl1Cmd;
 import frc.robot.commands.elvatorCmds.ElevLvl2Cmd;
 import frc.robot.commands.elvatorCmds.ElevLvl3Cmd;
 import frc.robot.commands.elvatorCmds.ElevLvl4Cmd;
+import frc.robot.commands.elvatorCmds.ElevLvlCmd;
 import frc.robot.commands.elvatorCmds.ElevMidCmd;
 import frc.robot.subsystems.ElevatorSubsys;
 
@@ -49,16 +50,16 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         // Create a JSB for each level
-        // new JoystickButton(coDriverJS, ElevConstants.kElevRcvrBtn).onTrue(new ElevLvl1Cmd(m_elevSubsys, 1));
-        // new JoystickButton(coDriverJS, ElevConstants.kElevLvl1Btn).onTrue(new ElevLvl2Cmd(m_elevSubsys, 2));
-        // new JoystickButton(coDriverJS, ElevConstants.kElevLvl2Btn).onTrue(new ElevLvl3Cmd(m_elevSubsys, 3));
-        // new JoystickButton(coDriverJS, ElevConstants.kElevLvl3Btn).onTrue(new ElevLvl4Cmd(m_elevSubsys, 4));
-        // new JoystickButton(coDriverJS, ElevConstants.kElevLvl4Btn).onTrue(new ElevLvl1Cmd(m_elevSubsys, 5));
+        new JoystickButton(coDriverJS, ElevConstants.kElevRcvrBtn).onTrue(new ElevLvlCmd(m_elevSubsys, 0));
+        new JoystickButton(coDriverJS, ElevConstants.kElevLvl1Btn).onTrue(new ElevLvlCmd(m_elevSubsys, 1));
+        new JoystickButton(coDriverJS, ElevConstants.kElevLvl2Btn).onTrue(new ElevLvlCmd(m_elevSubsys, 2));
+        new JoystickButton(coDriverJS, ElevConstants.kElevLvl3Btn).onTrue(new ElevLvlCmd(m_elevSubsys, 3));
+        new JoystickButton(coDriverJS, ElevConstants.kElevLvl4Btn).onTrue(new ElevLvlCmd(m_elevSubsys, 4));
 
         // Create a JSB for the 3 levels
-        new JoystickButton(coDriverJS, ElevConstants.kElevLowBtn).onTrue(new ElevLowCmd(m_elevSubsys, 1));
-        new JoystickButton(coDriverJS, ElevConstants.kElevMidBtn).onTrue(new ElevMidCmd(m_elevSubsys, 3));
-        new JoystickButton(coDriverJS, ElevConstants.kElevHighBtn).onTrue(new ElevHighCmd(m_elevSubsys, 4));
+        // new JoystickButton(coDriverJS, ElevConstants.kElevLowBtn).onTrue(new ElevLowCmd(m_elevSubsys, 1));
+        // new JoystickButton(coDriverJS, ElevConstants.kElevMidBtn).onTrue(new ElevMidCmd(m_elevSubsys, 3));
+        // new JoystickButton(coDriverJS, ElevConstants.kElevHighBtn).onTrue(new ElevHighCmd(m_elevSubsys, 4));
 
         // Work in progress.  Need to select the level then execute when ready(?).
         // new JoystickButton(coDriverJS, ElevConstants.kElevExecBtn).onTrue(new ElevExecCmd(m_elevSubsys, 0));
