@@ -32,17 +32,18 @@ public final class Constants {
         //Hardware
         public static final int kStg1SVChnl = 0;
         public static final int kStg2SVChnl = 1;
-        //JS Buttons
+        //JS Buttons for Neopad
+        //for all level select
         public static final int kElevRcvrBtn = 6;
         public static final int kElevLvl1Btn = 1;
         public static final int kElevLvl2Btn = 2;
         public static final int kElevLvl3Btn = 3;
         public static final int kElevLvl4Btn = 4;
-
-        public static final int kElevExecBtn = 5;
-        public static final int kElevLowBtn = 1;
+        //for request set then execute
+        public static final int kElevExecBtn = 6;
+        public static final int kElevLowBtn = 3;
         public static final int kElevMidBtn = 2;
-        public static final int kElevHighBtn = 3;
+        public static final int kElevHighBtn = 1;
     }
 
 }

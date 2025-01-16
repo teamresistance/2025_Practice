@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.commands.elvatorCmds.ElevLvl1Cmd;
+import frc.robot.commands.elvatorCmds.ElevLvlCmd;
 import frc.robot.subsystems.ElevatorSubsys;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command exampleAuto(ElevatorSubsys subsystem) {
-    return Commands.sequence(subsystem.exampleMethodCommand(), new ElevLvl1Cmd(subsystem, 0));
+    return Commands.sequence(subsystem.exampleMethodCommand(), new ElevLvlCmd(subsystem, 0));
   }
 
   private Autos() {

@@ -8,21 +8,19 @@ import frc.robot.subsystems.ElevatorSubsys;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-/** An example command that uses an example subsystem. */
+/** Elevator command to execute the value set in Elevator subsystem. */
 public class ElevExecCmd extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
     private final ElevatorSubsys m_elevSubsys;
-    private final int level;
 
     /**
-     * Creates a new ExampleCommand.
+     * Create command to execute the value set in Elevator subsystem.
      *
      * @param m_elevsubsys The subsystem used by this command.
      */
-    public ElevExecCmd(ElevatorSubsys m_elevSubsys, int level) {
+    public ElevExecCmd(ElevatorSubsys m_elevSubsys) {
         this.m_elevSubsys = m_elevSubsys;
-        this.level = level;
         addRequirements(m_elevSubsys);
     }
 
@@ -34,7 +32,7 @@ public class ElevExecCmd extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_elevSubsys.setElevator(level);
+        m_elevSubsys.setElevator(m_elevSubsys.getElevRq());
     }
 
     // Called once the command ends or is interrupted.

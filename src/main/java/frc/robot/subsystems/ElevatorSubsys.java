@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevConstants;
@@ -13,8 +14,10 @@ import frc.robot.Constants.RobotConstants;
 
 public class ElevatorSubsys extends SubsystemBase {
 
+    //Hardware
     private final Solenoid stg1SV = new Solenoid(RobotConstants.kModType, ElevConstants.kStg1SVChnl);
     private final Solenoid stg2SV = new Solenoid(RobotConstants.kModType, ElevConstants.kStg2SVChnl);
+    private static int elevLvlRequest = 0;  //Elevator level to be raised to when executed
 
     /** Creates a new Subsystem. */
     public ElevatorSubsys() {
@@ -47,7 +50,12 @@ public class ElevatorSubsys extends SubsystemBase {
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("Elev/Level Req", elevLvlRequest);
         // This method will be called once per scheduler run
+    }
+
+    public void setEvelRq(int level){
+        
     }
 
     public void setElevator(int level){
@@ -55,17 +63,17 @@ public class ElevatorSubsys extends SubsystemBase {
             case 0: //Retrieve
             case 1: //Level 1
             case 2: //Level 2
-            stg1SV.set(false);
+            stg1SV.set(false);  //Low
             stg2SV.set(false);
             System.out.println("Exec level: " + level);
             break;
             case 3: //Level 2
-            stg1SV.set(true);
+            stg1SV.set(true);   //Mid
             stg2SV.set(false);
             System.out.println("Exec level: " + level);
             break;
             case 4: //Level 2
-            stg1SV.set(true);
+            stg1SV.set(true);   //High
             stg2SV.set(true);
             System.out.println("Exec level: " + level);
             break;
@@ -75,6 +83,9 @@ public class ElevatorSubsys extends SubsystemBase {
             System.out.println("Error: illegal elevator stage level: " + level);
         }
     }
+
+    public void setElevRq(int level){ elevLvlRequest = level; }
+    public int getElevRq(){ return elevLvlRequest; }
 
     @Override
     public void simulationPeriodic() {

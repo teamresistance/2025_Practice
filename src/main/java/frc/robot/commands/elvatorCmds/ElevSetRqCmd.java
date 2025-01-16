@@ -8,19 +8,25 @@ import frc.robot.subsystems.ElevatorSubsys;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-/** An example command that uses an example subsystem. */
-public class ElevLvl3Cmd extends Command {
+/**
+ * This takes in a level from the JS button call
+ * then pass it to elevator subsystem.
+ * <p>The level is only set.  Another command needs 
+ * to be called to execute the level to solenoids.
+ */
+public class ElevSetRqCmd extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
   private final ElevatorSubsys m_elevSubsys;
   private final int level;
 
   /**
-   * Creates a new ExampleCommand.
+   * Create command to set level in elevator subsystem
    *
    * @param m_elevsubsys The subsystem used by this command.
+   * @param level to set in subsystem.  0-Low, 3-Mid, 4-high
    */
-  public ElevLvl3Cmd(ElevatorSubsys m_elevSubsys, int level) {
+  public ElevSetRqCmd(ElevatorSubsys m_elevSubsys, int level) {
     this.m_elevSubsys = m_elevSubsys;
     this.level = level;
     addRequirements(m_elevSubsys);
@@ -33,7 +39,7 @@ public class ElevLvl3Cmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_elevSubsys.setElevator(level);
+    m_elevSubsys.setElevRq(level);;
   }
 
   // Called once the command ends or is interrupted.
