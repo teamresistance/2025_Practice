@@ -98,6 +98,7 @@ public class RobotContainer {
 
   //Test: Keyboard
 
+  
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -114,7 +115,7 @@ public class RobotContainer {
     lvl4Button.onTrue(m_level4CommandGroup);
 
     // Test: Keyboard
-    
+
   }
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.
