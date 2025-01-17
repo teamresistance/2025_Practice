@@ -90,10 +90,13 @@ public class RobotContainer {
     configureBindings();
   }
 
+  //Logitech Extreme 3D Pro
   public static Joystick driverJoystick = new Joystick(OperatorConstants.kDriverControllerPort);
   public static JoystickButton lvl2Button = new JoystickButton(driverJoystick, 3);
   public static JoystickButton lvl3Button = new JoystickButton(driverJoystick, 4);
   public static JoystickButton lvl4Button = new JoystickButton(driverJoystick, 6);
+
+  //Test: Keyboard
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -105,9 +108,13 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    // Logitech Extreme 3D Pro
     lvl2Button.onTrue(m_level2CommandGroup);
     lvl3Button.onTrue(m_level3CommandGroup);
     lvl4Button.onTrue(m_level4CommandGroup);
+
+    // Test: Keyboard
+    
   }
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.
