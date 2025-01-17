@@ -7,24 +7,35 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
-public class ChangeBooleanSubsystem extends SubsystemBase {
-  public boolean booleanToChange = true;
+public class ElevatorSubsystem extends SubsystemBase {
+  public boolean firstStageSolenoidUp = false;
+  public boolean secondStageSolenoidUp = false;
 
   /** Creates a new ExampleSubsystem. */
-  public ChangeBooleanSubsystem() {}
+  public ElevatorSubsystem() {}
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
    * @return the opposite of the value of said boolean state.
    */
-  public void changeBoolean() {
-    booleanToChange = !booleanToChange;
+  public void raiseFirstStage() {
+    firstStageSolenoidUp = true;
+  }
+  public void raiseSecondStage() {
+    firstStageSolenoidUp = true;
+  }
+  public void lowerFirstStage() {
+    firstStageSolenoidUp = false;
+  }
+  public void lowerSecondStage() {
+    firstStageSolenoidUp = false;
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("My boolean", booleanToChange);
+    SmartDashboard.putBoolean("First Stage Up?", firstStageSolenoidUp);
+    SmartDashboard.putBoolean("Second Stage Up?", secondStageSolenoidUp);
   }
 
   @Override

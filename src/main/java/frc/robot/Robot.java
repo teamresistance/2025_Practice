@@ -2,6 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+//  ooooooooo.              .o8                     .           o8o                                 
+//  `888   `Y88.           "888                   .o8           `"'                                 
+//   888   .d88'  .ooooo.   888oooo.   .ooooo.  .o888oo        oooo  .oooo.   oooo    ooo  .oooo.   
+//   888ooo88P'  d88' `88b  d88' `88b d88' `88b   888          `888 `P  )88b   `88.  .8'  `P  )88b  
+//   888`88b.    888   888  888   888 888   888   888           888  .oP"888    `88..8'    .oP"888  
+//   888  `88b.  888   888  888   888 888   888   888 . .o.     888 d8(  888     `888'    d8(  888  
+//  o888o  o888o `Y8bod8P'  `Y8bod8P' `Y8bod8P'   "888" Y8P     888 `Y888""8o     `8'     `Y888""8o 
+//                                                              888                                 
+//                                                          .o. 88P                                 
+//                                                          `Y888P                                 
+
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -15,7 +26,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private Command m_changeBooleanCommand;
 
   private final RobotContainer m_robotContainer;
 
@@ -28,7 +38,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
   }
-
+  
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
    * that you want ran during disabled, autonomous, teleoperated and test.
@@ -55,7 +65,6 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
