@@ -4,19 +4,20 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.ElevConstants;
+import frc.robot.Constants.HdwConstants;
 import frc.robot.Constants.RobotConstants;
 
 public class ElevatorSubsys extends SubsystemBase {
 
     //Hardware
-    private final Solenoid stg1SV = new Solenoid(RobotConstants.kModType, ElevConstants.kStg1SVChnl);
-    private final Solenoid stg2SV = new Solenoid(RobotConstants.kModType, ElevConstants.kStg2SVChnl);
+    private final Solenoid elevStg1SV = new Solenoid(RobotConstants.kModType, HdwConstants.kElevStg1SVChnl);
+    private final Solenoid elevStg2SV = new Solenoid(RobotConstants.kModType, HdwConstants.kElevStg2SVChnl);
+
+    //Variables
     private static int elevLvlRequest = 0;  //Elevator level to be raised to when executed
 
     /** Creates a new Subsystem. */
@@ -63,23 +64,23 @@ public class ElevatorSubsys extends SubsystemBase {
             case 0: //Retrieve
             case 1: //Level 1
             case 2: //Level 2
-            stg1SV.set(false);  //Low
-            stg2SV.set(false);
+            elevStg1SV.set(false);  //Low
+            elevStg2SV.set(false);
             System.out.println("Exec level: " + level);
             break;
             case 3: //Level 2
-            stg1SV.set(true);   //Mid
-            stg2SV.set(false);
+            elevStg1SV.set(true);   //Mid
+            elevStg2SV.set(false);
             System.out.println("Exec level: " + level);
             break;
             case 4: //Level 2
-            stg1SV.set(true);   //High
-            stg2SV.set(true);
+            elevStg1SV.set(true);   //High
+            elevStg2SV.set(true);
             System.out.println("Exec level: " + level);
             break;
             default:
-            stg1SV.set(true);
-            stg2SV.set(true);
+            elevStg1SV.set(true);
+            elevStg2SV.set(true);
             System.out.println("Error: illegal elevator stage level: " + level);
         }
     }

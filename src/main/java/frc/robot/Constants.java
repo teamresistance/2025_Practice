@@ -28,22 +28,65 @@ public final class Constants {
         public static final int kModID = 2; // CAN adr, ID, of PDH
     }
 
-    public static class ElevConstants {
-        //Hardware
-        public static final int kStg1SVChnl = 0;
-        public static final int kStg2SVChnl = 1;
-        //JS Buttons for Neopad
+    public static class HdwConstants {
+        //----------- Hardware -------------------
+        public static final int kElevStg1SVChnl = 0;
+        public static final int kElevStg2SVChnl = 1;
+        public static final int kArmDnSVChnl = 2;
+        public static final int kGripClsSVChnl = 3;
+    }
+
+    public static class JSConstants {
+        //-------------- JS Buttons for normal 3 joysticks -----------------
         //for all level select
-        public static final int kElevRcvrBtn = 6;
-        public static final int kElevLvl1Btn = 1;
-        public static final int kElevLvl2Btn = 2;
-        public static final int kElevLvl3Btn = 3;
-        public static final int kElevLvl4Btn = 4;
+        public static final int kElevRcvr3JSBtn = 6;
+        public static final int kElevLvl13JSBtn = 1;
+        public static final int kElevLvl23JSBtn = 2;
+        public static final int kElevLvl33JSBtn = 3;
+        public static final int kElevLvl43JSBtn = 4;
         //for request set then execute
-        public static final int kElevExecBtn = 6;
-        public static final int kElevLowBtn = 3;
-        public static final int kElevMidBtn = 2;
-        public static final int kElevHighBtn = 1;
+        public static final int kElevExec3JSBtn = 6;
+        public static final int kElevLow4JSBtn = 3;
+        public static final int kElevMid3JSBtn = 2;
+        public static final int kElevHigh3JSBtn = 1;
+
+        //----------- JS Buttons for Neopad -------------
+        //for all level select
+        public static final int kElevRcvrNeoBtn = 6;
+        public static final int kElevLvl1NeoBtn = 1;
+        public static final int kElevLvl2NeoBtn = 2;
+        public static final int kElevLvl3NeoBtn = 3;
+        public static final int kElevLvl4NeoBtn = 4;
+        //for request set then execute
+        public static final int kElevExecNeoBtn = 4;
+        public static final int kElevLowNeoBtn = 3;
+        public static final int kElevMidNeoBtn = 2;
+        public static final int kElevHighNeoBtn = 1;
+
+        //----------------- JS Buttons for keyboard --------------
+        //for request set then execute
+        public static final int kElevExecKybd1Btn = 4;
+        public static final int  kElevLowKybd1Btn = 1;
+        public static final int  kElevMidKybd1Btn = 2;
+        public static final int kElevHighKybd1Btn = 3;
+    }
+
+    public static class GripConstants {
+        //JS Buttons for normal 3 joysticks
+        public static final int kGripTgl3JSBtn = 1;
+        //JS Buttons for Neopad
+        public static final int kGripTglNeoBtn = 5;
+        //JS Buttons for keyboard
+        public static final int kGripTglkybd1Btn = 1;
+    }
+
+    public static class ArmConstants {
+        //JS Buttons for normal 3 joysticks
+        public static final int kArmTgl3JSBtn = 1;
+        //JS Buttons for Neopad
+        public static final int kArmTglNeoBtn = 6;
+        //JS Buttons for keyboard
+        public static final int kArmTglkybd1Btn = 1;
     }
 
 }
