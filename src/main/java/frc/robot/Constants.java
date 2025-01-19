@@ -34,6 +34,8 @@ public final class Constants {
         public static final int kElevStg2SVChnl = 1;
         public static final int kArmDnSVChnl = 2;
         public static final int kGripClsSVChnl = 3;
+        public static int kFlipOutSVChnl;
+        public static int kFlipUpSVChnl;
     }
 
     public static class JSConstants {

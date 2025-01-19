@@ -20,6 +20,7 @@ import frc.robot.commands.elvatorCmds.ElevSetRqCmd;
 import frc.robot.commands.elvatorCmds.GripToggleCmd;
 import frc.robot.subsystems.ArmSubsys;
 import frc.robot.subsystems.ElevatorSubsys;
+import frc.robot.subsystems.FlipSubsys;
 import frc.robot.subsystems.GripSubsys;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -42,6 +43,8 @@ public class RobotContainer {
     private final ElevatorSubsys m_elevSubsys = new ElevatorSubsys();
     private final GripSubsys m_gripSubsys = new GripSubsys();
     private final ArmSubsys m_armSubsys = new ArmSubsys();
+    private final FlipSubsys m_flipSubsys = new FlipSubsys();
+    
     // Joysticks possible
     public static Joystick leftDrvrJS = new Joystick(0);
     public static Joystick rightDrvrJS = new Joystick(1);
@@ -50,14 +53,13 @@ public class RobotContainer {
     public static Joystick kybd1JS = new Joystick(4);
     public static Joystick kybd2JS = new Joystick(5);
     // JoystickButtons
-    public static JoystickButton elevLowBtn;
-    public static JoystickButton elevMidBtn;
-    public static JoystickButton elevHighBtn;
-    public static JoystickButton elevExecBtn;
-    public static JoystickButton armToggleBtn;
-    public static JoystickButton gripToggleBtn;
-
-    // public static int elevLevelReqest = 0;
+    public static JoystickButton elevLowBtn;    //Request Low level when execute
+    public static JoystickButton elevMidBtn;    //Request Mid level when execute
+    public static JoystickButton elevHighBtn;   //Request High level when execute
+    public static JoystickButton elevExecBtn;   //Execute
+    public static JoystickButton armToggleBtn;  //Rotate arm to place in scoring/recieving position -OR-
+    public static JoystickButton flipScoreBtn;  //Spin & flip to be in score position
+    public static JoystickButton gripToggleBtn; //Grip/release coral
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -193,14 +195,14 @@ public class RobotContainer {
 
     }
 
-    /**
-     * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
-     * @return the command to run in autonomous
-     */
-    public Command getAutonomousCommand() {
-        // An example command will be run in autonomous
-        return Autos.exampleAuto(m_elevSubsys);
-    }
+    // /**
+    //  * Use this to pass the autonomous command to the main {@link Robot} class.
+    //  *
+    //  * @return the command to run in autonomous
+    //  */
+    // public Command getAutonomousCommand() {
+    //     // An example command will be run in autonomous
+    //     return Autos.exampleAuto(m_elevSubsys);
+    // }
 
 }
