@@ -33,13 +33,15 @@ public class ElevatorLowerFirstStageCommand extends Command {
   @Override
   public void execute() {
     if (m_subsystem.firstStageSolenoidUp) {
-    m_subsystem.lowerFirstStage();
+      m_subsystem.lowerFirstStage();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_subsystem.firstStageSolenoidDown=true;
+  }
 
   // Returns true when the command should end.
   @Override
