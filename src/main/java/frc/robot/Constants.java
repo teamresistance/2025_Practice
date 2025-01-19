@@ -46,9 +46,13 @@ public final class Constants {
         public static final int kElevLvl43JSBtn = 4;
         //for request set then execute
         public static final int kElevExec3JSBtn = 6;
-        public static final int kElevLow4JSBtn = 3;
+        public static final int kElevLow3JSBtn = 3;
         public static final int kElevMid3JSBtn = 2;
         public static final int kElevHigh3JSBtn = 1;
+        //for Arm
+        public static final int kArmTgl3JSBtn = 11;
+        //for gripper
+        public static final int kGripTgl3JSBtn = 12;
 
         //----------- JS Buttons for Neopad -------------
         //for all level select
@@ -59,9 +63,13 @@ public final class Constants {
         public static final int kElevLvl4NeoBtn = 4;
         //for request set then execute
         public static final int kElevExecNeoBtn = 4;
-        public static final int kElevLowNeoBtn = 3;
+        public static final int kElevLowNeoBtn = 1;
         public static final int kElevMidNeoBtn = 2;
-        public static final int kElevHighNeoBtn = 1;
+        public static final int kElevHighNeoBtn = 3;
+        //for Arm
+        public static final int kArmTglNeoBtn = 5;
+        //for gripper
+        public static final int kGripTglNeoBtn = 6;
 
         //----------------- JS Buttons for keyboard --------------
         //for request set then execute
@@ -69,6 +77,10 @@ public final class Constants {
         public static final int  kElevLowKybd1Btn = 1;
         public static final int  kElevMidKybd1Btn = 2;
         public static final int kElevHighKybd1Btn = 3;
+        //for Arm
+        public static final int kArmTglKybd2Btn = 1;
+        //for gripper
+        public static final int kGripTglKybd2Btn = 2;
     }
 
     public static class GripConstants {
