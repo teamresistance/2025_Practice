@@ -66,7 +66,7 @@ public class RobotContainer {
      */
     public RobotContainer() {
         // Configure the button trigger bindings
-        int defaultConfigJS = 2; // 0=Normal 3 JS, 1=Neopad, 2=Keyboard 1
+        int defaultConfigJS = 1; // 0=Normal 3 JS, 1=Neopad, 2=Keyboard 1
         switch (defaultConfigJS) {
             case 0:
                 config3JS();
