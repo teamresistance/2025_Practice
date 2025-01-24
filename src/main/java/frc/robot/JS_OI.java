@@ -17,8 +17,8 @@ public class JS_OI {
     public Joystick rightDrvrJS = new Joystick(1);
     public Joystick coDriverJS = new Joystick(2);
     public Joystick neoJS = new Joystick(3);
-    public Joystick kybd1JS = new Joystick(4);
-    public Joystick kybd2JS = new Joystick(5);
+    public Joystick kybd0JS = new Joystick(4);
+    // public Joystick kybd1JS = new Joystick(5);
     // JoystickButtons
     public JoystickButton elevLowBtn;    //Request Low level when execute
     public JoystickButton elevMidBtn;    //Request Mid level when execute
@@ -93,12 +93,14 @@ public class JS_OI {
     /**Configue all buttons defined to use the keyboard */
     private void configKybd() {
         // Create a JSB for each level
-        elevExecBtn = new JoystickButton(kybd1JS, JSConstants.kElevExecKybd1Btn);
-        elevLowBtn = new JoystickButton(kybd1JS, JSConstants.kElevLowKybd1Btn);
-        elevMidBtn = new JoystickButton(kybd1JS, JSConstants.kElevMidKybd1Btn);
-        elevHighBtn = new JoystickButton(kybd1JS, JSConstants.kElevHighKybd1Btn);
-        armToggleBtn = new JoystickButton(kybd2JS, JSConstants.kArmTglKybd2Btn);
-        gripToggleBtn = new JoystickButton(kybd2JS, JSConstants.kGripTglKybd2Btn);
+        elevExecBtn = new JoystickButton(kybd0JS, JSConstants.kElevExecKybd0Btn);
+        elevLowBtn = new JoystickButton(kybd0JS, JSConstants.kElevLowKybd0Btn);
+        elevMidBtn = new JoystickButton(kybd0JS, JSConstants.kElevMidKybd0Btn);
+        elevHighBtn = new JoystickButton(kybd0JS, JSConstants.kElevHighKybd0Btn);
+        armToggleBtn = new JoystickButton(kybd0JS, JSConstants.kArmTglKybd0Btn);
+        gripToggleBtn = new JoystickButton(kybd0JS, JSConstants.kGripTglKybd0Btn);
+        // armToggleBtn = new JoystickButton(kybd0JS, JSConstants.kArmTglKybd1Btn);
+        // gripToggleBtn = new JoystickButton(kybd0JS, JSConstants.kGripTglKybd1Btn);
     }
 
     /**Configue all buttons defined to use the keyboard */

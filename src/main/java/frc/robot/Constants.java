@@ -76,14 +76,16 @@ public final class Constants {
 
         // ----------------- JS Buttons for keyboard --------------
         // for request set then execute
-        public static final int kElevExecKybd1Btn = 4;
-        public static final int kElevLowKybd1Btn = 1;
-        public static final int kElevMidKybd1Btn = 2;
-        public static final int kElevHighKybd1Btn = 3;
+        public static final int kElevExecKybd0Btn = 4;
+        public static final int kElevLowKybd0Btn = 1;
+        public static final int kElevMidKybd0Btn = 2;
+        public static final int kElevHighKybd0Btn = 3;
         // for Arm
-        public static final int kArmTglKybd2Btn = 1;
+        public static final int kArmTglKybd0Btn = 5;
+        public static final int kArmTglKybd1Btn = 2;
         // for gripper
-        public static final int kGripTglKybd2Btn = 2;
+        public static final int kGripTglKybd0Btn = 6;
+        public static final int kGripTglKybd1Btn = 2;
     }
 
     public static class GripConstants {

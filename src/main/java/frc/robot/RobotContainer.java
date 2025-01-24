@@ -55,7 +55,7 @@ public class RobotContainer {
     private final ArmSubsys m_armSubsys = new ArmSubsys();
     // private final FlipSubsys m_flipSubsys = new FlipSubsys();
 
-    private static final JS_OI jsbtn = new JS_OI(1); // 0=Normal 3 JS, 1=Neopad, 2=Keyboard
+    private static final JS_OI jsbtn = new JS_OI(2); // 0=Normal 3 JS, 1=Neopad, 2=Keyboard
 
     // The robot's subsystems and commands are defined here...
 
