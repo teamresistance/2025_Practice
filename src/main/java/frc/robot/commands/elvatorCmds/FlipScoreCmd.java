@@ -5,7 +5,6 @@
 package frc.robot.commands.elvatorCmds;
 
 import frc.robot.subsystems.FlipSubsys;
-import frc.robot.subsystems.GripSubsys;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 

@@ -4,14 +4,14 @@
 
 package frc.robot;
 
-import frc.robot.commands.elvatorCmds.ArmToggleCmd;
+import frc.robot.subsystems.ElevatorSubsys;
+import frc.robot.subsystems.ArmSubsys;
+// import frc.robot.subsystems.FlipSubsys;
+import frc.robot.subsystems.GripSubsys;
 import frc.robot.commands.elvatorCmds.ElevExecCmd;
 import frc.robot.commands.elvatorCmds.ElevSetRqCmd;
+import frc.robot.commands.elvatorCmds.ArmToggleCmd;
 import frc.robot.commands.elvatorCmds.GripToggleCmd;
-import frc.robot.subsystems.ArmSubsys;
-import frc.robot.subsystems.ElevatorSubsys;
-import frc.robot.subsystems.FlipSubsys;
-import frc.robot.subsystems.GripSubsys;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -27,7 +27,7 @@ public class RobotContainer {
     private final ElevatorSubsys m_elevSubsys = new ElevatorSubsys();
     private final GripSubsys m_gripSubsys = new GripSubsys();
     private final ArmSubsys m_armSubsys = new ArmSubsys();
-    private final FlipSubsys m_flipSubsys = new FlipSubsys();
+    // private final FlipSubsys m_flipSubsys = new FlipSubsys();
 
     private static final JS_OI jsbtn = new JS_OI(1);  // 0=Normal 3 JS, 1=Neopad, 2=Keyboard
     
@@ -51,7 +51,7 @@ public class RobotContainer {
     }
 
     public void update(){
-        if(jsbtn.ChooserUpd()) configButtonBindings();;
+        if(jsbtn.ChooserUpd()) configButtonBindings();
     }
 
     /**
