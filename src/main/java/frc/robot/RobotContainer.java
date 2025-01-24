@@ -83,6 +83,8 @@ public class RobotContainer {
   private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_armSubsystem);
   private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_armSubsystem);
 
+  private static final JS_OI jsbtn = new JS_OI(1);  // 0=Normal 3 JS, 1=Neopad, 2=Keyboard
+    
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
