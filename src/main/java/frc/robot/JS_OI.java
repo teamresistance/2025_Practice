@@ -6,17 +6,19 @@ package frc.robot;
 
 import frc.robot.Constants.JSConstants;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**Class to configure possible joystick types and buttons. */
 public class JS_OI {
     // Joysticks possible
-    public static Joystick leftDrvrJS = new Joystick(0);
-    public static Joystick rightDrvrJS = new Joystick(1);
-    public static Joystick coDriverJS = new Joystick(2);
-    public static Joystick neoJS = new Joystick(3);
-    public static Joystick kybd1JS = new Joystick(4);
-    public static Joystick kybd2JS = new Joystick(5);
+    public Joystick leftDrvrJS = new Joystick(0);
+    public Joystick rightDrvrJS = new Joystick(1);
+    public Joystick coDriverJS = new Joystick(2);
+    public Joystick neoJS = new Joystick(3);
+    public Joystick kybd1JS = new Joystick(4);
+    public Joystick kybd2JS = new Joystick(5);
     // JoystickButtons
     public JoystickButton elevLowBtn;    //Request Low level when execute
     public JoystickButton elevMidBtn;    //Request Mid level when execute
@@ -25,6 +27,13 @@ public class JS_OI {
     public JoystickButton armToggleBtn;  //Rotate arm to place in scoring/recieving position -OR-
     public JoystickButton flipScoreBtn;  //Spin & flip to be in score position
     public JoystickButton gripToggleBtn; //Grip/release coral
+    //Variables
+    private SendableChooser<String> chsr = new SendableChooser<String>();
+    private final String[] chsrDesc = {"3-Joysticks", "Nintendo", "Keyboard"};
+    // private static int jsConfig;
+    private String prvJSAssign;
+    private int defaultConfigJS;
+
 
     /**
      * Constructor to configure buttons for joystick type passed
@@ -33,7 +42,15 @@ public class JS_OI {
      */
     public JS_OI(int js_Type) {
         // Configure the button trigger bindings
-        int defaultConfigJS = js_Type; //2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
+        defaultConfigJS = js_Type; //2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
+        chooserInit();
+        configJS();
+    }
+
+    /**Configure a new JS assignment */
+    public void configJS() { // Configure JS controller assignments
+        configClearAll();          //Clear exisitng jsConfig
+
         switch (defaultConfigJS) {
             case 0:
                 config3JS();
@@ -48,6 +65,7 @@ public class JS_OI {
                 config3JS();
                 System.out.println("Bad joystick configuration: " + defaultConfigJS);
         }
+        // configButtonBindings();
     }
 
     /**Configue all buttons defined for 3 JS's */
@@ -82,4 +100,55 @@ public class JS_OI {
         armToggleBtn = new JoystickButton(kybd2JS, JSConstants.kArmTglKybd2Btn);
         gripToggleBtn = new JoystickButton(kybd2JS, JSConstants.kGripTglKybd2Btn);
     }
+
+    /**Configue all buttons defined to use the keyboard */
+    private void configClearAll() {
+        // Create a JSB for each level
+        elevExecBtn = null;
+        elevLowBtn = null;
+        elevMidBtn = null;
+        elevHighBtn = null;
+        armToggleBtn = null;
+        gripToggleBtn = null;
+    }
+
+    //---- Joystick controller chooser ----
+    /** Setup the JS Chooser and place on Smartdashboard */
+    private void chooserInit(){
+        for(int i = 0; i < chsrDesc.length; i++){
+            chsr.addOption(chsrDesc[i], chsrDesc[i]);
+        }
+        chsr.setDefaultOption(chsrDesc[defaultConfigJS], chsrDesc[defaultConfigJS]);    //Chg index to select chsrDesc[] for default
+        SmartDashboard.putData("JS/Choice", chsr);
+        ChooserUpd();   //Update the JS assignments
+    }
+
+    /**Check sdb to see if it has change and update if it has. */
+    public boolean ChooserUpd() { // Chk for Joystick configuration
+        // System.out.println("Prv JS Assn: " + prvJSAssign + " =? "+ chsr.getSelected());
+        if (prvJSAssign != (chsr.getSelected() == null ? chsrDesc[0] : chsr.getSelected())) {
+            prvJSAssign = chsr.getSelected();
+            SmartDashboard.putString("JS/Choosen", chsr.getSelected());   //Put selected on sdb
+            System.out.println("JS Chsn: " + chsr.getSelected());
+            defaultConfigJS = chsrStr2Int(prvJSAssign);
+            configJS();         //then assign new jsConfig
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get an int for a string array.
+     * Need to convert to Enum,
+     * @param str
+     * @return
+     */
+    public int chsrStr2Int(String str){
+        int i = 0;
+        for( ; i < chsrDesc.length - 1; i++ ){
+            if(prvJSAssign == chsrDesc[i]) break;
+        }
+        return i;
+    }
+
 }

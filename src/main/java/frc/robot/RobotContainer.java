@@ -29,7 +29,7 @@ public class RobotContainer {
     private final ArmSubsys m_armSubsys = new ArmSubsys();
     private final FlipSubsys m_flipSubsys = new FlipSubsys();
 
-    private static final JS_OI jsbtn = new JS_OI(2);  // 0=Normal 3 JS, 1=Neopad, 2=Keyboard
+    private static final JS_OI jsbtn = new JS_OI(1);  // 0=Normal 3 JS, 1=Neopad, 2=Keyboard
     
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -38,7 +38,7 @@ public class RobotContainer {
         configButtonBindings();
     }
 
-    private void configButtonBindings() {
+    public void configButtonBindings() {
         // Need to select the level then execute when ready(?).
         jsbtn.elevExecBtn.onTrue(new ElevExecCmd(m_elevSubsys));
         jsbtn.elevLowBtn.onTrue(new ElevSetRqCmd(m_elevSubsys, 0));
@@ -48,6 +48,10 @@ public class RobotContainer {
         jsbtn.armToggleBtn.onTrue(new ArmToggleCmd(m_armSubsys));
         //for gripper
         jsbtn.gripToggleBtn.onTrue(new GripToggleCmd(m_gripSubsys));
+    }
+
+    public void update(){
+        if(jsbtn.ChooserUpd()) configButtonBindings();;
     }
 
     /**
