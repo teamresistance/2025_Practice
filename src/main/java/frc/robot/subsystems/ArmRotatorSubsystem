@@ -1,0 +1,61 @@
+package frc.robot.subsystems; 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.sensors.PigeonIMU;
+
+public class ArmRotatorSubsystem extends SubsystemBase {
+  Solenoid armLifter = new Solenoid(PneumaticsModuleType.REVPH, 0);
+  Solenoid armLifter2= new Solenoid(PneumaticsModuleType.REVPH, 5);
+  Solenoid wristRotator = new Solenoid(PneumaticsModuleType.REVPH, 2); //The pneumatics hub channels that we are using are 0, 2, and 5
+  int phaseTracker = 1;
+  PigeonIMU pigeon = new PigeonIMU(0);
+  boolean up = false;
+  boolean rotated = false;
+  boolean down=false;
+
+  public void armLifter() {
+    switch (phaseTracker) {
+      case 1:
+        armLifter.setPulseDuration(1.0); // Assuming x is 1.0, replace with the correct value
+        break;
+      case 2:
+        armLifter.set(true);
+        up = true;
+        break;
+    }
+  }
+
+  public void armLifterSecondStage(){
+    armLifter2.setPulseDuration(1.0);
+    armLifter2.set(true);
+  }
+
+  public void wristRotator() {
+    wristRotator.setPulseDuration(1.0);
+    wristRotator.set(true);
+    rotated = true;
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putBoolean("Arm Rotator", armRotator.get());
+  }
+
+  public void lowerArm() {
+    armRotator.set(false);
+    down= true;
+  }
+
+  public boolean isArmUp() {
+    return up;
+  }
+  public void isArmLowered(){
+    return down;
+  }
+
+  public boolean isWristRotated() {
+    return rotated;
+  }
+}
