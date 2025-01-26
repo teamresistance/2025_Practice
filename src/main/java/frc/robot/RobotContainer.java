@@ -35,6 +35,9 @@ import frc.robot.commandgroups.Level4CommandGroup;
 // Arm Commands
 // NONE YET!
 
+// Interface Commands
+import frc.robot.commands.InterfaceStoreBranchesCommand;
+
 //   .oooooo..o              .o8                                         .                                        
 //  d8P'    `Y8             "888                                       .o8                                        
 //  Y88bo.      oooo  oooo   888oooo.   .oooo.o oooo    ooo  .oooo.o .o888oo  .ooooo.  ooo. .oo.  .oo.    .oooo.o 
@@ -47,6 +50,7 @@ import frc.robot.commandgroups.Level4CommandGroup;
 
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.InterfaceSubsystem;
 
 //    .oooooo.   ooooo 
 //   d8P'  `Y8b  `888' 
@@ -78,10 +82,13 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
+  private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
 
   private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_armSubsystem);
   private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_armSubsystem);
   private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_armSubsystem);
+
+  private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(m_interfaceSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -95,6 +102,7 @@ public class RobotContainer {
   public static JoystickButton lvl2Button = new JoystickButton(driverJoystick, 3);
   public static JoystickButton lvl3Button = new JoystickButton(driverJoystick, 4);
   public static JoystickButton lvl4Button = new JoystickButton(driverJoystick, 6);
+  public static JoystickButton selectBranchAndAddButton = new JoystickButton(driverJoystick, 1);
 
   //Test: Keyboard
 
@@ -113,6 +121,7 @@ public class RobotContainer {
     lvl2Button.onTrue(m_level2CommandGroup);
     lvl3Button.onTrue(m_level3CommandGroup);
     lvl4Button.onTrue(m_level4CommandGroup);
+    selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
 
     // Test: Keyboard
 
