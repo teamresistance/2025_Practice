@@ -46,12 +46,14 @@ public class InterfaceSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     if (interfaceChooser == null){
-      interfaceChooser();
+      //interfaceChooser();
     }
-    SmartDashboard.putString("Reef Position", interfaceChooser.getSelected());
-    SmartDashboard.putString("Reef Level", interfaceChooserLvl.getSelected());
-    SmartDashboard.putData(interfaceChooser);
-    SmartDashboard.putData(interfaceChooserLvl);
+    else{
+      SmartDashboard.putString("Reef Position", interfaceChooser.getSelected());
+      SmartDashboard.putString("Reef Level", interfaceChooserLvl.getSelected());
+      SmartDashboard.putData(interfaceChooser);
+      SmartDashboard.putData(interfaceChooserLvl);
+    }
     // This method will be called once per scheduler run
   }
 }
