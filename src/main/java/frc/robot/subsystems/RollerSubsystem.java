@@ -19,7 +19,7 @@ public class RollerSubsystem extends SubsystemBase {
             rollerActivated = false;
         }
         public void startRollersReverse() {
-            rollerReverse = true;
+            rollerActivated = true;
             rollerReverse = false;
         }
 

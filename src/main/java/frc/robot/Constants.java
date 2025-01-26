@@ -19,10 +19,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static class OperatorConstants {
-        public static final int kDriverControllerPort = 0;
-    }
-
     public static class RobotConstants {
         public static final int kScoreTimeoutSeconds = 3000; //Milliseconds
         public static final PneumaticsModuleType kModType = PneumaticsModuleType.CTREPCM;
@@ -41,6 +37,7 @@ public final class Constants {
 
     public static class JSConstants {
         //-------------- JS Buttons for normal 3 joysticks -----------------
+        public static final int kDriverControllerPort = 0;
         //for all level select
         public static final int kElevRcvr3JSBtn = 6;
         public static final int kElevLvl13JSBtn = 1;
@@ -56,6 +53,9 @@ public final class Constants {
         public static final int kArmTgl3JSBtn = 11;
         //for gripper
         public static final int kGripTgl3JSBtn = 12;
+        //for roller
+        public static final int kRollerFwd3JSBtn = 5;
+        public static final int kRollerRev3JSBtn = 7;
 
         //----------- JS Buttons for Neopad -------------
         //for all level select
