@@ -4,22 +4,17 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ChangeBooleanSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ArmSubsystem3;
 
-/** An example command that uses an example subsystem. */
-public class ChangeBooleanCommand extends Command {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ChangeBooleanSubsystem m_subsystem;
-
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public ChangeBooleanCommand(ChangeBooleanSubsystem subsystem) {
-    m_subsystem = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
+/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
+public class ToggleArmCmd3 extends Command {
+  private ArmSubsystem3 subsystem;
+  
+    /** Creates a new ElevatorToggleCmd. */
+    public ToggleArmCmd3(ArmSubsystem3 subsystem) {
+      // Use addRequirements() here to declare subsystem dependencies.
+      this.subsystem = subsystem;
     addRequirements(subsystem); 
   }
 
@@ -30,9 +25,8 @@ public class ChangeBooleanCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.changeBoolean();
+    subsystem.ElevatorToggle();
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

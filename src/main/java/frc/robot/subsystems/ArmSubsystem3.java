@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ArmSubsystem extends SubsystemBase {
+public class ArmSubsystem3 extends SubsystemBase {
   private Solenoid arm = new Solenoid(PneumaticsModuleType.CTREPCM, 2);
 
   /** Creates a new ArmSubsystem. */
-  public ArmSubsystem() {}
+  public ArmSubsystem3() {}
 
     /** Command to toggle the elevator's rotating coral holder */
   public void ElevatorToggle(){

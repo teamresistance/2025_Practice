@@ -5,17 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.InterfaceSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ToggleArmCmd extends Command {
-  private ArmSubsystem subsystem;
-  
-    /** Creates a new ElevatorToggleCmd. */
-    public ToggleArmCmd(ArmSubsystem subsystem) {
-      // Use addRequirements() here to declare subsystem dependencies.
-      this.subsystem = subsystem;
-    addRequirements(subsystem); 
+public class InterfaceChooseCmd extends Command {
+
+  public InterfaceSubsystem subsystem;
+
+  public InterfaceChooseCmd(InterfaceSubsystem subsystem) {
+    this.subsystem = subsystem;
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -25,8 +24,7 @@ public class ToggleArmCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    subsystem.ElevatorToggle();
-  }
+    subsystem.goInterfaceLoc();}
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

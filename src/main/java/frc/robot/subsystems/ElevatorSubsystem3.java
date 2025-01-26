@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ElevatorSubsystem extends SubsystemBase {
+public class ElevatorSubsystem3 extends SubsystemBase {
   /** Creates a new ElevatorSubsystem. */
-  public ElevatorSubsystem() {}
+  public ElevatorSubsystem3() {}
 
   private Solenoid elevSolenoid1 = new Solenoid(PneumaticsModuleType.CTREPCM, 0); //Update these later to actual solenoids
   private Solenoid elevSolenoid2 = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
