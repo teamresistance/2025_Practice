@@ -15,6 +15,9 @@ package frc.robot;
 // Constants
 import frc.robot.Constants.OperatorConstants;
 
+// Operator Input
+import frc.robot.OperatorInput;
+
 
 //  .oooooo.                                                                             .o8           
 // d8P'  `Y8b                                                                           "888           
@@ -80,6 +83,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private final OperatorInput m_operatorInput = new OperatorInput(1);
+
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
   private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
