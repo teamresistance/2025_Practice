@@ -21,16 +21,16 @@ public class OperatorInput {
     public JoystickButton lvl2Button;
     public JoystickButton lvl3Button;
     public JoystickButton lvl4Button;
-    public JoystickButton selectBranchAndAddButton;
+    public JoystickButton kSelectBranchAndAddButton;
 
     /**
      * Constructor to configure buttons for joystick type passed
      * 
      * @param js_Type 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
      */
-    public OperatorInput (int js_Type) {
+    public OperatorInput (int joystickType) {
         // Configure the button trigger bindings
-        int defaultConfigJS = js_Type; //2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
+        int defaultConfigJS = joystickType; //2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
         switch (defaultConfigJS) {
             case 0:
                 config3Joysticks();
@@ -53,7 +53,7 @@ public class OperatorInput {
         lvl2Button = new JoystickButton(coDriverJS, OperatorConstants.klvl2Button_3Joysticks_ID);
         lvl3Button = new JoystickButton(coDriverJS, OperatorConstants.klvl3Button_3Joysticks_ID);
         lvl4Button = new JoystickButton(coDriverJS, OperatorConstants.klvl4Button_3Joysticks_ID);
-        selectBranchAndAddButton = new JoystickButton(coDriverJS, OperatorConstants.selectBranchAndAddButton_3Joysticks_ID);
+        kSelectBranchAndAddButton = new JoystickButton(coDriverJS, OperatorConstants.kSelectBranchAndAddButton_3Joysticks_ID);
     }
 
     /**Configue all buttons defined for a Niteno Pad */
@@ -62,16 +62,16 @@ public class OperatorInput {
         lvl2Button = new JoystickButton(neoJS, OperatorConstants.klvl2Button_Neo_ID);
         lvl3Button = new JoystickButton(neoJS, OperatorConstants.klvl3Button_Neo_ID);
         lvl4Button = new JoystickButton(neoJS, OperatorConstants.klvl4Button_Neo_ID);
-        selectBranchAndAddButton = new JoystickButton(neoJS, OperatorConstants.selectBranchAndAddButton_Neo_ID);
+        kSelectBranchAndAddButton = new JoystickButton(neoJS, OperatorConstants.kSelectBranchAndAddButton_Neo_ID);
     }
 
     /**Configue all buttons defined to use the keyboard */
     private void configKybd() {
         // Create a JSB for each level
         lvl2Button = new JoystickButton(kybd1JS, OperatorConstants.klvl2Button_Kybd1_ID);
-        lvl3Button = new JoystickButton(kybd1JS, OperatorConstants.selectBranchAndAddButton_Kybd1_ID);
+        lvl3Button = new JoystickButton(kybd1JS, OperatorConstants.klvl3Button_Kybd1_ID);
         lvl4Button = new JoystickButton(kybd1JS, OperatorConstants.klvl4Button_Kybd1_ID);
-        selectBranchAndAddButton = new JoystickButton(kybd1JS, OperatorConstants.klvl3Button_Kybd1_ID);
+        kSelectBranchAndAddButton = new JoystickButton(kybd1JS, OperatorConstants.kSelectBranchAndAddButton_Kybd1_ID);
     }
 }
 

@@ -13,7 +13,6 @@
 package frc.robot;
 
 // Constants
-import frc.robot.Constants.OperatorConstants;
 
 // Operator Input
 import frc.robot.OperatorInput;
@@ -31,12 +30,6 @@ import frc.robot.OperatorInput;
 import frc.robot.commandgroups.Level2CommandGroup;
 import frc.robot.commandgroups.Level3CommandGroup;
 import frc.robot.commandgroups.Level4CommandGroup;
-
-// Elevator Commands
-// NONE YET!
-
-// Arm Commands
-// NONE YET!
 
 // Interface Commands
 import frc.robot.commands.InterfaceStoreBranchesCommand;
@@ -64,12 +57,6 @@ import frc.robot.subsystems.InterfaceSubsystem;
 //   `Y8bood8P'  o888o 
 //                    
 
-// Operator Input Imports
-// ----------------------Logitech Extreme 3D Pro
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-// ----------------------Xbox Controller
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 // Necessary stuff
 // import edu.wpi.first.wpilibj2.command.Command;  <------------- Uncomment this if you are using a command without a group
@@ -83,7 +70,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final OperatorInput m_operatorInput = new OperatorInput(1);
+  private final OperatorInput m_operatorInput = new OperatorInput(0);
 
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
@@ -102,15 +89,6 @@ public class RobotContainer {
     configureBindings();
   }
 
-  //Logitech Extreme 3D Pro
-  public static Joystick driverJoystick = new Joystick(OperatorConstants.kDriverControllerPort);
-  public static JoystickButton lvl2Button = new JoystickButton(driverJoystick, 3);
-  public static JoystickButton lvl3Button = new JoystickButton(driverJoystick, 4);
-  public static JoystickButton lvl4Button = new JoystickButton(driverJoystick, 6);
-  public static JoystickButton selectBranchAndAddButton = new JoystickButton(driverJoystick, 1);
-
-  //Test: Keyboard
-
   
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -123,10 +101,10 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Logitech Extreme 3D Pro
-    lvl2Button.onTrue(m_level2CommandGroup);
-    lvl3Button.onTrue(m_level3CommandGroup);
-    lvl4Button.onTrue(m_level4CommandGroup);
-    selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
+    m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
+    m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
+    m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
+    m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
 
     // Test: Keyboard
 

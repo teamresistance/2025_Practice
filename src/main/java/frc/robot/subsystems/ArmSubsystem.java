@@ -6,10 +6,24 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.*;
+
 import frc.robot.Constants.RobotConstants;
+import frc.robot.Constants.HardwareConstants;
+
+import edu.wpi.first.wpilibj.Solenoid;
 
 
 public class ArmSubsystem extends SubsystemBase {
+  public Solenoid wristRotator = new Solenoid(
+    HardwareConstants.pneumaticsModuleType, 
+    HardwareConstants.kSolenoid_wristRotator_portNumber
+    );
+  
+  public Solenoid armLifter = new Solenoid(
+    HardwareConstants.pneumaticsModuleType, 
+    HardwareConstants.kSolenoid_armLifter_portNumber
+    );
+
   public boolean hasCoral = false;
   public boolean inScoringPosition = false;
 
@@ -26,9 +40,17 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void rotateArmAxis() {
+    armLifter.setPulseDuration(
+      HardwareConstants.kArmLifterPulseDurationSeconds
+    );
+    armLifter.set(true);
   }
 
   public void rotateArmWrist() {
+    wristRotator.setPulseDuration(
+      HardwareConstants.kWristRotatorPulseDurationSeconds
+    );
+    wristRotator.set(true);
   }
   public void getInScoringPosition() {
     rotateArmAxis();
@@ -38,7 +60,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void score() {
     try {
-      Thread.sleep(RobotConstants.kScoreTimeoutSeconds);
+      Thread.sleep(RobotConstants.kScoreTimeoutMilliseconds);
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
     }
@@ -47,6 +69,9 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void getBackToReceivingPosition() {
+    wristRotator.set(false);
+    armLifter.set(false);
+
     inScoringPosition = false;
   }
 
