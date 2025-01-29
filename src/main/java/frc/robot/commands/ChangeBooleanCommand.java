@@ -4,20 +4,20 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ChangeBooleanSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class ElevatorRaiseFirstStageCommand extends Command {
+public class ChangeBooleanCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ElevatorSubsystem m_subsystem;
+  private final ChangeBooleanSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ElevatorRaiseFirstStageCommand(ElevatorSubsystem subsystem) {
+  public ChangeBooleanCommand(ChangeBooleanSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem); 
@@ -25,16 +25,12 @@ public class ElevatorRaiseFirstStageCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    System.out.println("Raising first stage...");
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!m_subsystem.firstStageSolenoidUp) {
-      m_subsystem.raiseFirstStage();
-    }
+    m_subsystem.changeBoolean();
   }
 
   // Called once the command ends or is interrupted.
@@ -44,7 +40,6 @@ public class ElevatorRaiseFirstStageCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out.println("Raised first stage!");
     return true;
   }
 }
