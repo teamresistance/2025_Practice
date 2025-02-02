@@ -14,67 +14,51 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DigitalSource;
 
 
-public class Design4ClawSubsystem extends SubsystemBase {
-  public boolean gripped = false;
-  public boolean IsInScoringPosition=false;
-  public boolean IsInReceivingPosition= false;
-  public boolean isGripped= false;
+public class FlipperSubsystem extends SubsystemBase {
+  public boolean isInScoringPosition=false;
+  public boolean isInReceivingPosition= false;
+  public boolean isGripped = false;
+  public boolean hasCoral= false;
   Solenoid gripper = new Solenoid(PneumaticsModuleType.REVPH, 6); //The pneumatics hub channels that we are using are 0, 2, and 5
-  Solenoid clawTilter= new Solenoid(PneumaticsModuleType.REVPH, 9);
-  TalonFX rotator= new TalonFX(9);
+  Solenoid flipper= new Solenoid(PneumaticsModuleType.REVPH, 9);
   DigitalInput CoralDetector= new DigitalInput(0);
   public boolean hasCoral=CoralDetector.get();
   /** Creates a new ExampleSubsystem. */
-  public Design4ClawSubsystem() {}
+  public FlipperSubsystem() {}
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
    * @return the opposite of the value of said boolean state.
    */
-  public void ClawGrip() {
+  public void grip() {
     gripper.setPulseDuration(1.0);
-    gripper.set(coralDetector.get());
+    hasCoral = coralDetector.get();
+    gripper.set(hasCoral);
+    isGripped = gripper.get();
+   
   }
   public void letGo(){
     gripper.setPulseDuration(1.0);
     gripper.set(false);
   }
-  public void clawSpinner(){
-    double motorTurnAmount= angleToEncoderTicks(90);
-    rotator.set(ControlMode.position, motorTurnAmount);
+  ///public void clawSpinner(){
+   // double motorTurnAmount= angleToEncoderTicks(90);
+   /// rotator.set(ControlMode.position, motorTurnAmount);
+  //}
+  public void flipperReadyToScore() {
+    flipper.setPulseDuration(1.0);
+    flipper.set(true);
+    isInScoringPosition = true;
   }
-  public void clawTilter() {
-    clawTilter.setPulseDuration(1.0);
-    clawTilter.set(true);
+  public void flipperReadyToReceive(){
+    flipper.setPulseDuration(1.0);
+    flipper.set(false);
+    isInReceivingPosition = true;
   }
-  public void clawUntilter(){
-    clawTilter.setPulseDuration(1.0);
-    clawTilter.set(false);
-  }
-  public void clawUnspinner(){
-    rotator.set(ControlMode.Position, -motorTurnAmount);
-  }
-
-  public void scoringPositionJourney() {
-    clawSpinner();
-    clawTilter();
-    IsInScoringPosition=true;
-  }
-  public void getBackToReceivingPositionJourney(){
-    clawUntilter();
-    clawUnspinner();
-    IsInReceivingPosition=true;
-  }
-  public boolean IsInScoringPosition(){
-    return IsinScoringPosition;
-  }
-  public boolean IsItInReceivingPosition(){
-    return IsInReceivingPosition;
-  }
-  public boolean IsItGripped(){
-    return isGripped;
-  }
+  ///public void clawUnspinner(){
+    ///rotator.set(ControlMode.Position, -motorTurnAmount);
+  ///}
 
   public void score() {
     try {
@@ -86,14 +70,10 @@ public class Design4ClawSubsystem extends SubsystemBase {
     hasCoral = false;
   }
 
-  public void getBackToReceivingPosition() {
-    UnrotateArmWrist();
-    inScoringPosition = false;
-  }
-
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("Has Coral?", hasCoral);
+    SmartDashboard.putBoolean("Is Gripped?", isGripped);
     SmartDashboard.putBoolean("In Scoring Position?", inScoringPosition);
   }
 

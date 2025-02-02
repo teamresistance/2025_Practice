@@ -5,21 +5,21 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // Commands
 import frc.robot.commands.ElevatorRaiseFirstStageCommand;
 import frc.robot.commands.ElevatorLowerFirstStageCommand;
-import frc.robot.commands.ArmGetIntoScoringPositionAndScoreCommand;
-import frc.robot.commands.ArmRetractCommand;
+import frc.robot.commands.FlipperScoringCommand;
+import frc.robot.commands.FlipperBackToReceivingCommand;
 
 // Subsystems
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.FlipperSubsystem;
 
 // Create a sequential command group for Level 3
 public class Level3CommandGroup extends SequentialCommandGroup {
-    public Level3CommandGroup(ElevatorSubsystem elevatorSubsystem, ArmSubsystem armSubsystem) {
+    public Level3CommandGroup(ElevatorSubsystem elevatorSubsystem, FlipperSubsystem flipperSubsystem) {
         addCommands(
-            new ElevatorRaiseFirstStageCommand(elevatorSubsystem),
-            new ArmGetIntoScoringPositionAndScoreCommand(armSubsystem),
-            new ArmRetractCommand(armSubsystem),
-            new ElevatorLowerFirstStageCommand(elevatorSubsystem)
+            new ElevatorRaiseFirstStageCommand(elevatorSubsystem),   
+            new Design4ClawScoringCommand(Design4ClawSubsystem),
+            new Design4ClawBackToReceivingCommand(Design4ClawSubsystem),
+            new ElevatorLowerFirstStageCommand(ElevatorSubsystem)
         );
     }
 }
