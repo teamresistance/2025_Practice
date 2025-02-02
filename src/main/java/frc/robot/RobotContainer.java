@@ -12,7 +12,9 @@
 
 package frc.robot;
 
+
 // Constants
+import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.JSConstants;
 
 
@@ -28,11 +30,12 @@ import frc.robot.Constants.JSConstants;
 import frc.robot.commandgroups.Level2CommandGroup;
 import frc.robot.commandgroups.Level3CommandGroup;
 import frc.robot.commandgroups.Level4CommandGroup;
-import frc.robot.commands.RollerIntakeCommand; 
-import frc.robot.commands.RollerOutputCommand;
 
 // Elevator Commands
 // NONE YET!
+
+// Climber Commands
+import frc.robot.commands.ClimberActivateCommand;
 
 // Arm Commands
 // NONE YET!
@@ -46,10 +49,10 @@ import frc.robot.commands.RollerOutputCommand;
 //  8""88888P'   `V88V"V8P'  `Y8bod8P' 8""888P'     .8'     8""888P'   "888" `Y8bod8P' o888o o888o o888o 8""888P' 
 //                                              .o..P'                                                            
 //                                              `Y8P'                                                             
-
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.RollerSubsystem;
+
 //    .oooooo.   ooooo 
 //   d8P'  `Y8b  `888' 
 //  888      888  888  
@@ -80,14 +83,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
-  private final RollerSubsystem m_rollerSubsystem = new RollerSubsystem();
-  private final RollerOutputCommand m_rollerOutputCommand = new RollerOutputCommand(m_rollerSubsystem);
-  private final RollerIntakeCommand m_rollerIntakeCommand = new RollerIntakeCommand(m_rollerSubsystem);
-
+  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_armSubsystem);
   private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_armSubsystem);
   private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_armSubsystem);
-  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -97,12 +96,11 @@ public class RobotContainer {
   }
 
   //Logitech Extreme 3D Pro
-  public static Joystick driverJoystick = new Joystick(JSConstants.kDriverControllerPort);
+  public static Joystick driverJoystick = new Joystick(OperatorConstants.kDriverControllerPort);
   public static JoystickButton lvl2Button = new JoystickButton(driverJoystick, 3);
   public static JoystickButton lvl3Button = new JoystickButton(driverJoystick, 4);
   public static JoystickButton lvl4Button = new JoystickButton(driverJoystick, 6);
-  public static JoystickButton rollerIntakeButton = new JoystickButton(driverJoystick, JSConstants.kRollerFwd3JSBtn);
-  public static JoystickButton rollerOutputButton = new JoystickButton(driverJoystick, JSConstants.kRollerRev3JSBtn);
+  public static JoystickButton climberButton = new JoystickButton(driverJoystick, JSConstants.kClimberActivate3JSBtn);
 
   //Test: Keyboard
 
@@ -120,9 +118,7 @@ public class RobotContainer {
     lvl2Button.onTrue(m_level2CommandGroup);
     lvl3Button.onTrue(m_level3CommandGroup);
     lvl4Button.onTrue(m_level4CommandGroup);
-    rollerIntakeButton.onTrue(m_rollerIntakeCommand);
-    rollerOutputButton.onTrue(m_rollerOutputCommand);
-
+    climberButton.onTrue(new ClimberActivateCommand(m_climberSubsystem));
     // Test: Keyboard
     
   }

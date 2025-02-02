@@ -33,6 +33,7 @@ public final class Constants {
         public static final int kGripClsSVChnl = 3;
         public static int kFlipOutSVChnl;
         public static int kFlipUpSVChnl;
+        public static final int kClimberSVChnl = 4;
     }
 
     public static class JSConstants {
@@ -51,11 +52,8 @@ public final class Constants {
         public static final int kElevHigh3JSBtn = 1;
         //for Arm
         public static final int kArmTgl3JSBtn = 11;
-        //for gripper
-        public static final int kGripTgl3JSBtn = 12;
-        //for roller
-        public static final int kRollerFwd3JSBtn = 5;
-        public static final int kRollerRev3JSBtn = 7;
+        //for climber
+        public static final int kClimbAct3JSBtn = 12;
 
         //----------- JS Buttons for Neopad -------------
         //for all level select
