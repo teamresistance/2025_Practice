@@ -2,6 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+
+//   _____ ___  __  __ __   ___ ___  __  _   __ _____ __  __  _  ______   ___  ___  
+//  |_   _| __|/  \|  V  | | _ \ __/' _/| |/' _/_   _/  \|  \| |/ _/ __| / _ \/ __| 
+//    | | | _|| /\ | \_/ | | v / _|`._`.| |`._`. | || /\ | | ' | \_| _|  ) _ ( ,_ \ 
+//    |_| |___|_||_|_| |_| |_|_\___|___/|_||___/ |_||_||_|_|\__|\__/___| \___/\___/ 
+
 package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;

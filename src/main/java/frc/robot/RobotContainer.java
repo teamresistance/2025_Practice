@@ -2,26 +2,78 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+//  ooooooooo.              .o8                     .     .oooooo.                             .              o8o                                 
+//  `888   `Y88.           "888                   .o8    d8P'  `Y8b                          .o8              `"'                                 
+//   888   .d88'  .ooooo.   888oooo.   .ooooo.  .o888oo 888           .ooooo.  ooo. .oo.   .o888oo  .oooo.   oooo  ooo. .oo.    .ooooo.  oooo d8b 
+//   888ooo88P'  d88' `88b  d88' `88b d88' `88b   888   888          d88' `88b `888P"Y88b    888   `P  )88b  `888  `888P"Y88b  d88' `88b `888""8P 
+//   888`88b.    888   888  888   888 888   888   888   888          888   888  888   888    888    .oP"888   888   888   888  888ooo888  888     
+//   888  `88b.  888   888  888   888 888   888   888 . `88b    ooo  888   888  888   888    888 . d8(  888   888   888   888  888    .o  888     
+//  o888o  o888o `Y8bod8P'  `Y8bod8P' `Y8bod8P'   "888"  `Y8bood8P'  `Y8bod8P' o888o o888o   "888" `Y888""8o o888o o888o o888o `Y8bod8P' d888b    
+
 package frc.robot;
 
+// Constants
 import frc.robot.Constants.OperatorConstants;
 
-import frc.robot.commands.GoToReefLocationCmd;
-import frc.robot.commands.InterfaceChooseCmd;
-import frc.robot.subsystems.ExampleSubsystem;
+// Operator Input
+import frc.robot.OperatorInput;
+
+
+//  .oooooo.                                                                             .o8           
+// d8P'  `Y8b                                                                           "888           
+//888           .ooooo.  ooo. .oo.  .oo.   ooo. .oo.  .oo.    .oooo.   ooo. .oo.    .oooo888   .oooo.o 
+//888          d88' `88b `888P"Y88bP"Y88b  `888P"Y88bP"Y88b  `P  )88b  `888P"Y88b  d88' `888  d88(  "8 
+//888          888   888  888   888   888   888   888   888   .oP"888   888   888  888   888  `"Y88b.  
+//`88b    ooo  888   888  888   888   888   888   888   888  d8(  888   888   888  888   888  o.  )88b 
+// `Y8bood8P'  `Y8bod8P' o888o o888o o888o o888o o888o o888o `Y888""8o o888o o888o `Y8bod88P" 8""888P' 
+
+// Command Groups
+import frc.robot.commandgroups.Level2CommandGroup;
+import frc.robot.commandgroups.Level3CommandGroup;
+import frc.robot.commandgroups.Level4CommandGroup;
+
+// Elevator Commands
+// NONE YET!
+
+// Arm Commands
+// NONE YET!
+
+// Interface Commands
+import frc.robot.commands.InterfaceStoreBranchesCommand;
+
+//   .oooooo..o              .o8                                         .                                        
+//  d8P'    `Y8             "888                                       .o8                                        
+//  Y88bo.      oooo  oooo   888oooo.   .oooo.o oooo    ooo  .oooo.o .o888oo  .ooooo.  ooo. .oo.  .oo.    .oooo.o 
+//   `"Y8888o.  `888  `888   d88' `88b d88(  "8  `88.  .8'  d88(  "8   888   d88' `88b `888P"Y88bP"Y88b  d88(  "8 
+//       `"Y88b  888   888   888   888 `"Y88b.    `88..8'   `"Y88b.    888   888ooo888  888   888   888  `"Y88b.  
+//  oo     .d8P  888   888   888   888 o.  )88b    `888'    o.  )88b   888 . 888    .o  888   888   888  o.  )88b 
+//  8""88888P'   `V88V"V8P'  `Y8bod8P' 8""888P'     .8'     8""888P'   "888" `Y8bod8P' o888o o888o o888o 8""888P' 
+//                                              .o..P'                                                            
+//                                              `Y8P'                                                             
+
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.InterfaceSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
-import frc.robot.subsystems.ArmSubsystem3;
-import frc.robot.subsystems.CoralSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem3;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+//    .oooooo.   ooooo 
+//   d8P'  `Y8b  `888' 
+//  888      888  888  
+//  888      888  888  
+//  888      888  888  
+//  `88b    d88'  888  
+//   `Y8bood8P'  o888o 
+//                    
+
+// Operator Input Imports
+// ----------------------Logitech Extreme 3D Pro
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.PositionElevatorCmd3;
-import frc.robot.commands.ToggleArmCmd3;
-import frc.robot.commands.VisionCmd;
+// ----------------------Xbox Controller
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
+// Necessary stuff
+// import edu.wpi.first.wpilibj2.command.Command;  <------------- Uncomment this if you are using a command without a group
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,18 +83,17 @@ import frc.robot.commands.VisionCmd;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ElevatorSubsystem3 m_elevatorSubsystem3 = new ElevatorSubsystem3();
-  private final ArmSubsystem3 m_armSubsystem3 = new ArmSubsystem3();
-  private final CoralSubsystem m_coralSubsystem = new CoralSubsystem();
+  private final OperatorInput m_operatorInput = new OperatorInput(1);
+
+  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
   private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
-  private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
 
+  private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_armSubsystem);
+  private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_armSubsystem);
+  private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_armSubsystem);
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private final Joystick js = new Joystick(0);
+  private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(m_interfaceSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -51,9 +102,16 @@ public class RobotContainer {
     configureBindings();
   }
 
-  public static Joystick driverJoystick = new Joystick(0);
-  public static JoystickButton changeBooleanButton = new JoystickButton(driverJoystick, 7);
+  //Logitech Extreme 3D Pro
+  public static Joystick driverJoystick = new Joystick(OperatorConstants.kDriverControllerPort);
+  public static JoystickButton lvl2Button = new JoystickButton(driverJoystick, 3);
+  public static JoystickButton lvl3Button = new JoystickButton(driverJoystick, 4);
+  public static JoystickButton lvl4Button = new JoystickButton(driverJoystick, 6);
+  public static JoystickButton selectBranchAndAddButton = new JoystickButton(driverJoystick, 1);
 
+  //Test: Keyboard
+
+  
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -64,45 +122,22 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    //Levels
-    int mode = 2;
-    if (mode == 1){
-      new JoystickButton(js, 5).onTrue(new PositionElevatorCmd3(m_elevatorSubsystem3, 1));
-      new JoystickButton(js, 3).onTrue(new PositionElevatorCmd3(m_elevatorSubsystem3, 2));
-      new JoystickButton(js, 4).onTrue(new PositionElevatorCmd3(m_elevatorSubsystem3, 3));
-      new JoystickButton(js, 6).onTrue(new PositionElevatorCmd3(m_elevatorSubsystem3, 4));
-      //Arm
-      new JoystickButton(js, 1).onTrue(new ToggleArmCmd3(m_armSubsystem3));
-      //Reef
-      new JoystickButton(js, 7).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 1));
-      new JoystickButton(js, 8).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 2));
-      new JoystickButton(js, 9).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 3));
-      new JoystickButton(js, 10).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 4));
-      new JoystickButton(js, 11).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 5));
-      new JoystickButton(js, 12).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 6));
-    }
-    if (mode == 2){
-      new JoystickButton(js, 1).onTrue(new VisionCmd(m_visionSubsystem));
-    }
-    if (mode == 3){
-      new JoystickButton(js, 1).onTrue(new InterfaceChooseCmd(m_interfaceSubsystem));
-    }
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // Logitech Extreme 3D Pro
+    lvl2Button.onTrue(m_level2CommandGroup);
+    lvl3Button.onTrue(m_level3CommandGroup);
+    lvl4Button.onTrue(m_level4CommandGroup);
+    selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
+
+    // Test: Keyboard
 
   }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.
    *
    * @return the command to run in teleopPeriodic
    */
+  //public Command getChangeBooleanCommand() {
+    // An example command will be run in autonomous
+  //  return new ChangeBooleanCommand(m_changeBooleanSubsystem);
+  //}
 }

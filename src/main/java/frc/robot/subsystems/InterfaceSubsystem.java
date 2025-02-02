@@ -5,55 +5,54 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.*;
+import java.util.ArrayList;
 
 public class InterfaceSubsystem extends SubsystemBase {
-  /** Creates a new InferfaceSubsystem. */
-  public InterfaceSubsystem() {}
+  public SendableChooser<String> reefBranchChooser = new SendableChooser<String>();
+  public SendableChooser<String> reefLevelChooser = new SendableChooser<String>();
+  public ArrayList<String[]> reefBranchCombinations = new ArrayList<>();
 
-  public SendableChooser<String> interfaceChooser;
-  public SendableChooser<String> interfaceChooserLvl;
-  public void interfaceChooser(){
-    //Pos
-    interfaceChooser = new SendableChooser<>();
-    interfaceChooser.addOption("1", "1");
-    interfaceChooser.addOption("2", "2");
-    interfaceChooser.addOption("3", "3");
-    interfaceChooser.addOption("4", "4");
-    interfaceChooser.addOption("5", "5");
-    interfaceChooser.addOption("6", "6");
-    interfaceChooser.addOption("7", "7");
-    interfaceChooser.addOption("8", "8");
-    interfaceChooser.addOption("9", "9");
-    interfaceChooser.addOption("10", "10");
-    interfaceChooser.addOption("11", "11");
-    interfaceChooser.addOption("12", "12");
-    interfaceChooser.setDefaultOption("1","1");
-    //Level
-    interfaceChooserLvl = new SendableChooser<>();
-    interfaceChooserLvl.addOption("1", "1");
-    interfaceChooserLvl.addOption("2", "2");
-    interfaceChooserLvl.addOption("3", "3");
-    interfaceChooserLvl.addOption("4", "4");
-    interfaceChooserLvl.setDefaultOption("1","1"); 
-    }
+  /** Creates a new ExampleSubsystem. */
+  public InterfaceSubsystem() {
+    reefBranchChooserInitialize();
+    reefLevelChooserInitialize();
+  }
 
-  public void goInterfaceLoc(){
-    System.out.println("Pretend this went to location " + interfaceChooser.getSelected() + ", level " + interfaceChooserLvl.getSelected());
+  public void reefBranchChooserInitialize() {
+    reefBranchChooser.addOption("A", "A");
+    reefBranchChooser.addOption("B", "B");
+    reefBranchChooser.addOption("C", "C");
+    reefBranchChooser.addOption("D", "D");
+    reefBranchChooser.addOption("E", "E");
+    reefBranchChooser.addOption("F", "F");
+    reefBranchChooser.addOption("G", "G");
+    reefBranchChooser.addOption("H", "H");
+    reefBranchChooser.addOption("I", "I");
+    reefBranchChooser.addOption("J", "J");
+    reefBranchChooser.addOption("K", "K");
+    reefBranchChooser.addOption("L", "L");
+    reefBranchChooser.setDefaultOption("A", "A");
+    SmartDashboard.putData("Reef Branch Chooser", reefBranchChooser);
+  }
+
+  public void reefLevelChooserInitialize() {
+    reefLevelChooser.addOption("1", "1");
+    reefLevelChooser.addOption("2", "2");
+    reefLevelChooser.addOption("3", "3");
+    reefLevelChooser.addOption("4", "4");
+    reefLevelChooser.setDefaultOption("1", "1");
+    SmartDashboard.putData("Reef Level Chooser", reefLevelChooser);
   }
 
   @Override
   public void periodic() {
-    if (interfaceChooser == null){
-      interfaceChooser();
-    }
-    else{
-      SmartDashboard.putString("Reef Position", interfaceChooser.getSelected());
-      SmartDashboard.putString("Reef Level", interfaceChooserLvl.getSelected());
-      SmartDashboard.putData(interfaceChooser);
-      SmartDashboard.putData(interfaceChooserLvl);
-    }
-    // This method will be called once per scheduler run
+    SmartDashboard.putData("Reef Branch Chooser", reefBranchChooser);
+    SmartDashboard.putData("Reef Level Chooser", reefLevelChooser);
+  }
+
+  @Override
+  public void simulationPeriodic() {
+    // This method will be called once per scheduler run during simulation
   }
 }
