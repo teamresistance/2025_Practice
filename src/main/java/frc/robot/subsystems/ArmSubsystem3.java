@@ -39,6 +39,7 @@ public class ArmSubsystem3 extends SubsystemBase {
       cancelSwitch=false;
     }
     SmartDashboard.putBoolean("Arm Holder", arm.get());
+    SmartDashboard.putBoolean("Gripper Holder", gripper.get());
     // This method will be called once per scheduler run
   }
 }

@@ -46,7 +46,7 @@ public class InterfaceSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     if (interfaceChooser == null){
-      //interfaceChooser();
+      interfaceChooser();
     }
     else{
       SmartDashboard.putString("Reef Position", interfaceChooser.getSelected());
