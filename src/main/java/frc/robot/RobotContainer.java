@@ -10,6 +10,7 @@ import frc.robot.commands.GoToReefLocationCmd;
 import frc.robot.commands.InterfaceChooseCmd;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.InterfaceSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.subsystems.ArmSubsystem3;
 import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem3;
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.PositionElevatorCmd3;
 import frc.robot.commands.ToggleArmCmd3;
+import frc.robot.commands.VisionCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -34,6 +36,7 @@ public class RobotContainer {
   private final ArmSubsystem3 m_armSubsystem3 = new ArmSubsystem3();
   private final CoralSubsystem m_coralSubsystem = new CoralSubsystem();
   private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
+  private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -62,7 +65,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     //Levels
-    int mode = 1;
+    int mode = 2;
     if (mode == 1){
       new JoystickButton(js, 5).onTrue(new PositionElevatorCmd3(m_elevatorSubsystem3, 1));
       new JoystickButton(js, 3).onTrue(new PositionElevatorCmd3(m_elevatorSubsystem3, 2));
@@ -77,6 +80,9 @@ public class RobotContainer {
       new JoystickButton(js, 10).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 4));
       new JoystickButton(js, 11).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 5));
       new JoystickButton(js, 12).onTrue(new GoToReefLocationCmd(m_coralSubsystem, 6));
+    }
+    if (mode == 2){
+      new JoystickButton(js, 1).onTrue(new VisionCmd(m_visionSubsystem));
     }
     if (mode == 3){
       new JoystickButton(js, 1).onTrue(new InterfaceChooseCmd(m_interfaceSubsystem));
