@@ -4,20 +4,20 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ChangeBooleanSubsystem;
+import frc.robot.subsystems.InterfaceSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class ChangeBooleanCommand extends Command {
+public class InterfaceStoreBranchesCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ChangeBooleanSubsystem m_subsystem;
+  private final InterfaceSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ChangeBooleanCommand(ChangeBooleanSubsystem subsystem) {
+  public InterfaceStoreBranchesCommand(InterfaceSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem); 
@@ -25,12 +25,23 @@ public class ChangeBooleanCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("Storing Branch Combination: Branch " + 
+    m_subsystem.reefBranchChooser.getSelected() +
+    ", Level " +
+    m_subsystem.reefLevelChooser.getSelected() +
+    "...");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.changeBoolean();
+    m_subsystem.reefBranchCombinations.add(
+      new String[] {
+        m_subsystem.reefBranchChooser.getSelected(),
+        m_subsystem.reefLevelChooser.getSelected()
+    }
+    );
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +51,7 @@ public class ChangeBooleanCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println("Stored Branch Combination!");
     return true;
   }
 }
