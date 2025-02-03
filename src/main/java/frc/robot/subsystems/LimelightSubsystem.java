@@ -2,7 +2,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.LimelightHelpers;
+import frc.robot.Constants.RobotConstants;
 
 public class LimelightSubsystem extends SubsystemBase {
     
@@ -10,9 +12,9 @@ public class LimelightSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        double tx = LimelightHelpers.getTX("");
-        double ty = LimelightHelpers.getTY("");
-        double ta = LimelightHelpers.getTA("");
+        double tx = LimelightHelpers.getTX(RobotConstants.limelightName);
+        double ty = LimelightHelpers.getTY(RobotConstants.limelightName);
+        double ta = LimelightHelpers.getTA(RobotConstants.limelightName);
 
         SmartDashboard.putNumber("X-Offset in degrees", tx);
         SmartDashboard.putNumber("Y-Offset in degrees", ty);

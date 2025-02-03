@@ -43,6 +43,7 @@ public final class Constants {
 
   public static class RobotConstants {
     public static final int kScoreTimeoutMilliseconds = 3000; //Milliseconds
+    public static final String limelightName = "limelight";
   }
 
   public static class HardwareConstants {
