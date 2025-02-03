@@ -8,7 +8,7 @@ import frc.robot.subsystems.FlipperSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** Command to move the flipper into scoring position and release the coral. */
-public class FlipperScoreCommand extends Command {
+public class FlipperExtendAndScoreCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final FlipperSubsystem m_subsystem;
 
@@ -17,7 +17,7 @@ public class FlipperScoreCommand extends Command {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public FlipperScoreCommand(FlipperSubsystem subsystem) {
+  public FlipperExtendAndScoreCommand(FlipperSubsystem subsystem) {
     m_subsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -29,7 +29,7 @@ public class FlipperScoreCommand extends Command {
 
   @Override
   public void execute() {
-    m_subsystem.flipperReadyToScore();
+    m_subsystem.extend();
     m_subsystem.letGo();
     m_subsystem.score();
   }
