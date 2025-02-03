@@ -53,6 +53,7 @@ public class InterfaceSubsystem extends SubsystemBase {
 
   @Override
   public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+    SmartDashboard.putData("Reef Branch Chooser", reefBranchChooser);
+    SmartDashboard.putData("Reef Level Chooser", reefLevelChooser);
   }
 }

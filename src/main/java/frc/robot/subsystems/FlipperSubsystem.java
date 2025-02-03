@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -84,6 +84,21 @@ public class FlipperSubsystem extends SubsystemBase {
 
   @Override
   public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+    //Scan for coral using DigitalInput.
+    //If coral found, grip it after 200ms.
+    if (gripper.get() == false) {
+      if (coralDetector.get() == true) {
+        try {
+            Thread.sleep(RobotConstants.kGripperDelayMilliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        gripper.set(true);
+      }
+    }
+
+    SmartDashboard.putBoolean("Has Coral?", hasCoral);
+    SmartDashboard.putBoolean("Is Gripped?", isGripped);
+    SmartDashboard.putBoolean("In Scoring Position?", isInScoringPosition);
   }
 }

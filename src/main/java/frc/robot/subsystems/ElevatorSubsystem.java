@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants.HardwareConstants;
 
@@ -45,10 +45,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     secondStageSolenoid.setPulseDuration(
       HardwareConstants.kSecondStagePulseDurationSeconds
     );
-    firstStageSolenoid.set(true);
+    secondStageSolenoid.set(true);
     
 
-    firstStageSolenoidUp = true;
+    secondStageSolenoidUp = true;
   }
   public void lowerFirstStage() {
     firstStageSolenoid.set(false);
@@ -58,7 +58,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void lowerSecondStage() {
     secondStageSolenoid.set(false);
 
-    firstStageSolenoidUp = false;
+    secondStageSolenoidUp = false;
   }
 
   @Override
@@ -69,6 +69,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   @Override
   public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+    SmartDashboard.putBoolean("First Stage Up?", firstStageSolenoidUp);
+    SmartDashboard.putBoolean("Second Stage Up?", secondStageSolenoidUp);
   }
 }

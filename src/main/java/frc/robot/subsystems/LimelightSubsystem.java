@@ -23,6 +23,12 @@ public class LimelightSubsystem extends SubsystemBase {
 
     @Override
     public void simulationPeriodic() {
-        // This method will be called once per scheduler run during simulation
+        double tx = LimelightHelpers.getTX(RobotConstants.limelightName);
+        double ty = LimelightHelpers.getTY(RobotConstants.limelightName);
+        double ta = LimelightHelpers.getTA(RobotConstants.limelightName);
+
+        SmartDashboard.putNumber("X-Offset in degrees", tx);
+        SmartDashboard.putNumber("Y-Offset in degrees", ty);
+        SmartDashboard.putNumber("Area of target in %", ta);
     }
 }
