@@ -52,8 +52,9 @@ import frc.robot.commands.InterfaceStoreBranchesCommand;
 //                                              `Y8P'                                                             
 
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.FlipperSubsystem;
 import frc.robot.subsystems.InterfaceSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 
 //    .oooooo.   ooooo 
 //   d8P'  `Y8b  `888' 
@@ -63,13 +64,6 @@ import frc.robot.subsystems.InterfaceSubsystem;
 //  `88b    d88'  888  
 //   `Y8bood8P'  o888o 
 //                    
-
-// Operator Input Imports
-// ----------------------Logitech Extreme 3D Pro
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-// ----------------------Xbox Controller
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 // Necessary stuff
 // import edu.wpi.first.wpilibj2.command.Command;  <------------- Uncomment this if you are using a command without a group
@@ -83,15 +77,16 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final OperatorInput m_operatorInput = new OperatorInput(1);
+  private final OperatorInput m_operatorInput = new OperatorInput(0);
 
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
-  private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
+  private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
   private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
+  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
 
-  private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_armSubsystem);
-  private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_armSubsystem);
-  private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_armSubsystem);
+  private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
+  private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_flipperSubsystem);
+  private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_flipperSubsystem);
 
   private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(m_interfaceSubsystem);
 
@@ -103,11 +98,6 @@ public class RobotContainer {
   }
 
   //Logitech Extreme 3D Pro
-  public static Joystick driverJoystick = new Joystick(OperatorConstants.kDriverControllerPort);
-  public static JoystickButton lvl2Button = new JoystickButton(driverJoystick, 3);
-  public static JoystickButton lvl3Button = new JoystickButton(driverJoystick, 4);
-  public static JoystickButton lvl4Button = new JoystickButton(driverJoystick, 6);
-  public static JoystickButton selectBranchAndAddButton = new JoystickButton(driverJoystick, 1);
 
   //Test: Keyboard
 
@@ -123,10 +113,10 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Logitech Extreme 3D Pro
-    lvl2Button.onTrue(m_level2CommandGroup);
-    lvl3Button.onTrue(m_level3CommandGroup);
-    lvl4Button.onTrue(m_level4CommandGroup);
-    selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
+    m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
+    m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
+    m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
+    m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
 
     // Test: Keyboard
 
