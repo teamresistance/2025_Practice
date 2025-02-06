@@ -8,6 +8,9 @@ package frc.robot;
 //Hardware imports
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
+//Mathy stuff
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -65,7 +68,7 @@ public final class Constants {
   }
 
   public static class FieldConstants {
-    public static final double kReefBranchWidthInches = 1;
+    public static final double kReefBranchWidthMeters = Units.inchesToMeters(1.0);
   }
 
 }

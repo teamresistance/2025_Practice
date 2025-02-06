@@ -21,9 +21,9 @@ public class LimelightSubsystem extends SubsystemBase {
         LimelightHelpers.getT2DArray(
             RobotConstants.limelightName)[13];
 
-        double forwardDistanceToBranchInches = 
+        double forwardDistanceToBranchMeters = 
             (RobotConstants.kLimelightWindowResolutionWidthPixels)
-            * (FieldConstants.kReefBranchWidthInches)
+            * (FieldConstants.kReefBranchWidthMeters)
             / (perceivedBranchWidthPixels
             * Math.sin(
                 Math.toRadians(
@@ -31,16 +31,14 @@ public class LimelightSubsystem extends SubsystemBase {
                     / 2))
             * 2);
 
-        double horizontalOffsetToBranchInches = 
-            forwardDistanceToBranchInches
+        double horizontalOffsetToBranchMeters = 
+            forwardDistanceToBranchMeters
             * Math.tan(
                 Math.toRadians(
-                    tx
-                ));
-
-        SmartDashboard.putNumber("X-Offset in degrees", tx);
-        SmartDashboard.putNumber("Y-Offset in degrees", ty);
-        SmartDashboard.putNumber("Area of target in %", ta);
+                    tx));
+        
+        SmartDashboard.putNumber("Forward Distance to Branch in Meters", forwardDistanceToBranchMeters);
+        SmartDashboard.putNumber("Horizontal Offset to Branch in Meters", horizontalOffsetToBranchMeters);
 
     }
 
