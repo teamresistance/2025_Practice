@@ -94,7 +94,7 @@ public class FlipperSubsystem extends SubsystemBase {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        gripper.set(true);
+        grip();
       }
     }
 
