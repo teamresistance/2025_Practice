@@ -40,6 +40,9 @@ import frc.robot.commandgroups.Level4CommandGroup;
 
 // Interface Commands
 import frc.robot.commands.InterfaceStoreBranchesCommand;
+import frc.robot.commands.InterfaceToggleLeftRightCommand;
+import frc.robot.commands.InterfaceGetBranchIDCommand;
+import frc.robot.commands.InterfaceGetBranchLevelCommand;
 
 //   .oooooo..o              .o8                                         .                                        
 //  d8P'    `Y8             "888                                       .o8                                        
@@ -55,6 +58,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.FlipperSubsystem;
 import frc.robot.subsystems.InterfaceSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
 
 //    .oooooo.   ooooo 
 //   d8P'  `Y8b  `888' 
@@ -77,7 +81,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final OperatorInput m_operatorInput = new OperatorInput(0);
+  private final OperatorInput m_operatorInput = new OperatorInput(1);
 
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
@@ -112,14 +116,45 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Logitech Extreme 3D Pro
-    m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
-    m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
-    m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
-    m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
+    if (m_operatorInput.jsType != 1) {
+      m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
+      m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
+      m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
+      m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
+    } else {
+      m_operatorInput.buttonA.onTrue(
+        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "A")
+      );
+      m_operatorInput.buttonB.onTrue(
+        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "B")
+      );
+      m_operatorInput.buttonC.onTrue(
+        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "C")
+      );
+      m_operatorInput.buttonD.onTrue(
+        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "D")
+      );
+      m_operatorInput.buttonE.onTrue(
+        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "E")
+      );
+      m_operatorInput.buttonF.onTrue(
+        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "F")
+      );
 
-    // Test: Keyboard
+      m_operatorInput.buttonRL.onTrue(
+        new InterfaceToggleLeftRightCommand(m_interfaceSubsystem)
+      );
 
+      m_operatorInput.button4.onTrue(
+        new InterfaceGetBranchLevelCommand(m_interfaceSubsystem, 4)
+      );
+      m_operatorInput.button3.onTrue(
+        new InterfaceGetBranchLevelCommand(m_interfaceSubsystem, 3)
+      );
+      m_operatorInput.button2_1.onTrue(
+        new InterfaceGetBranchLevelCommand(m_interfaceSubsystem, 2)
+      );
+    }
   }
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.

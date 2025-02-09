@@ -18,9 +18,7 @@ public class ElevatorLowerFirstStageCommand extends Command {
    * @param subsystem The subsystem used by this command.
    */
   public ElevatorLowerFirstStageCommand(ElevatorSubsystem subsystem) {
-    m_subsystem = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem); 
+    m_subsystem = subsystem; 
   }
 
   // Called when the command is initially scheduled.
