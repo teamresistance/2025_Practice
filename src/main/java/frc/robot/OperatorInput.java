@@ -24,6 +24,7 @@ public class OperatorInput {
     public JoystickButton lvl3Button;
     public JoystickButton lvl4Button;
     public JoystickButton selectBranchAndAddButton;
+    public JoystickButton climbButton;
     // ReefselectorButtons
     public JoystickButton buttonA;
     public JoystickButton buttonB;
@@ -71,6 +72,7 @@ public class OperatorInput {
         lvl3Button = new JoystickButton(coDriverJS, OperatorConstants.klvl3Button_3Joysticks_ID);
         lvl4Button = new JoystickButton(coDriverJS, OperatorConstants.klvl4Button_3Joysticks_ID);
         selectBranchAndAddButton = new JoystickButton(coDriverJS, OperatorConstants.kSelectBranchAndAddButton_3Joysticks_ID);
+        climbButton = new JoystickButton(coDriverJS, OperatorConstants.kclimbButton_3Joysticks_ID);
     }
 
     private void config2JoysticksAndReefSelector() {
@@ -87,6 +89,7 @@ public class OperatorInput {
         button4 = new JoystickButton(reefSelector, 8);
         button3 = new JoystickButton(reefSelector, 9);
         button2_1 = new JoystickButton(reefSelector, 10);
+        climbButton = new JoystickButton(coDriverJS, OperatorConstants.kclimbButton_2JoysticksAndReefSelector_ID);
     }
 
     /**Configue all buttons defined for a Niteno Pad */
