@@ -62,6 +62,9 @@ public final class Constants {
     public static final int kFirstStagePulseDurationSeconds = 1;
     public static final int kSolenoid_secondStage_portNumber = 5;
     public static final int kSecondStagePulseDurationSeconds = 1;
+
+    //Climber
+    public static final int kClimberSolenoid_portNumber = 4;
   }
 
   public static class FieldConstants {
