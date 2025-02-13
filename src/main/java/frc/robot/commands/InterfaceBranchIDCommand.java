@@ -8,7 +8,7 @@ import frc.robot.subsystems.InterfaceSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class InterfaceGetBranchIDCommand extends Command {
+public class InterfaceBranchIDCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final InterfaceSubsystem m_subsystem;
   private final String id;
@@ -18,7 +18,7 @@ public class InterfaceGetBranchIDCommand extends Command {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public InterfaceGetBranchIDCommand(InterfaceSubsystem subsystem, String id) {
+  public InterfaceBranchIDCommand(InterfaceSubsystem subsystem, String id) {
     m_subsystem = subsystem;
     this.id = id;
     // Use addRequirements() here to declare subsystem dependencies.

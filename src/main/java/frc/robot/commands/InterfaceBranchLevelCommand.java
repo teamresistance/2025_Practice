@@ -18,7 +18,7 @@ public class InterfaceBranchLevelCommand extends Command {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public InterfaceGetBranchLevelCommand(InterfaceSubsystem subsystem, int lvl) {
+  public InterfaceBranchLevelCommand(InterfaceSubsystem subsystem, int lvl) {
     m_subsystem = subsystem;
     this.lvl = lvl;
     // Use addRequirements() here to declare subsystem dependencies.
