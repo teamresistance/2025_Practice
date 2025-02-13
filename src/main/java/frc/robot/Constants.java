@@ -52,7 +52,7 @@ public final class Constants {
   }
 
   public static class HardwareConstants {
-    public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.REVPH;
+    public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
     
     //Arm
     public static final int kSolenoid_wristRotator_portNumber = 2;
