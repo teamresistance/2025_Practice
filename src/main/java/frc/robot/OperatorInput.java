@@ -5,12 +5,13 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.OperatorConstants.JoystickType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**Class to configure possible joystick types and buttons. */
 public class OperatorInput {
-    public int jsType;
+    public JoystickType joystickType;
     // Joysticks possible
     public static Joystick leftDrvrJS = new Joystick(0);
     public static Joystick rightDrvrJS = new Joystick(1);
@@ -42,21 +43,21 @@ public class OperatorInput {
      * 
      * @param js_Type 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
      */
-    public OperatorInput (int joystickType) {
+    public OperatorInput (JoystickType jsType) {
         // Configure the button trigger bindings
-        int defaultConfigJS = joystickType; //2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
-        jsType = joystickType;
+        JoystickType defaultConfigJS = jsType; //2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
+        joystickType = jsType;
         switch (defaultConfigJS) {
-            case 0:
+            case k3Joysticks:
                 config3Joysticks();
                 break;
-            case 1:
+            case k2JoysticksAndReefSelector:
                 config2JoysticksAndReefSelector();
                 break;
-            case 2:
+            case kNeo:
                 configNeo();
                 break;
-            case 3:
+            case kKybd1:
                 configKybd();
                 break;
             default:

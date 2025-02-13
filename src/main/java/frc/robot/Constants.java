@@ -22,6 +22,13 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
  */
 public final class Constants {
   public static class OperatorConstants {
+    public static enum JoystickType {
+      k3Joysticks,
+      k2JoysticksAndReefSelector,
+      kNeo,
+      kKybd1
+    }
+
     public static final int klvl2Button_3Joysticks_ID = 3;
     public static final int klvl3Button_3Joysticks_ID = 4;
     public static final int klvl4Button_3Joysticks_ID = 6;

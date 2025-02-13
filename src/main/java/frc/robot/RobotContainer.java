@@ -13,7 +13,7 @@
 package frc.robot;
 
 // Constants
-import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.OperatorConstants.JoystickType;
 
 // Operator Input
 import frc.robot.OperatorInput;
@@ -86,7 +86,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final OperatorInput m_operatorInput = new OperatorInput(0);
+  private final OperatorInput m_operatorInput = new OperatorInput(JoystickType.k3Joysticks);
 
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
@@ -123,7 +123,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    if (m_operatorInput.jsType != 1) {
+    if (m_operatorInput.joystickType != JoystickType.k2JoysticksAndReefSelector) {
       m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
       m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
       m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
