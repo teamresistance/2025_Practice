@@ -30,5 +30,6 @@ public class ClimberSubsystem extends SubsystemBase{
 
     public void simulationPeriodic(){
         //This method will be called once per scheduler run
+        SmartDashboard.putBoolean("Climber is Activated:", climberSV.get());
     }
 }

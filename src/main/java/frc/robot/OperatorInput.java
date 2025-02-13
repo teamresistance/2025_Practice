@@ -99,6 +99,7 @@ public class OperatorInput {
         lvl3Button = new JoystickButton(neoJS, OperatorConstants.klvl3Button_Neo_ID);
         lvl4Button = new JoystickButton(neoJS, OperatorConstants.klvl4Button_Neo_ID);
         selectBranchAndAddButton = new JoystickButton(neoJS, OperatorConstants.kSelectBranchAndAddButton_Neo_ID);
+        climbButton = new JoystickButton(coDriverJS, OperatorConstants.kclimbButton_Neo_ID);
     }
 
     /**Configue all buttons defined to use the keyboard */

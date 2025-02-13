@@ -30,10 +30,11 @@ public final class Constants {
 
     public static final int kclimbButton_2JoysticksAndReefSelector_ID = 2;
 
-    public static final int klvl2Button_Neo_ID = 0;
-    public static final int klvl3Button_Neo_ID = 0;
-    public static final int klvl4Button_Neo_ID = 0;
-    public static final int kSelectBranchAndAddButton_Neo_ID = 0;
+    public static final int klvl2Button_Neo_ID = 1;
+    public static final int klvl3Button_Neo_ID = 2;
+    public static final int klvl4Button_Neo_ID = 3;
+    public static final int kSelectBranchAndAddButton_Neo_ID = 4;
+    public static final int kclimbButton_Neo_ID = 5;
 
     public static final int klvl2Button_Kybd1_ID = 0;
     public static final int klvl3Button_Kybd1_ID = 0;
