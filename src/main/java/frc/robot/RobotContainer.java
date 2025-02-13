@@ -86,7 +86,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final OperatorInput m_operatorInput = new OperatorInput(0);
+  private final OperatorInput m_operatorInput = new OperatorInput(2);
 
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
