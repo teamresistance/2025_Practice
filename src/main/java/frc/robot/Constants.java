@@ -26,7 +26,7 @@ public final class Constants {
     public static final int klvl3Button_3Joysticks_ID = 4;
     public static final int klvl4Button_3Joysticks_ID = 6;
     public static final int kSelectBranchAndAddButton_3Joysticks_ID = 1;
-    public static final int kclimbButton_3Joysticks_ID = 5;
+    public static final int kclimbButton_3Joysticks_ID = 2;
 
     public static final int kclimbButton_2JoysticksAndReefSelector_ID = 2;
 

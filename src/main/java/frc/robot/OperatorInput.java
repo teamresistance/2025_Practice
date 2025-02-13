@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class OperatorInput {
     public int jsType;
     // Joysticks possible
-    public static Joystick leftDrvrJS;
-    public static Joystick rightDrvrJS;
-    public static Joystick coDriverJS;
-    public static Joystick reefSelector;
-    public static Joystick neoJS;
-    public static Joystick kybd1JS;
-    public static Joystick kybd2JS;
+    public static Joystick leftDrvrJS = new Joystick(0);
+    public static Joystick rightDrvrJS = new Joystick(1);
+    public static Joystick coDriverJS = new Joystick(2);
+    public static Joystick reefSelector = new Joystick(3);
+    public static Joystick neoJS = new Joystick(4);
+    public static Joystick kybd1JS = new Joystick(5);
+    public static Joystick kybd2JS = new Joystick(6);
     // JoystickButtons
     public JoystickButton lvl2Button;
     public JoystickButton lvl3Button;
@@ -67,10 +67,6 @@ public class OperatorInput {
 
     /**Configue all buttons defined for 3 JS's */
     private void config3Joysticks() {
-        leftDrvrJS = new Joystick(1);
-        rightDrvrJS = new Joystick(2);
-        coDriverJS = new Joystick(3);
-        
         // Create a JSB for each level
         lvl2Button = new JoystickButton(coDriverJS, OperatorConstants.klvl2Button_3Joysticks_ID);
         lvl3Button = new JoystickButton(coDriverJS, OperatorConstants.klvl3Button_3Joysticks_ID);
@@ -80,9 +76,6 @@ public class OperatorInput {
     }
 
     private void config2JoysticksAndReefSelector() {
-        leftDrvrJS = new Joystick(1);
-        rightDrvrJS = new Joystick(2);
-        reefSelector = new Joystick(4);
         // Create a JSB for each level
         buttonA = new JoystickButton(reefSelector, 1);
         buttonB = new JoystickButton(reefSelector, 2);
@@ -101,8 +94,6 @@ public class OperatorInput {
 
     /**Configue all buttons defined for a Niteno Pad */
     private void configNeo() {
-        neoJS = new Joystick(5);
-
         // Create a JSB for each level
         lvl2Button = new JoystickButton(neoJS, OperatorConstants.klvl2Button_Neo_ID);
         lvl3Button = new JoystickButton(neoJS, OperatorConstants.klvl3Button_Neo_ID);
@@ -112,9 +103,6 @@ public class OperatorInput {
 
     /**Configue all buttons defined to use the keyboard */
     private void configKybd() {
-        kybd1JS = new Joystick(6);
-        kybd2JS = new Joystick(7);
-
         // Create a JSB for each level
         lvl2Button = new JoystickButton(kybd1JS, OperatorConstants.klvl2Button_Kybd1_ID);
         lvl3Button = new JoystickButton(kybd1JS, OperatorConstants.klvl3Button_Kybd1_ID);
