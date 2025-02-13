@@ -161,9 +161,8 @@ public class RobotContainer {
       m_operatorInput.button2_1.onTrue(
         new InterfaceGetBranchLevelCommand(m_interfaceSubsystem, 2)
       );
-
-      m_operatorInput.climbButton.onTrue(m_climberActivateCommand);
     }
+    m_operatorInput.climbButton.onTrue(m_climberActivateCommand);
   }
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.
