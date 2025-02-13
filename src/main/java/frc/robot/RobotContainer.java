@@ -41,8 +41,8 @@ import frc.robot.commandgroups.Level4CommandGroup;
 // Interface Commands
 import frc.robot.commands.InterfaceStoreBranchesCommand;
 import frc.robot.commands.InterfaceToggleLeftRightCommand;
-import frc.robot.commands.InterfaceGetBranchIDCommand;
-import frc.robot.commands.InterfaceGetBranchLevelCommand;
+import frc.robot.commands.InterfaceBranchIDCommand;
+import frc.robot.commands.InterfaceBranchLevelCommand;
 
 // Climber Command(s)
 import frc.robot.commands.ClimberActivateCommand;
@@ -130,22 +130,22 @@ public class RobotContainer {
       m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
     } else {
       m_operatorInput.buttonA.onTrue(
-        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "A")
+        new InterfaceBranchIDCommand(m_interfaceSubsystem, "A")
       );
       m_operatorInput.buttonB.onTrue(
-        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "B")
+        new InterfaceBranchIDCommand(m_interfaceSubsystem, "B")
       );
       m_operatorInput.buttonC.onTrue(
-        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "C")
+        new InterfaceBranchIDCommand(m_interfaceSubsystem, "C")
       );
       m_operatorInput.buttonD.onTrue(
-        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "D")
+        new InterfaceBranchIDCommand(m_interfaceSubsystem, "D")
       );
       m_operatorInput.buttonE.onTrue(
-        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "E")
+        new InterfaceBranchIDCommand(m_interfaceSubsystem, "E")
       );
       m_operatorInput.buttonF.onTrue(
-        new InterfaceGetBranchIDCommand(m_interfaceSubsystem, "F")
+        new InterfaceBranchIDCommand(m_interfaceSubsystem, "F")
       );
 
       m_operatorInput.buttonRL.onTrue(
@@ -153,13 +153,13 @@ public class RobotContainer {
       );
 
       m_operatorInput.button4.onTrue(
-        new InterfaceGetBranchLevelCommand(m_interfaceSubsystem, 4)
+        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 4)
       );
       m_operatorInput.button3.onTrue(
-        new InterfaceGetBranchLevelCommand(m_interfaceSubsystem, 3)
+        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 3)
       );
       m_operatorInput.button2_1.onTrue(
-        new InterfaceGetBranchLevelCommand(m_interfaceSubsystem, 2)
+        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2)
       );
     }
     m_operatorInput.climbButton.onTrue(m_climberActivateCommand);
