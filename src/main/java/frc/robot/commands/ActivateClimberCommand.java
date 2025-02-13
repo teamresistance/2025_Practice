@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimberActivateCommand extends Command{
+public class ActivateClimberCommand extends Command{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final ClimberSubsystem m_subsystem;
 
-    public ClimberActivateCommand(ClimberSubsystem subsystem){
+    public ActivateClimberCommand(ClimberSubsystem subsystem){
         m_subsystem = subsystem;
         addRequirements(subsystem);
     }
@@ -21,7 +21,7 @@ public class ClimberActivateCommand extends Command{
     //runs repeatedly until command is ended
     @Override
     public void execute(){
-        m_subsystem.climberActivate(true);
+        m_subsystem.activateClimber(true);
     }
 
     @Override

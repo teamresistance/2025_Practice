@@ -45,7 +45,7 @@ import frc.robot.commands.InterfaceBranchIDCommand;
 import frc.robot.commands.InterfaceBranchLevelCommand;
 
 // Climber Command(s)
-import frc.robot.commands.ClimberActivateCommand;
+import frc.robot.commands.ActivateClimberCommand;
 
 //   .oooooo..o              .o8                                         .                                        
 //  d8P'    `Y8             "888                                       .o8                                        
@@ -99,7 +99,7 @@ public class RobotContainer {
   private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_flipperSubsystem);
 
   private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(m_interfaceSubsystem);
-  private final ClimberActivateCommand m_climberActivateCommand = new ClimberActivateCommand(m_climberSubsystem);
+  private final ActivateClimberCommand m_ActivateClimberCommand = new ActivateClimberCommand(m_climberSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -162,7 +162,7 @@ public class RobotContainer {
         new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2)
       );
     }
-    m_operatorInput.climbButton.onTrue(m_climberActivateCommand);
+    m_operatorInput.climbButton.onTrue(m_ActivateClimberCommand);
   }
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.

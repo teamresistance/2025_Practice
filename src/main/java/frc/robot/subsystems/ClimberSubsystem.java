@@ -17,7 +17,7 @@ public class ClimberSubsystem extends SubsystemBase{
     public ClimberSubsystem(){
     }
 
-    public void climberActivate(boolean state){
+    public void activateClimber(boolean state){
         climberSV.setPulseDuration(1);
         climberSV.set(state);
         System.out.println("Climber is Activated: " + climberSV.get());
