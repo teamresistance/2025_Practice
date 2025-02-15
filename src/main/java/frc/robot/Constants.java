@@ -22,15 +22,26 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
  */
 public final class Constants {
   public static class OperatorConstants {
+    public static enum JoystickType {
+      k3Joysticks,
+      k2JoysticksAndReefSelector,
+      kNeo,
+      kKybd1
+    }
+
     public static final int klvl2Button_3Joysticks_ID = 3;
     public static final int klvl3Button_3Joysticks_ID = 4;
     public static final int klvl4Button_3Joysticks_ID = 6;
     public static final int kSelectBranchAndAddButton_3Joysticks_ID = 1;
+    public static final int kclimbButton_3Joysticks_ID = 2;
 
-    public static final int klvl2Button_Neo_ID = 0;
-    public static final int klvl3Button_Neo_ID = 0;
-    public static final int klvl4Button_Neo_ID = 0;
-    public static final int kSelectBranchAndAddButton_Neo_ID = 0;
+    public static final int kclimbButton_2JoysticksAndReefSelector_ID = 2;
+
+    public static final int klvl2Button_Neo_ID = 1;
+    public static final int klvl3Button_Neo_ID = 2;
+    public static final int klvl4Button_Neo_ID = 3;
+    public static final int kSelectBranchAndAddButton_Neo_ID = 4;
+    public static final int kclimbButton_Neo_ID = 5;
 
     public static final int klvl2Button_Kybd1_ID = 0;
     public static final int klvl3Button_Kybd1_ID = 0;
@@ -49,7 +60,7 @@ public final class Constants {
   }
 
   public static class HardwareConstants {
-    public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.REVPH;
+    public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
     
     //Arm
     public static final int kSolenoid_wristRotator_portNumber = 2;
@@ -62,10 +73,13 @@ public final class Constants {
     public static final int kFirstStagePulseDurationSeconds = 1;
     public static final int kSolenoid_secondStage_portNumber = 5;
     public static final int kSecondStagePulseDurationSeconds = 1;
+
+    //Climber
+    public static final int kClimberSolenoid_portNumber = 4;
   }
 
   public static class FieldConstants {
-    public static final double kReefBranchWidthInches = 1;
+    public static final double kReefBranchWidthInches = 1.660;
   }
 
 }

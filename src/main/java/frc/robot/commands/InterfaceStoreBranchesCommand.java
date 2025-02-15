@@ -26,22 +26,13 @@ public class InterfaceStoreBranchesCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Storing Branch Combination: Branch " + 
-    m_subsystem.reefBranchChooser.getSelected() +
-    ", Level " +
-    m_subsystem.reefLevelChooser.getSelected() +
-    "...");
+    System.out.println("Storing Branch Combination");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.reefBranchCombinations.add(
-      new String[] {
-        m_subsystem.reefBranchChooser.getSelected(),
-        m_subsystem.reefLevelChooser.getSelected()
-    }
-    );
+    m_subsystem.execute();
   }
 
   // Called once the command ends or is interrupted.

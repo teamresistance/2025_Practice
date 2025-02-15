@@ -9,40 +9,52 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 import java.util.ArrayList;
 
 public class InterfaceSubsystem extends SubsystemBase {
+  public String currentBranchID;
+  public String currentBranchLR = "M";
+  public boolean lrButtonToggleState = true;
+  public int currentBranchLevel;
   public SendableChooser<String> reefBranchChooser = new SendableChooser<String>();
   public SendableChooser<String> reefLevelChooser = new SendableChooser<String>();
-  public ArrayList<String[]> reefBranchCombinations = new ArrayList<>();
+  public ArrayList<Object[]> reefBranchCombinations = new ArrayList<>();
 
   /** Creates a new ExampleSubsystem. */
-  public InterfaceSubsystem() {
-    reefBranchChooserInitialize();
-    reefLevelChooserInitialize();
+  public InterfaceSubsystem() {}
+
+  public void storeBranchID(String branchID) {
+    currentBranchID = branchID;
+    System.out.println(currentBranchID);
   }
 
-  public void reefBranchChooserInitialize() {
-    reefBranchChooser.addOption("A", "A");
-    reefBranchChooser.addOption("B", "B");
-    reefBranchChooser.addOption("C", "C");
-    reefBranchChooser.addOption("D", "D");
-    reefBranchChooser.addOption("E", "E");
-    reefBranchChooser.addOption("F", "F");
-    reefBranchChooser.addOption("G", "G");
-    reefBranchChooser.addOption("H", "H");
-    reefBranchChooser.addOption("I", "I");
-    reefBranchChooser.addOption("J", "J");
-    reefBranchChooser.addOption("K", "K");
-    reefBranchChooser.addOption("L", "L");
-    reefBranchChooser.setDefaultOption("A", "A");
-    SmartDashboard.putData("Reef Branch Chooser", reefBranchChooser);
+  public void storeBranchLevel(int branchLevel) {
+    if (currentBranchLR.equals("M")) {
+      currentBranchLevel = branchLevel;
+    } else if (branchLevel == 2) {
+      currentBranchLevel = 1;
+    }
+    System.out.println(currentBranchLevel);
   }
 
-  public void reefLevelChooserInitialize() {
-    reefLevelChooser.addOption("1", "1");
-    reefLevelChooser.addOption("2", "2");
-    reefLevelChooser.addOption("3", "3");
-    reefLevelChooser.addOption("4", "4");
-    reefLevelChooser.setDefaultOption("1", "1");
-    SmartDashboard.putData("Reef Level Chooser", reefLevelChooser);
+  public void toggleBranchLR() {
+    lrButtonToggleState = !lrButtonToggleState;
+    if (lrButtonToggleState == true) {
+      currentBranchLR = "L";
+    } else {
+      currentBranchLR = "R";
+    }
+    System.out.println(currentBranchLR);
+  }
+
+  public void execute() {
+    reefBranchCombinations.add(
+      new Object[] {
+      currentBranchID,
+      currentBranchLR,
+      currentBranchLevel});
+    System.out.println("Branch Combination Stored:\n"
+    + currentBranchID + "\n"
+    + currentBranchLR + "\n"
+    + currentBranchLevel + "\n");
+
   }
 
   @Override
