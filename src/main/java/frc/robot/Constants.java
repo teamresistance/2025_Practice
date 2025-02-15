@@ -80,6 +80,7 @@ public final class Constants {
 
   public static class FieldConstants {
     public static final double kReefBranchWidthInches = 1.660;
+    public static final double kReefBranchInsetInches = 1.125;
   }
 
 }

@@ -18,7 +18,6 @@ import frc.robot.Constants.OperatorConstants.JoystickType;
 // Operator Input
 import frc.robot.OperatorInput;
 
-
 //  .oooooo.                                                                             .o8           
 // d8P'  `Y8b                                                                           "888           
 //888           .ooooo.  ooo. .oo.  .oo.   ooo. .oo.  .oo.    .oooo.   ooo. .oo.    .oooo888   .oooo.o 
@@ -79,9 +78,12 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
@@ -95,31 +97,40 @@ public class RobotContainer {
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
 
   private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
-  private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem, m_flipperSubsystem);
-  private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem, m_flipperSubsystem);
+  private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,
+      m_flipperSubsystem);
+  private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem,
+      m_flipperSubsystem);
 
-  private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(m_interfaceSubsystem);
+  private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(
+      m_interfaceSubsystem);
   private final ActivateClimberCommand m_ActivateClimberCommand = new ActivateClimberCommand(m_climberSubsystem);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
 
     // Configure the trigger bindings
     configureBindings();
   }
 
-  //Logitech Extreme 3D Pro
+  // Logitech Extreme 3D Pro
 
-  //Test: Keyboard
+  // Test: Keyboard
 
-  
   /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
+   * Use this method to define your trigger->command mappings. Triggers can be
+   * created via the
+   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with
+   * an arbitrary
    * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
+   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
+   * {@link
+   * CommandXboxController
+   * Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
+   * PS4} controllers or
+   * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
   private void configureBindings() {
@@ -130,37 +141,27 @@ public class RobotContainer {
       m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
     } else {
       m_operatorInput.buttonA.onTrue(
-        new InterfaceBranchIDCommand(m_interfaceSubsystem, "A")
-      );
+          new InterfaceBranchIDCommand(m_interfaceSubsystem, "A"));
       m_operatorInput.buttonB.onTrue(
-        new InterfaceBranchIDCommand(m_interfaceSubsystem, "B")
-      );
+          new InterfaceBranchIDCommand(m_interfaceSubsystem, "B"));
       m_operatorInput.buttonC.onTrue(
-        new InterfaceBranchIDCommand(m_interfaceSubsystem, "C")
-      );
+          new InterfaceBranchIDCommand(m_interfaceSubsystem, "C"));
       m_operatorInput.buttonD.onTrue(
-        new InterfaceBranchIDCommand(m_interfaceSubsystem, "D")
-      );
+          new InterfaceBranchIDCommand(m_interfaceSubsystem, "D"));
       m_operatorInput.buttonE.onTrue(
-        new InterfaceBranchIDCommand(m_interfaceSubsystem, "E")
-      );
+          new InterfaceBranchIDCommand(m_interfaceSubsystem, "E"));
       m_operatorInput.buttonF.onTrue(
-        new InterfaceBranchIDCommand(m_interfaceSubsystem, "F")
-      );
+          new InterfaceBranchIDCommand(m_interfaceSubsystem, "F"));
 
       m_operatorInput.buttonRL.onTrue(
-        new InterfaceToggleLeftRightCommand(m_interfaceSubsystem)
-      );
+          new InterfaceToggleLeftRightCommand(m_interfaceSubsystem));
 
       m_operatorInput.button4.onTrue(
-        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 4)
-      );
+          new InterfaceBranchLevelCommand(m_interfaceSubsystem, 4));
       m_operatorInput.button3.onTrue(
-        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 3)
-      );
+          new InterfaceBranchLevelCommand(m_interfaceSubsystem, 3));
       m_operatorInput.button2_1.onTrue(
-        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2)
-      );
+          new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2));
     }
     m_operatorInput.climbButton.onTrue(m_ActivateClimberCommand);
   }
@@ -169,8 +170,8 @@ public class RobotContainer {
    *
    * @return the command to run in teleopPeriodic
    */
-  //public Command getChangeBooleanCommand() {
-    // An example command will be run in autonomous
-  //  return new ChangeBooleanCommand(m_changeBooleanSubsystem);
-  //}
+  // public Command getChangeBooleanCommand() {
+  // An example command will be run in autonomous
+  // return new ChangeBooleanCommand(m_changeBooleanSubsystem);
+  // }
 }
