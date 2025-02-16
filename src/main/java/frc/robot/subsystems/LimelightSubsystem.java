@@ -13,8 +13,15 @@ import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 
 public class LimelightSubsystem extends SubsystemBase {
+    public Pose2d alignedPose;
+    public boolean isSeekingAlignment = false;
+    public Object[] reefBranchCombinations = {"", "", 0};
     
     public LimelightSubsystem() {}
+
+    public int getNearestVisibleAprilTagID() {
+        return 1; // Replace accordingly
+    }
 
     public double getAngleOfAprilTag (int id) {
         AprilTagFieldLayout field = AprilTagFieldLayout.loadField(
@@ -22,6 +29,55 @@ public class LimelightSubsystem extends SubsystemBase {
         );
 
         return field.getTagPose(id).get().getRotation().getZ();
+    }
+
+    public double[] getReefXY(String id) {
+        if (!id.equals("M")) {
+            switch (id) {
+                case "A":
+                    return FieldConstants.branchAposition;
+                case "B":
+                    return FieldConstants.branchBposition;
+                case "C":
+                    return FieldConstants.branchCposition;
+                case "D":
+                    return FieldConstants.branchDposition;
+                case "E":
+                    return FieldConstants.branchEposition;
+                case "F":
+                    return FieldConstants.branchFposition;
+                case "G":
+                    return FieldConstants.branchGposition;
+                case "H":
+                    return FieldConstants.branchHposition;
+                case "I":
+                    return FieldConstants.branchIposition;
+                case "J":
+                    return FieldConstants.branchJposition;
+                case "K":
+                    return FieldConstants.branchKposition;
+                case "L":
+                    return FieldConstants.branchLposition;
+                default:
+                    throw new IllegalArgumentException("Invalid branch ID: " + id);
+            }
+        } else {
+            if (id.matches("A|B")) {
+                return FieldConstants.reefABmidpoint;
+            } else if (id.matches("C|D")) {
+                return FieldConstants.reefCDmidpoint;
+            } else if (id.matches("E|F")) {
+                return FieldConstants.reefEFmidpoint;
+            } else if (id.matches("G|H")) {
+                return FieldConstants.reefGHmidpoint;
+            } else if (id.matches("I|J")) {
+                return FieldConstants.reefIJmidpoint;
+            } else if (id.matches("K|L")) {
+                return FieldConstants.reefKLmidpoint;
+            } else {
+                throw new IllegalArgumentException("Invalid branch ID: " + id);
+            }
+        }
     }
 
     /**
@@ -55,6 +111,16 @@ public class LimelightSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+        // We want to keep isSeekingAlignment as true until the robot's pose matches the alignedPose.
+
+        if (isSeekingAlignment) {
+            alignedPose = getAlignedPose(
+                getReefXY(reefBranchCombinations[0].toString()), 
+                getAngleOfAprilTag(getNearestVisibleAprilTagID()), 
+                RobotConstants.kCameraToCenterOffsetInches, 
+                RobotConstants.kFlipperToCenterOffsetInches);
+        }
+
         /*
         double tx = LimelightHelpers.getTX(RobotConstants.limelightName);
         double ty = LimelightHelpers.getTY(RobotConstants.limelightName);

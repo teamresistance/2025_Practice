@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.RobotContainer;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class InterfaceSubsystem extends SubsystemBase {
   public int currentBranchLevel;
   public SendableChooser<String> reefBranchChooser = new SendableChooser<String>();
   public SendableChooser<String> reefLevelChooser = new SendableChooser<String>();
-  public ArrayList<Object[]> reefBranchCombinations = new ArrayList<>();
+  public Object[] reefBranchCombinations = new Object[3];
 
   /** Creates a new ExampleSubsystem. */
   public InterfaceSubsystem() {}
@@ -45,11 +47,11 @@ public class InterfaceSubsystem extends SubsystemBase {
   }
 
   public void execute() {
-    reefBranchCombinations.add(
-      new Object[] {
+    reefBranchCombinations = new Object[] {
       currentBranchID,
       currentBranchLR,
-      currentBranchLevel});
+      currentBranchLevel};
+      
     System.out.println("Branch Combination Stored:\n"
     + currentBranchID + "\n"
     + currentBranchLR + "\n"

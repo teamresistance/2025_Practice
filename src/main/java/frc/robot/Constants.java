@@ -57,6 +57,9 @@ public final class Constants {
     public static final String limelightName = "limelight";
     public static final double kLimelightWindowResolutionWidthPixels = 960;
     public static final double kLimelightHorizontalFOVdegrees = 62.5;
+
+    public static final double[] kCameraToCenterOffsetInches = {0, 0}; // {x, y}
+    public static final double[] kFlipperToCenterOffsetInches = {0, 0}; // {x, y}
   }
 
   public static class HardwareConstants {
@@ -81,6 +84,26 @@ public final class Constants {
   public static class FieldConstants {
     public static final double kReefBranchWidthInches = 1.660;
     public static final double kReefBranchInsetInches = 1.125;
+
+    public static final double[] branchAposition = {10.50, 13.00};
+    public static final double[] branchBposition = {10.50, 12.13};
+    public static final double[] branchCposition = {12.80,  9.44};
+    public static final double[] branchDposition = {13.73,  8.90};
+    public static final double[] branchEposition = {17.02,  9.65};
+    public static final double[] branchFposition = {17.96, 10.19};
+    public static final double[] branchGposition = {18.96, 13.42};
+    public static final double[] branchHposition = {18.96, 14.50};
+    public static final double[] branchIposition = {16.66, 16.98};
+    public static final double[] branchJposition = {15.73, 17.52};
+    public static final double[] branchKposition = {12.43, 16.77};
+    public static final double[] branchLposition = {11.50, 16.23};
+
+    public static final double[] reefABmidpoint = {10.50, 12.46};
+    public static final double[] reefCDmidpoint = {13.26,  9.17};
+    public static final double[] reefEFmidpoint = {17.49,  9.92};
+    public static final double[] reefGHmidpoint = {18.96, 13.96};
+    public static final double[] reefIJmidpoint = {16.19, 17.25};
+    public static final double[] reefKLmidpoint = {11.97, 16.50};
   }
 
 }
