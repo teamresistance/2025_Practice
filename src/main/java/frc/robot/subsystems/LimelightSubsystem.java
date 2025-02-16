@@ -13,13 +13,22 @@ import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 
 public class LimelightSubsystem extends SubsystemBase {
+    // BOTH APRILTAG BASED and REEF BRANCH BASED variables
+    public Pose2d currentPose;
     public Pose2d alignedPose;
     public boolean isSeekingAlignment = false;
     public Object[] reefBranchCombinations = {"", "", 0};
     String limelightName = RobotConstants.limelightName;
+    // REEF BRANCH BASED variables
+    double perceivedBranchWidthPixels;
+    double forwardDistanceToBranchInches;
+    double horizontalOffsetToBranchInches;
+
+
+
     
     public LimelightSubsystem() {}
-
+    // APRILTAG BASED STRATEGY
     public int getNearestVisibleAprilTagID() { //Should only be called when target is visible
         return (int) LimelightHelpers.getT2DArray(limelightName)[9];
     }
@@ -110,8 +119,67 @@ public class LimelightSubsystem extends SubsystemBase {
         return new Pose2d(idealX, idealY, idealPoseAngle);
     }
 
+    // REEF BRANCH BASED STRATEGY
+    public void setPBWP() {
+        perceivedBranchWidthPixels = LimelightHelpers.getT2DArray(
+            RobotConstants.limelightName)[13];
+    }
+    public void setFDTBI() {
+        forwardDistanceToBranchInches = 
+            (RobotConstants.kLimelightWindowResolutionWidthPixels)
+            * (FieldConstants.kReefBranchWidthInches)
+            / (perceivedBranchWidthPixels
+            * Math.sin(
+                Math.toRadians(
+                    RobotConstants.kLimelightHorizontalFOVdegrees
+                    / 2))
+            * 2);
+    }
+    public void setHOTBI() {
+        horizontalOffsetToBranchInches = 
+            forwardDistanceToBranchInches
+            * Math.tan(
+                Math.toRadians(
+                    LimelightHelpers.getTX(
+                        RobotConstants.limelightName
+                    )
+                )
+            );
+    }
+
+    /**
+     * 
+     * @param reefPose Pose of the reef branch. ONLY USED IN THE REEF BRANCH BASED APPROACH.
+     * @param aprilTagPoseAngleRadians The angle, in radians, of the AprilTag on the nearest side of the reef.
+     * @param cameraToCenterOffset Array of length 2 that stores the x and y offset of the camera with respect to the center of the robot.
+     * The +y direction is forward with the flipper side in front.
+     * Tje +x direction is rotated -90 degrees from the +y direction.
+     * @param flipperToCenterOffset Array of length 2 that stores the x and y offset of the flipper with respect to the center of the robot.
+     * The +y direction is forward with the flipper side in front.
+     * Tje +x direction is rotated -90 degrees from the +y direction.
+     * @return The ideal pose of the robot to score on the branch expressed in reefXY.
+     */
+    public Pose2d getAlignedPose(Pose2d reefPose,
+    Pose2d currentPose,
+    double[] cameraToCenterOffset, 
+    double[] flipperToCenterOffset)
+{
+    Rotation2d idealPoseAngle = new Rotation2d(reefPose.getRotation().getRadians());
+
+    double idealVector = cameraToCenterOffset[0]
+        + FieldConstants.kReefBranchInsetInches
+        - flipperToCenterOffset[0];
+    
+    double idealX = currentPose.getX() + idealVector * Math.cos(reefPose.getRotation().getRadians());
+    double idealY = currentPose.getY() + idealVector * Math.sin(reefPose.getRotation().getRadians());
+
+    return new Pose2d(idealX, idealY, idealPoseAngle);
+}
+
+
     @Override
     public void periodic() {
+        // APRILTAG BASED STRATEGY
         // We want to keep isSeekingAlignment as true until the robot's pose matches the alignedPose.
         if (isSeekingAlignment && LimelightHelpers.getTV(limelightName)) {
             alignedPose = getAlignedPose(
@@ -121,36 +189,12 @@ public class LimelightSubsystem extends SubsystemBase {
                 RobotConstants.kFlipperToCenterOffsetInches);
         }
 
-        /*
-        double tx = LimelightHelpers.getTX(RobotConstants.limelightName);
-        double ty = LimelightHelpers.getTY(RobotConstants.limelightName);
-        double ta = LimelightHelpers.getTA(RobotConstants.limelightName);
-
-        double perceivedBranchWidthPixels = 
-        LimelightHelpers.getT2DArray(
-            RobotConstants.limelightName)[13];
-
-        double forwardDistanceToBranchInches = 
-            (RobotConstants.kLimelightWindowResolutionWidthPixels)
-            * (FieldConstants.kReefBranchWidthInches)
-            / (perceivedBranchWidthPixels
-            * Math.sin(
-                Math.toRadians(
-                    RobotConstants.kLimelightHorizontalFOVdegrees
-                    / 2))
-            * 2);
-
-        double horizontalOffsetToBranchInches = 
-            forwardDistanceToBranchInches
-            * Math.tan(
-                Math.toRadians(
-                    tx
-                ));
-
-        SmartDashboard.putNumber("X-Offset in degrees", tx);
-        SmartDashboard.putNumber("Y-Offset in degrees", ty);
-        SmartDashboard.putNumber("Area of target in %", ta);
-        */
+        // REEF BRANCH BASED STRATEGY
+        if (LimelightHelpers.getTV(limelightName)) {
+            setPBWP();
+            setFDTBI();
+            setHOTBI();
+        }
     }
 
     @Override

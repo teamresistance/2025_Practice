@@ -61,6 +61,7 @@ import frc.robot.subsystems.FlipperSubsystem;
 import frc.robot.subsystems.InterfaceSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
@@ -93,8 +94,9 @@ public class RobotContainer {
   private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
   private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
-  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+  public final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  public final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
 
   private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
   private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,
