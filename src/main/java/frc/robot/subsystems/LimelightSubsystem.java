@@ -16,11 +16,12 @@ public class LimelightSubsystem extends SubsystemBase {
     public Pose2d alignedPose;
     public boolean isSeekingAlignment = false;
     public Object[] reefBranchCombinations = {"", "", 0};
+    String limelightName = RobotConstants.limelightName;
     
     public LimelightSubsystem() {}
 
-    public int getNearestVisibleAprilTagID() {
-        return 1; // Replace accordingly
+    public int getNearestVisibleAprilTagID() { //Should only be called when target is visible
+        return (int) LimelightHelpers.getT2DArray(limelightName)[9];
     }
 
     public double getAngleOfAprilTag (int id) {
@@ -112,8 +113,7 @@ public class LimelightSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // We want to keep isSeekingAlignment as true until the robot's pose matches the alignedPose.
-
-        if (isSeekingAlignment) {
+        if (isSeekingAlignment && LimelightHelpers.getTV(limelightName)) {
             alignedPose = getAlignedPose(
                 getReefXY(reefBranchCombinations[0].toString()), 
                 getAngleOfAprilTag(getNearestVisibleAprilTagID()), 
