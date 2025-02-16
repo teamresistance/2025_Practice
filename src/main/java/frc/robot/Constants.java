@@ -60,7 +60,11 @@ public final class Constants {
   }
 
   public static class HardwareConstants {
+<<<<<<< Updated upstream
     public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
+=======
+    public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.PCM;
+>>>>>>> Stashed changes
     
     //Arm
     public static final int kSolenoid_wristRotator_portNumber = 2;
