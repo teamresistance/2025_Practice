@@ -34,7 +34,7 @@ public class SwerveSubsystem extends SubsystemBase {
     Pose2d BlueDTarget= new Pose2d(5.0152, 3.86, new Rotation2d(Math.atan(Math.atan(3.86/5.0152))));
     Pose2d BlueKTarget= new Pose2d(4.9261, 12.347, new Rotation2d(Math.tan(12.347/4.9261)));
     Pose2d BlueLTarget= new Pose2d(12.5308, 4.19, new Rotation2d(Math.tan(4.19/12.5308)));
-    PWMTalonFX controller= new PWMTalonFX(HardwareConstants.pwmTalonFX_channel);
+    WPI_TalonFX controller= new PWMTalonFX(HardwareConstants.pwmTalonFX_channel);
     Trajectory robotPath= new Trajectory(currentPose, BlueATarget, config);
     TalonFX swerveMotor1= new TalonFX(1);
     TalonFX swerveMotor2= new TalonFX(2);

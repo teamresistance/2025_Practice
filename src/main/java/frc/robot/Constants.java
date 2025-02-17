@@ -60,6 +60,8 @@ public final class Constants {
 
     public static final double[] kCameraToCenterOffsetInches = {0, 0}; // {x, y}
     public static final double[] kFlipperToCenterOffsetInches = {0, 0}; // {x, y}
+
+    public static final int kLEDlength = 60;
   }
 
   public static class HardwareConstants {
@@ -79,6 +81,9 @@ public final class Constants {
 
     //Climber
     public static final int kClimberSolenoid_portNumber = 4;
+
+    //LED
+    public static final int kLED_portNumber = 0;
 
     //Others
     public static final int pwmTalonFX_channel = 0;
