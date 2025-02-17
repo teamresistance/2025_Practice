@@ -9,4 +9,10 @@ import edu.wpi.first.math.geometry.Pose2d;
 
 public class SwerveSubsystem extends SubsystemBase {
   public Pose2d currentPose;
+
+  public SwerveSubsystem() {}
+
+  public Pose2d getcurrentPose () {
+    return currentPose;
+  }
 }

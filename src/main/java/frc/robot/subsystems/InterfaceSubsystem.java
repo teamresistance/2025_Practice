@@ -9,6 +9,7 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class InterfaceSubsystem extends SubsystemBase {
   public String currentBranchID;
@@ -57,6 +58,10 @@ public class InterfaceSubsystem extends SubsystemBase {
     + currentBranchLR + "\n"
     + currentBranchLevel + "\n");
 
+  }
+
+  public boolean branchCombinationExists() {
+    return ! Optional.ofNullable(reefBranchCombinations).isEmpty();
   }
 
   @Override

@@ -14,6 +14,7 @@ package frc.robot;
 
 // Constants
 import frc.robot.Constants.OperatorConstants.JoystickType;
+import frc.robot.Constants.HardwareConstants.LedMode;
 
 // Operator Input
 import frc.robot.OperatorInput;
@@ -62,8 +63,9 @@ import frc.robot.subsystems.InterfaceSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.subsystems.LEDSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 //    .oooooo.   ooooo 
@@ -92,13 +94,13 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final OperatorInput m_operatorInput = new OperatorInput(JoystickType.k3Joysticks);
 
-  public final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
-  public final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
+  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
   private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
-  public final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  public final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
-  public final LEDSubsystem m_ledSubsystem = new LEDSubsystem();
+  private final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
+  private final LedSubsystem m_ledSubsystem = new LedSubsystem();
 
   private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
   private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,
@@ -168,6 +170,46 @@ public class RobotContainer {
           new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2));
     }
     m_operatorInput.climbButton.onTrue(m_ActivateClimberCommand);
+
+    //------------------Non-button Triggers for Subsystem Interaction
+
+    // If interface subsystem finalizes a branch combination, limelight subsystem will begin seeking alignment.
+    new Trigger(m_interfaceSubsystem::branchCombinationExists)
+    .onTrue(new InstantCommand(
+        () -> {
+            m_limelightSubsystem.setSeekingAlignment(true);
+        }
+    ));
+    
+    // If flipper subsystem detects coral, LED subsystem will strobe.
+    // If flipper subsystem is ready to score, LED subsystem will glow solid.
+    Trigger ledComplexTrigger = new Trigger(() -> 
+        m_flipperSubsystem.getHasCoral() 
+        && (! m_elevatorSubsystem.getFirstStageSolenoidUp()
+        )
+    );
+
+    ledComplexTrigger.onTrue(new InstantCommand(
+        () -> {
+            m_ledSubsystem.setMode(LedMode.kSTROBE);
+        }
+    ));
+    
+    ledComplexTrigger.onFalse(new InstantCommand(
+        () -> {
+            m_ledSubsystem.setMode(LedMode.kSOLID);
+        }
+    ));
+    
+    // If drive subsystem is in the ideal pose, set isSeekingAlignment to false.
+    new Trigger(() ->
+        m_limelightSubsystem.isWithinErrorThreshold()
+    ).onTrue(new InstantCommand(
+            () -> {
+                m_limelightSubsystem.setSeekingAlignment(false);
+            }
+        ));
+
   }
   /**
    * Use this to pass the boolean changer command to the main {@link Robot} class.

@@ -63,6 +63,10 @@ public class FlipperSubsystem extends SubsystemBase {
     hasCoral = false;
   }
 
+  public boolean getHasCoral() {
+    return hasCoral;
+  }
+
   @Override
   public void periodic() {
     //Scan for coral using DigitalInput.

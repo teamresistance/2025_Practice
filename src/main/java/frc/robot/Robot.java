@@ -19,9 +19,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-//LED actions
-import frc.robot.Constants.HardwareConstants.LEDmode;
-
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
  * the TimedRobot documentation. If you change the name of this class or the package after creating
@@ -83,16 +80,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.m_limelightSubsystem.currentPose = m_robotContainer.m_swerveSubsystem.currentPose;
-
-    if (m_robotContainer.m_flipperSubsystem.hasCoral) {
-      m_robotContainer.m_ledSubsystem.mode = LEDmode.kStrobe;
-    } else if (m_robotContainer.m_elevatorSubsystem.firstStageSolenoidUp
-      || m_robotContainer.m_elevatorSubsystem.secondStageSolenoidUp) {
-      m_robotContainer.m_ledSubsystem.mode = LEDmode.kSolid;
-    } else {
-      m_robotContainer.m_ledSubsystem.mode = LEDmode.kOff;
-    }
   }
 
   @Override

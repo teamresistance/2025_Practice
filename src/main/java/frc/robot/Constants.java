@@ -61,12 +61,17 @@ public final class Constants {
     public static final double[] kCameraToCenterOffsetInches = {0, 0}; // {x, y}
     public static final double[] kFlipperToCenterOffsetInches = {0, 0}; // {x, y}
 
-    public static final int kLEDlength = 60;
-    public static final int kLEDanimationDelayMilliseconds = 100; // Can only be multiple of 20ms.
-    public static final int[] kLEDstrobeColor1 = {255, 255, 0};
-    public static final int[] kLEDstrobeColor2 = {0, 255, 0};
-    public static final int[] kLEDstrobeColor3 = {0, 255, 255};
-    public static final int[] kLEDsolidColor = {132, 76, 130};
+    // These are the error thresholds for the robot to be considered aligned with the reef branch.
+    // Treat them as if they have a +/- tolerance.
+    public static final double kXdirectionErrorThresholdInches = 1.000;
+    public static final double kYdirectionErrorThresholdInches = 1.000;
+
+    public static final int kLedLength = 60;
+    public static final int kLedAnimationDelayMilliseconds = 100; // Can only be multiple of 20ms.
+    public static final int[] kLedStrobeColor1 = {255, 255, 0};
+    public static final int[] kLedStrobeColor2 = {0, 255, 0};
+    public static final int[] kLedStrobeColor3 = {0, 255, 255};
+    public static final int[] kLedSolidColor = {132, 76, 130};
   }
 
   public static class HardwareConstants {
@@ -87,13 +92,13 @@ public final class Constants {
     //Climber
     public static final int kClimberSolenoid_portNumber = 4;
 
-    //LED
-    public static final int kLED_portNumber = 0;
+    //Led
+    public static final int kLed_portNumber = 0;
 
-    public enum LEDmode {
-      kSolid,
-      kStrobe,
-      kOff
+    public enum LedMode {
+      kSOLID,
+      kSTROBE,
+      kOFF
     }
 
     //Others

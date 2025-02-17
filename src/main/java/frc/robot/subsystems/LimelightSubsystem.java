@@ -23,11 +23,20 @@ public class LimelightSubsystem extends SubsystemBase {
     double perceivedBranchWidthPixels;
     double forwardDistanceToBranchInches;
     double horizontalOffsetToBranchInches;
-
-
-
     
     public LimelightSubsystem() {}
+
+    public void setSeekingAlignment(boolean changeTo) {
+        this.isSeekingAlignment = changeTo;
+    }
+
+    public boolean isWithinErrorThreshold() {
+        boolean inXThreshold = Math.abs(currentPose.getX() - alignedPose.getX()) < RobotConstants.kXdirectionErrorThresholdInches;
+        boolean inYThreshold = Math.abs(currentPose.getX() - alignedPose.getX()) < RobotConstants.kYdirectionErrorThresholdInches;
+
+        return inXThreshold && inYThreshold;
+    }
+
     // APRILTAG BASED STRATEGY
     public int getNearestVisibleAprilTagID() { //Should only be called when target is visible
         return (int) LimelightHelpers.getT2DArray(limelightName)[9];
@@ -35,7 +44,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
     public double getAngleOfAprilTag (int id) {
         AprilTagFieldLayout field = AprilTagFieldLayout.loadField(
-            AprilTagFields.k2025Reefscape
+            AprilTagFields.k2025ReefscapeWelded
         );
 
         return field.getTagPose(id).get().getRotation().getZ();

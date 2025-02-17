@@ -4,23 +4,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.RobotConstants;
 import frc.robot.Constants.HardwareConstants;
-import frc.robot.Constants.HardwareConstants.LEDmode;
+import frc.robot.Constants.HardwareConstants.LedMode;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 
-public class LEDSubsystem extends SubsystemBase {
-    AddressableLED skibidiLed = new AddressableLED(HardwareConstants.kLED_portNumber);
-    int length = RobotConstants.kLEDlength;
+public class LedSubsystem extends SubsystemBase {
+    AddressableLED ledstrip = new AddressableLED(HardwareConstants.kLed_portNumber);
+    int length = RobotConstants.kLedLength;
     int animationFrame = 0;
-    int animationDelay = RobotConstants.kLEDanimationDelayMilliseconds;
+    int animationDelay = RobotConstants.kLedAnimationDelayMilliseconds;
     int delayTracker = 0;
 
-    public LEDmode mode = HardwareConstants.LEDmode.kSolid;
+    public LedMode mode = HardwareConstants.LedMode.kOFF;
 
-    public LEDSubsystem() {
-        skibidiLed.setLength(length);
-        skibidiLed.start();
+    public LedSubsystem() {
+        ledstrip.setLength(length);
+        ledstrip.start();
     }
 
     public void setLEDColor(int[] color) {
@@ -28,7 +28,7 @@ public class LEDSubsystem extends SubsystemBase {
         for (var i = 0; i < buffer.getLength(); i++) {
             buffer.setRGB(i, color[0], color[1], color[2]);
         }
-        skibidiLed.setData(buffer);
+        ledstrip.setData(buffer);
     }
 
     public void strobeBetween(int frame, int[]... colors) {
@@ -36,7 +36,7 @@ public class LEDSubsystem extends SubsystemBase {
         AddressableLEDBuffer buffer = new AddressableLEDBuffer(length);
     
         for (int i = 0; i < length; i++) {
-            int shiftedIndex = (i + frame) % length; // Shift the gradient by 'frame' LEDs
+            int shiftedIndex = (i + frame) % length; // Shift the gradient by 'frame' Leds
     
             int colorsBetween = shiftedIndex / cycleLength;
             int nextColor = Math.min(colorsBetween + 1, colors.length - 1); // Prevent out-of-bounds
@@ -56,7 +56,11 @@ public class LEDSubsystem extends SubsystemBase {
         for (var i = 0; i < buffer.getLength(); i++) {
             buffer.setRGB(i, 0, 0, 0);
         }
-        skibidiLed.setData(buffer);
+        ledstrip.setData(buffer);
+    }
+
+    public void setMode(LedMode changeTo) {
+        mode = changeTo;
     }
 
     @Override
@@ -69,17 +73,17 @@ public class LEDSubsystem extends SubsystemBase {
         }
 
         switch (mode) {
-            case kSolid:
-                setLEDColor(RobotConstants.kLEDsolidColor);
+            case kSOLID:
+                setLEDColor(RobotConstants.kLedSolidColor);
                 break;
-            case kStrobe:
+            case kSTROBE:
                 strobeBetween(animationFrame,
-                    RobotConstants.kLEDstrobeColor1,
-                    RobotConstants.kLEDstrobeColor2,
-                    RobotConstants.kLEDstrobeColor3
+                    RobotConstants.kLedStrobeColor1,
+                    RobotConstants.kLedStrobeColor2,
+                    RobotConstants.kLedStrobeColor3
                 );
                 break;
-            case kOff:
+            case kOFF:
                 turnOff();
                 break;
         }

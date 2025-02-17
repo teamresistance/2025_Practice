@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 
 import frc.robot.Constants.HardwareConstants;
 
+import com.fasterxml.jackson.core.base.GeneratorBase;
+
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class ElevatorSubsystem extends SubsystemBase {
@@ -59,6 +61,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     secondStageSolenoid.set(false);
 
     firstStageSolenoidUp = false;
+  }
+
+  public boolean getFirstStageSolenoidUp() {
+    return firstStageSolenoidUp;
   }
 
   @Override
