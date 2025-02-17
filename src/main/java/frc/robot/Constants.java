@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-
 //Hardware imports
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
@@ -51,48 +50,49 @@ public final class Constants {
   }
 
   public static class RobotConstants {
-    public static final int kScoreTimeoutMilliseconds = 3000; //Milliseconds
-    public static final int kGripperDelayMilliseconds = 200; //Milliseconds
+    public static final int kScoreTimeoutMilliseconds = 3000; // Milliseconds
+    public static final int kGripperDelayMilliseconds = 200; // Milliseconds
 
     public static final String limelightName = "limelight";
     public static final double kLimelightWindowResolutionWidthPixels = 960;
     public static final double kLimelightHorizontalFOVdegrees = 62.5;
 
-    public static final double[] kCameraToCenterOffsetInches = {0, 0}; // {x, y}
-    public static final double[] kFlipperToCenterOffsetInches = {0, 0}; // {x, y}
+    public static final double[] kCameraToCenterOffsetInches = { 0, 0 }; // {x, y}
+    public static final double[] kFlipperToCenterOffsetInches = { 0, 0 }; // {x, y}
 
-    // These are the error thresholds for the robot to be considered aligned with the reef branch.
+    // These are the error thresholds for the robot to be considered aligned with
+    // the reef branch.
     // Treat them as if they have a +/- tolerance.
     public static final double kXdirectionErrorThresholdInches = 1.000;
     public static final double kYdirectionErrorThresholdInches = 1.000;
 
     public static final int kLedLength = 60;
     public static final int kLedAnimationDelayMilliseconds = 100; // Can only be multiple of 20ms.
-    public static final int[] kLedStrobeColor1 = {255, 255, 0};
-    public static final int[] kLedStrobeColor2 = {0, 255, 0};
-    public static final int[] kLedStrobeColor3 = {0, 255, 255};
-    public static final int[] kLedSolidColor = {132, 76, 130};
+    public static final int[] kLedStrobeColor1 = { 255, 255, 0 };
+    public static final int[] kLedStrobeColor2 = { 0, 255, 0 };
+    public static final int[] kLedStrobeColor3 = { 0, 255, 255 };
+    public static final int[] kLedSolidColor = { 132, 76, 130 };
   }
 
   public static class HardwareConstants {
     public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
-    
-    //Arm
+
+    // Arm
     public static final int kSolenoid_wristRotator_portNumber = 2;
     public static final int kWristRotatorPulseDurationSeconds = 1;
     public static final int kSolenoid_armLifter_portNumber = 0;
     public static final int kArmLifterPulseDurationSeconds = 1;
 
-    //Elevator
+    // Elevator
     public static final int kSolenoid_firstStage_portNumber = 1;
     public static final int kFirstStagePulseDurationSeconds = 1;
     public static final int kSolenoid_secondStage_portNumber = 5;
     public static final int kSecondStagePulseDurationSeconds = 1;
 
-    //Climber
+    // Climber
     public static final int kClimberSolenoid_portNumber = 4;
 
-    //Led
+    // Led
     public static final int kLed_portNumber = 0;
 
     public enum LedMode {
@@ -101,7 +101,7 @@ public final class Constants {
       kOFF
     }
 
-    //Others
+    // Others
     public static final int pwmTalonFX_channel = 0;
   }
 
@@ -109,25 +109,25 @@ public final class Constants {
     public static final double kReefBranchWidthInches = 1.660;
     public static final double kReefBranchInsetInches = 1.125;
 
-    public static final double[] branchAposition = {10.50, 13.00};
-    public static final double[] branchBposition = {10.50, 12.13};
-    public static final double[] branchCposition = {12.80,  9.44};
-    public static final double[] branchDposition = {13.73,  8.90};
-    public static final double[] branchEposition = {17.02,  9.65};
-    public static final double[] branchFposition = {17.96, 10.19};
-    public static final double[] branchGposition = {18.96, 13.42};
-    public static final double[] branchHposition = {18.96, 14.50};
-    public static final double[] branchIposition = {16.66, 16.98};
-    public static final double[] branchJposition = {15.73, 17.52};
-    public static final double[] branchKposition = {12.43, 16.77};
-    public static final double[] branchLposition = {11.50, 16.23};
+    public static final double[] branchAposition = { 10.50, 13.00 };
+    public static final double[] branchBposition = { 10.50, 12.13 };
+    public static final double[] branchCposition = { 12.80, 9.44 };
+    public static final double[] branchDposition = { 13.73, 8.90 };
+    public static final double[] branchEposition = { 17.02, 9.65 };
+    public static final double[] branchFposition = { 17.96, 10.19 };
+    public static final double[] branchGposition = { 18.96, 13.42 };
+    public static final double[] branchHposition = { 18.96, 14.50 };
+    public static final double[] branchIposition = { 16.66, 16.98 };
+    public static final double[] branchJposition = { 15.73, 17.52 };
+    public static final double[] branchKposition = { 12.43, 16.77 };
+    public static final double[] branchLposition = { 11.50, 16.23 };
 
-    public static final double[] reefABmidpoint = {10.50, 12.46};
-    public static final double[] reefCDmidpoint = {13.26,  9.17};
-    public static final double[] reefEFmidpoint = {17.49,  9.92};
-    public static final double[] reefGHmidpoint = {18.96, 13.96};
-    public static final double[] reefIJmidpoint = {16.19, 17.25};
-    public static final double[] reefKLmidpoint = {11.97, 16.50};
+    public static final double[] reefABmidpoint = { 10.50, 12.46 };
+    public static final double[] reefCDmidpoint = { 13.26, 9.17 };
+    public static final double[] reefEFmidpoint = { 17.49, 9.92 };
+    public static final double[] reefGHmidpoint = { 18.96, 13.96 };
+    public static final double[] reefIJmidpoint = { 16.19, 17.25 };
+    public static final double[] reefKLmidpoint = { 11.97, 16.50 };
   }
 
 }

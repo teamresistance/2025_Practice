@@ -91,133 +91,126 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final OperatorInput m_operatorInput = new OperatorInput(JoystickType.k3Joysticks);
+    // The robot's subsystems and commands are defined here...
+    private final OperatorInput m_operatorInput = new OperatorInput(JoystickType.k3Joysticks);
 
-  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
-  private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
-  private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
-  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
-  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  private final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
-  private final LedSubsystem m_ledSubsystem = new LedSubsystem();
+    private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+    private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
+    private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
+    private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+    private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+    private final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
+    private final LedSubsystem m_ledSubsystem = new LedSubsystem();
 
-  private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
-  private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,
-      m_flipperSubsystem);
-  private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem,
-      m_flipperSubsystem);
+    private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
+    private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,
+            m_flipperSubsystem);
+    private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem,
+            m_flipperSubsystem);
 
-  private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(
-      m_interfaceSubsystem, m_limelightSubsystem);
-  private final ActivateClimberCommand m_ActivateClimberCommand = new ActivateClimberCommand(m_climberSubsystem);
+    private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(
+            m_interfaceSubsystem);
+    private final ActivateClimberCommand m_ActivateClimberCommand = new ActivateClimberCommand(m_climberSubsystem);
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
+    public RobotContainer() {
 
-    // Configure the trigger bindings
-    configureBindings();
-  }
-
-  // Logitech Extreme 3D Pro
-
-  // Test: Keyboard
-
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be
-   * created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with
-   * an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
-   * {@link
-   * CommandXboxController
-   * Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or
-   * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
-  private void configureBindings() {
-    if (m_operatorInput.joystickType != JoystickType.k2JoysticksAndReefSelector) {
-      m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
-      m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
-      m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
-      m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
-    } else {
-      m_operatorInput.buttonA.onTrue(
-          new InterfaceBranchIDCommand(m_interfaceSubsystem, "A"));
-      m_operatorInput.buttonB.onTrue(
-          new InterfaceBranchIDCommand(m_interfaceSubsystem, "B"));
-      m_operatorInput.buttonC.onTrue(
-          new InterfaceBranchIDCommand(m_interfaceSubsystem, "C"));
-      m_operatorInput.buttonD.onTrue(
-          new InterfaceBranchIDCommand(m_interfaceSubsystem, "D"));
-      m_operatorInput.buttonE.onTrue(
-          new InterfaceBranchIDCommand(m_interfaceSubsystem, "E"));
-      m_operatorInput.buttonF.onTrue(
-          new InterfaceBranchIDCommand(m_interfaceSubsystem, "F"));
-
-      m_operatorInput.buttonRL.onTrue(
-          new InterfaceToggleLeftRightCommand(m_interfaceSubsystem));
-
-      m_operatorInput.button4.onTrue(
-          new InterfaceBranchLevelCommand(m_interfaceSubsystem, 4));
-      m_operatorInput.button3.onTrue(
-          new InterfaceBranchLevelCommand(m_interfaceSubsystem, 3));
-      m_operatorInput.button2_1.onTrue(
-          new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2));
+        // Configure the trigger bindings
+        configureBindings();
     }
-    m_operatorInput.climbButton.onTrue(m_ActivateClimberCommand);
 
-    //------------------Non-button Triggers for Subsystem Interaction
+    // Logitech Extreme 3D Pro
 
-    // If interface subsystem finalizes a branch combination, limelight subsystem will begin seeking alignment.
-    new Trigger(m_interfaceSubsystem::branchCombinationExists)
-    .onTrue(new InstantCommand(
-        () -> {
-            m_limelightSubsystem.setSeekingAlignment(true);
+    // Test: Keyboard
+
+    /**
+     * Use this method to define your trigger->command mappings. Triggers can be
+     * created via the
+     * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with
+     * an arbitrary
+     * predicate, or via the named factories in {@link
+     * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
+     * {@link
+     * CommandXboxController
+     * Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
+     * PS4} controllers or
+     * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
+     * joysticks}.
+     */
+    private void configureBindings() {
+        if (m_operatorInput.joystickType != JoystickType.k2JoysticksAndReefSelector) {
+            m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
+            m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
+            m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
+            m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
+        } else {
+            m_operatorInput.buttonA.onTrue(
+                    new InterfaceBranchIDCommand(m_interfaceSubsystem, "A"));
+            m_operatorInput.buttonB.onTrue(
+                    new InterfaceBranchIDCommand(m_interfaceSubsystem, "B"));
+            m_operatorInput.buttonC.onTrue(
+                    new InterfaceBranchIDCommand(m_interfaceSubsystem, "C"));
+            m_operatorInput.buttonD.onTrue(
+                    new InterfaceBranchIDCommand(m_interfaceSubsystem, "D"));
+            m_operatorInput.buttonE.onTrue(
+                    new InterfaceBranchIDCommand(m_interfaceSubsystem, "E"));
+            m_operatorInput.buttonF.onTrue(
+                    new InterfaceBranchIDCommand(m_interfaceSubsystem, "F"));
+
+            m_operatorInput.buttonRL.onTrue(
+                    new InterfaceToggleLeftRightCommand(m_interfaceSubsystem));
+
+            m_operatorInput.button4.onTrue(
+                    new InterfaceBranchLevelCommand(m_interfaceSubsystem, 4));
+            m_operatorInput.button3.onTrue(
+                    new InterfaceBranchLevelCommand(m_interfaceSubsystem, 3));
+            m_operatorInput.button2_1.onTrue(
+                    new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2));
         }
-    ));
-    
-    // If flipper subsystem detects coral, LED subsystem will strobe.
-    // If flipper subsystem is ready to score, LED subsystem will glow solid.
-    Trigger ledComplexTrigger = new Trigger(() -> 
-        m_flipperSubsystem.getHasCoral() 
-        && (! m_elevatorSubsystem.getFirstStageSolenoidUp()
-        )
-    );
+        m_operatorInput.climbButton.onTrue(m_ActivateClimberCommand);
 
-    ledComplexTrigger.onTrue(new InstantCommand(
-        () -> {
-            m_ledSubsystem.setMode(LedMode.kSTROBE);
-        }
-    ));
-    
-    ledComplexTrigger.onFalse(new InstantCommand(
-        () -> {
-            m_ledSubsystem.setMode(LedMode.kSOLID);
-        }
-    ));
-    
-    // If drive subsystem is in the ideal pose, set isSeekingAlignment to false.
-    new Trigger(() ->
-        m_limelightSubsystem.isWithinErrorThreshold()
-    ).onTrue(new InstantCommand(
-            () -> {
-                m_limelightSubsystem.setSeekingAlignment(false);
-            }
-        ));
+        // ------------------Non-button Triggers for Subsystem Interaction
 
-  }
-  /**
-   * Use this to pass the boolean changer command to the main {@link Robot} class.
-   *
-   * @return the command to run in teleopPeriodic
-   */
-  // public Command getChangeBooleanCommand() {
-  // An example command will be run in autonomous
-  // return new ChangeBooleanCommand(m_changeBooleanSubsystem);
-  // }
+        // If interface subsystem finalizes a branch combination, limelight subsystem
+        // will take this combination and begin seeking alignment.
+        new Trigger(m_interfaceSubsystem::branchCombinationExists)
+                .onTrue(new InstantCommand(
+                        () -> {
+                            m_limelightSubsystem.reefBranchCombinations = m_interfaceSubsystem.getBranchCombination();
+                            m_limelightSubsystem.setSeekingAlignment(true);
+                        }));
+
+        // If flipper subsystem detects coral, LED subsystem will strobe.
+        // If flipper subsystem is ready to score, LED subsystem will glow solid.
+        Trigger ledComplexTrigger = new Trigger(() -> m_flipperSubsystem.getHasCoral()
+                && (!m_elevatorSubsystem.getFirstStageSolenoidUp()));
+
+        ledComplexTrigger.onTrue(new InstantCommand(
+                () -> {
+                    m_ledSubsystem.setMode(LedMode.kSTROBE);
+                }));
+
+        ledComplexTrigger.onFalse(new InstantCommand(
+                () -> {
+                    m_ledSubsystem.setMode(LedMode.kSOLID);
+                }));
+
+        // If drive subsystem is in the ideal pose, set isSeekingAlignment to false.
+        new Trigger(() -> m_limelightSubsystem.isWithinErrorThreshold()).onTrue(new InstantCommand(
+                () -> {
+                    m_limelightSubsystem.setSeekingAlignment(false);
+                }));
+
+    }
+    /**
+     * Use this to pass the boolean changer command to the main {@link Robot} class.
+     *
+     * @return the command to run in teleopPeriodic
+     */
+    // public Command getChangeBooleanCommand() {
+    // An example command will be run in autonomous
+    // return new ChangeBooleanCommand(m_changeBooleanSubsystem);
+    // }
 }

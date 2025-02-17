@@ -21,27 +21,24 @@ public class Level4CommandGroup extends SequentialCommandGroup {
     public class RaiseBothStagesCommandGroup extends ParallelCommandGroup {
         public RaiseBothStagesCommandGroup(ElevatorSubsystem elevatorSubsystem) {
             addCommands(
-                new ElevatorRaiseFirstStageCommand(elevatorSubsystem),
-                new ElevatorRaiseSecondStageCommand(elevatorSubsystem)
-            );
+                    new ElevatorRaiseFirstStageCommand(elevatorSubsystem),
+                    new ElevatorRaiseSecondStageCommand(elevatorSubsystem));
         }
     }
 
     public class LowerBothStagesCommandGroup extends ParallelCommandGroup {
         public LowerBothStagesCommandGroup(ElevatorSubsystem elevatorSubsystem) {
             addCommands(
-                new ElevatorLowerSecondStageCommand(elevatorSubsystem),
-                new ElevatorLowerFirstStageCommand(elevatorSubsystem)
-            );
+                    new ElevatorLowerSecondStageCommand(elevatorSubsystem),
+                    new ElevatorLowerFirstStageCommand(elevatorSubsystem));
         }
-    }   
+    }
 
     public Level4CommandGroup(ElevatorSubsystem elevatorSubsystem, FlipperSubsystem flipperSubsystem) {
         addCommands(
-            new RaiseBothStagesCommandGroup(elevatorSubsystem),
-            new FlipperExtendAndScoreCommand(flipperSubsystem),
-            new FlipperRetractCommand(flipperSubsystem),
-            new LowerBothStagesCommandGroup(elevatorSubsystem)
-        );
+                new RaiseBothStagesCommandGroup(elevatorSubsystem),
+                new FlipperExtendAndScoreCommand(flipperSubsystem),
+                new FlipperRetractCommand(flipperSubsystem),
+                new LowerBothStagesCommandGroup(elevatorSubsystem));
     }
 }

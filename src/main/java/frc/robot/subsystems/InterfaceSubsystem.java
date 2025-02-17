@@ -21,7 +21,8 @@ public class InterfaceSubsystem extends SubsystemBase {
   public Object[] reefBranchCombinations = new Object[3];
 
   /** Creates a new ExampleSubsystem. */
-  public InterfaceSubsystem() {}
+  public InterfaceSubsystem() {
+  }
 
   public void storeBranchID(String branchID) {
     currentBranchID = branchID;
@@ -49,19 +50,23 @@ public class InterfaceSubsystem extends SubsystemBase {
 
   public void execute() {
     reefBranchCombinations = new Object[] {
-      currentBranchID,
-      currentBranchLR,
-      currentBranchLevel};
-      
+        currentBranchID,
+        currentBranchLR,
+        currentBranchLevel };
+
     System.out.println("Branch Combination Stored:\n"
-    + currentBranchID + "\n"
-    + currentBranchLR + "\n"
-    + currentBranchLevel + "\n");
+        + currentBranchID + "\n"
+        + currentBranchLR + "\n"
+        + currentBranchLevel + "\n");
 
   }
 
   public boolean branchCombinationExists() {
-    return ! Optional.ofNullable(reefBranchCombinations).isEmpty();
+    return !Optional.ofNullable(reefBranchCombinations).isEmpty();
+  }
+
+  public Object[] getBranchCombination() {
+    return reefBranchCombinations;
   }
 
   @Override

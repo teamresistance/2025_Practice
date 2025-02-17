@@ -16,10 +16,9 @@ import frc.robot.subsystems.FlipperSubsystem;
 public class Level3CommandGroup extends SequentialCommandGroup {
     public Level3CommandGroup(ElevatorSubsystem elevatorSubsystem, FlipperSubsystem flipperSubsystem) {
         addCommands(
-            new ElevatorRaiseFirstStageCommand(elevatorSubsystem),   
-            new FlipperExtendAndScoreCommand(flipperSubsystem),
-            new FlipperRetractCommand(flipperSubsystem),
-            new ElevatorLowerFirstStageCommand(elevatorSubsystem)
-        );
+                new ElevatorRaiseFirstStageCommand(elevatorSubsystem),
+                new FlipperExtendAndScoreCommand(flipperSubsystem),
+                new FlipperRetractCommand(flipperSubsystem),
+                new ElevatorLowerFirstStageCommand(elevatorSubsystem));
     }
 }
