@@ -62,6 +62,11 @@ public final class Constants {
     public static final double[] kFlipperToCenterOffsetInches = {0, 0}; // {x, y}
 
     public static final int kLEDlength = 60;
+    public static final int kLEDanimationDelayMilliseconds = 100; // Can only be multiple of 20ms.
+    public static final int[] kLEDstrobeColor1 = {255, 255, 0};
+    public static final int[] kLEDstrobeColor2 = {0, 255, 0};
+    public static final int[] kLEDstrobeColor3 = {0, 255, 255};
+    public static final int[] kLEDsolidColor = {132, 76, 130};
   }
 
   public static class HardwareConstants {
@@ -84,6 +89,12 @@ public final class Constants {
 
     //LED
     public static final int kLED_portNumber = 0;
+
+    public enum LEDmode {
+      kSolid,
+      kStrobe,
+      kOff
+    }
 
     //Others
     public static final int pwmTalonFX_channel = 0;

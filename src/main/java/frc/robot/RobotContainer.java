@@ -62,6 +62,7 @@ import frc.robot.subsystems.InterfaceSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
@@ -91,12 +92,13 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final OperatorInput m_operatorInput = new OperatorInput(JoystickType.k3Joysticks);
 
-  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
-  private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
+  public final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  public final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
   private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
   public final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   public final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
+  public final LEDSubsystem m_ledSubsystem = new LEDSubsystem();
 
   private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
   private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,

@@ -17,7 +17,7 @@ public class FlipperSubsystem extends SubsystemBase {
   private final Solenoid flipper = new Solenoid(PneumaticsModuleType.REVPH, 9);
   private final DigitalInput coralDetector = new DigitalInput(0);
   
-  private boolean hasCoral = false;
+  public boolean hasCoral = false;
   private boolean isGripped = false;
   private boolean isInScoringPosition = false;
 

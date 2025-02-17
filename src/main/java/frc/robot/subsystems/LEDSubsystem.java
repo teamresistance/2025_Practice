@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.RobotConstants;
 import frc.robot.Constants.HardwareConstants;
+import frc.robot.Constants.HardwareConstants.LEDmode;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
@@ -11,17 +12,21 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 public class LEDSubsystem extends SubsystemBase {
     AddressableLED skibidiLed = new AddressableLED(HardwareConstants.kLED_portNumber);
     int length = RobotConstants.kLEDlength;
-    int strobeIndex = 0;
+    int animationFrame = 0;
+    int animationDelay = RobotConstants.kLEDanimationDelayMilliseconds;
+    int delayTracker = 0;
+
+    public LEDmode mode = HardwareConstants.LEDmode.kSolid;
 
     public LEDSubsystem() {
         skibidiLed.setLength(length);
         skibidiLed.start();
     }
 
-    public void setLEDColor(int r, int g, int b) {
+    public void setLEDColor(int[] color) {
         AddressableLEDBuffer buffer = new AddressableLEDBuffer(length);
         for (var i = 0; i < buffer.getLength(); i++) {
-            buffer.setRGB(i, r, g, b);
+            buffer.setRGB(i, color[0], color[1], color[2]);
         }
         skibidiLed.setData(buffer);
     }
@@ -44,5 +49,45 @@ public class LEDSubsystem extends SubsystemBase {
     
             buffer.setRGB(i, red, grn, blu);
         }
+    }
+
+    public void turnOff() {
+        AddressableLEDBuffer buffer = new AddressableLEDBuffer(length);
+        for (var i = 0; i < buffer.getLength(); i++) {
+            buffer.setRGB(i, 0, 0, 0);
+        }
+        skibidiLed.setData(buffer);
+    }
+
+    @Override
+    public void periodic() {
+        delayTracker ++;
+
+        if (delayTracker * 20 >= animationDelay) {
+            animationFrame = (animationFrame + 1) % length;
+            delayTracker = 0;
+        }
+
+        switch (mode) {
+            case kSolid:
+                setLEDColor(RobotConstants.kLEDsolidColor);
+                break;
+            case kStrobe:
+                strobeBetween(animationFrame,
+                    RobotConstants.kLEDstrobeColor1,
+                    RobotConstants.kLEDstrobeColor2,
+                    RobotConstants.kLEDstrobeColor3
+                );
+                break;
+            case kOff:
+                turnOff();
+                break;
+        }
+
+    }
+
+    @Override
+    public void simulationPeriodic() {
+
     }
 }
