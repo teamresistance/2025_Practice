@@ -79,6 +79,9 @@ public final class Constants {
 
     //Climber
     public static final int kClimberSolenoid_portNumber = 4;
+
+    //Others
+    public static final int pwmTalonFX_channel = 0;
   }
 
   public static class FieldConstants {
