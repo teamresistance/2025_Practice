@@ -4,9 +4,12 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.RobotContainer;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class InterfaceSubsystem extends SubsystemBase {
   public String currentBranchID;
@@ -15,10 +18,11 @@ public class InterfaceSubsystem extends SubsystemBase {
   public int currentBranchLevel;
   public SendableChooser<String> reefBranchChooser = new SendableChooser<String>();
   public SendableChooser<String> reefLevelChooser = new SendableChooser<String>();
-  public ArrayList<Object[]> reefBranchCombinations = new ArrayList<>();
+  public Object[] reefBranchCombinations = new Object[3];
 
   /** Creates a new ExampleSubsystem. */
-  public InterfaceSubsystem() {}
+  public InterfaceSubsystem() {
+  }
 
   public void storeBranchID(String branchID) {
     currentBranchID = branchID;
@@ -45,16 +49,24 @@ public class InterfaceSubsystem extends SubsystemBase {
   }
 
   public void execute() {
-    reefBranchCombinations.add(
-      new Object[] {
-      currentBranchID,
-      currentBranchLR,
-      currentBranchLevel});
-    System.out.println("Branch Combination Stored:\n"
-    + currentBranchID + "\n"
-    + currentBranchLR + "\n"
-    + currentBranchLevel + "\n");
+    reefBranchCombinations = new Object[] {
+        currentBranchID,
+        currentBranchLR,
+        currentBranchLevel };
 
+    System.out.println("Branch Combination Stored:\n"
+        + currentBranchID + "\n"
+        + currentBranchLR + "\n"
+        + currentBranchLevel + "\n");
+
+  }
+
+  public boolean branchCombinationExists() {
+    return !Optional.ofNullable(reefBranchCombinations).isEmpty();
+  }
+
+  public Object[] getBranchCombination() {
+    return reefBranchCombinations;
   }
 
   @Override

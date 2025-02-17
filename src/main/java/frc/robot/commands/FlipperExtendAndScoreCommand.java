@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 /** Command to move the flipper into scoring position and release the coral. */
 public class FlipperExtendAndScoreCommand extends Command {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final FlipperSubsystem m_subsystem;
 
   /**

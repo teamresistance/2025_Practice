@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class ArmGetIntoScoringPositionAndScoreCommand extends Command {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ArmSubsystem m_subsystem;
 
   /**
@@ -20,7 +20,7 @@ public class ArmGetIntoScoringPositionAndScoreCommand extends Command {
   public ArmGetIntoScoringPositionAndScoreCommand(ArmSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem); 
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -41,7 +41,8 @@ public class ArmGetIntoScoringPositionAndScoreCommand extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override

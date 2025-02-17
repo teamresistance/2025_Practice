@@ -12,9 +12,8 @@ import frc.robot.subsystems.FlipperSubsystem;
 // Create a sequential command group for Level 4
 public class Level2CommandGroup extends SequentialCommandGroup {
     public Level2CommandGroup(FlipperSubsystem flipperSubsystem) {
-        addCommands(    
-            new FlipperExtendAndScoreCommand(flipperSubsystem),
-            new FlipperRetractCommand(flipperSubsystem)
-        );
+        addCommands(
+                new FlipperExtendAndScoreCommand(flipperSubsystem),
+                new FlipperRetractCommand(flipperSubsystem));
     }
 }

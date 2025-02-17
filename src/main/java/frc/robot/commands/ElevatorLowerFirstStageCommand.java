@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class ElevatorLowerFirstStageCommand extends Command {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ElevatorSubsystem m_subsystem;
 
   /**
@@ -18,7 +18,7 @@ public class ElevatorLowerFirstStageCommand extends Command {
    * @param subsystem The subsystem used by this command.
    */
   public ElevatorLowerFirstStageCommand(ElevatorSubsystem subsystem) {
-    m_subsystem = subsystem; 
+    m_subsystem = subsystem;
   }
 
   // Called when the command is initially scheduled.
@@ -31,13 +31,14 @@ public class ElevatorLowerFirstStageCommand extends Command {
   @Override
   public void execute() {
     if (m_subsystem.firstStageSolenoidUp) {
-    m_subsystem.lowerFirstStage();
+      m_subsystem.lowerFirstStage();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override

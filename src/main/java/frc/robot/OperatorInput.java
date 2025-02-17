@@ -9,7 +9,7 @@ import frc.robot.Constants.OperatorConstants.JoystickType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-/**Class to configure possible joystick types and buttons. */
+/** Class to configure possible joystick types and buttons. */
 public class OperatorInput {
     public JoystickType joystickType;
     // Joysticks possible
@@ -43,9 +43,9 @@ public class OperatorInput {
      * 
      * @param js_Type 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
      */
-    public OperatorInput (JoystickType jsType) {
+    public OperatorInput(JoystickType jsType) {
         // Configure the button trigger bindings
-        JoystickType defaultConfigJS = jsType; //2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
+        JoystickType defaultConfigJS = jsType; // 2; // 0=Normal 3 JS's, 1=Neopad, 2=Keyboard
         joystickType = jsType;
         switch (defaultConfigJS) {
             case k3Joysticks:
@@ -66,13 +66,14 @@ public class OperatorInput {
         }
     }
 
-    /**Configue all buttons defined for 3 JS's */
+    /** Configue all buttons defined for 3 JS's */
     private void config3Joysticks() {
         // Create a JSB for each level
         lvl2Button = new JoystickButton(coDriverJS, OperatorConstants.klvl2Button_3Joysticks_ID);
         lvl3Button = new JoystickButton(coDriverJS, OperatorConstants.klvl3Button_3Joysticks_ID);
         lvl4Button = new JoystickButton(coDriverJS, OperatorConstants.klvl4Button_3Joysticks_ID);
-        selectBranchAndAddButton = new JoystickButton(coDriverJS, OperatorConstants.kSelectBranchAndAddButton_3Joysticks_ID);
+        selectBranchAndAddButton = new JoystickButton(coDriverJS,
+                OperatorConstants.kSelectBranchAndAddButton_3Joysticks_ID);
         climbButton = new JoystickButton(coDriverJS, OperatorConstants.kclimbButton_3Joysticks_ID);
     }
 
@@ -83,9 +84,9 @@ public class OperatorInput {
         buttonC = new JoystickButton(reefSelector, 3);
         buttonD = new JoystickButton(reefSelector, 4);
         buttonE = new JoystickButton(reefSelector, 5);
-        buttonF = new JoystickButton(reefSelector,6);
+        buttonF = new JoystickButton(reefSelector, 6);
 
-        buttonRL = new JoystickButton(reefSelector,7);
+        buttonRL = new JoystickButton(reefSelector, 7);
 
         button4 = new JoystickButton(reefSelector, 8);
         button3 = new JoystickButton(reefSelector, 9);
@@ -93,7 +94,7 @@ public class OperatorInput {
         climbButton = new JoystickButton(coDriverJS, OperatorConstants.kclimbButton_2JoysticksAndReefSelector_ID);
     }
 
-    /**Configue all buttons defined for a Niteno Pad */
+    /** Configue all buttons defined for a Niteno Pad */
     private void configNeo() {
         // Create a JSB for each level
         lvl2Button = new JoystickButton(neoJS, OperatorConstants.klvl2Button_Neo_ID);
@@ -103,7 +104,7 @@ public class OperatorInput {
         climbButton = new JoystickButton(coDriverJS, OperatorConstants.kclimbButton_Neo_ID);
     }
 
-    /**Configue all buttons defined to use the keyboard */
+    /** Configue all buttons defined to use the keyboard */
     private void configKybd() {
         // Create a JSB for each level
         lvl2Button = new JoystickButton(kybd1JS, OperatorConstants.klvl2Button_Kybd1_ID);
@@ -112,4 +113,3 @@ public class OperatorInput {
         selectBranchAndAddButton = new JoystickButton(kybd1JS, OperatorConstants.kSelectBranchAndAddButton_Kybd1_ID);
     }
 }
-

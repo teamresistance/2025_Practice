@@ -12,26 +12,25 @@ import frc.robot.Constants.HardwareConstants;
 
 import edu.wpi.first.wpilibj.Solenoid;
 
-
 public class ArmSubsystem extends SubsystemBase {
   public Solenoid wristRotator = new Solenoid(
-    HardwareConstants.pneumaticsModuleType, 
-    HardwareConstants.kSolenoid_wristRotator_portNumber
-    );
-  
+      HardwareConstants.pneumaticsModuleType,
+      HardwareConstants.kSolenoid_wristRotator_portNumber);
+
   public Solenoid armLifter = new Solenoid(
-    HardwareConstants.pneumaticsModuleType, 
-    HardwareConstants.kSolenoid_armLifter_portNumber
-    );
+      HardwareConstants.pneumaticsModuleType,
+      HardwareConstants.kSolenoid_armLifter_portNumber);
 
   public boolean hasCoral = false;
   public boolean inScoringPosition = false;
 
   /** Creates a new ExampleSubsystem. */
-  public ArmSubsystem() {}
+  public ArmSubsystem() {
+  }
 
   /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
+   * An example method querying a boolean state of the subsystem (for example, a
+   * digital sensor).
    *
    * @return the opposite of the value of said boolean state.
    */
@@ -41,17 +40,16 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void rotateArmAxis() {
     armLifter.setPulseDuration(
-      HardwareConstants.kArmLifterPulseDurationSeconds
-    );
+        HardwareConstants.kArmLifterPulseDurationSeconds);
     armLifter.set(true);
   }
 
   public void rotateArmWrist() {
     wristRotator.setPulseDuration(
-      HardwareConstants.kWristRotatorPulseDurationSeconds
-    );
+        HardwareConstants.kWristRotatorPulseDurationSeconds);
     wristRotator.set(true);
   }
+
   public void getInScoringPosition() {
     rotateArmAxis();
     rotateArmWrist();
