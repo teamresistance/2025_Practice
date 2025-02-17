@@ -15,48 +15,48 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class ElevatorSubsystem extends SubsystemBase {
   public Solenoid firstStageSolenoid = new Solenoid(
-    HardwareConstants.pneumaticsModuleType, 
-    HardwareConstants.kSolenoid_firstStage_portNumber
-    );
-  
+      HardwareConstants.pneumaticsModuleType,
+      HardwareConstants.kSolenoid_firstStage_portNumber);
+
   public Solenoid secondStageSolenoid = new Solenoid(
-    HardwareConstants.pneumaticsModuleType, 
-    HardwareConstants.kSolenoid_secondStage_portNumber
-    );
-  
+      HardwareConstants.pneumaticsModuleType,
+      HardwareConstants.kSolenoid_secondStage_portNumber);
+
   public boolean firstStageSolenoidUp = false;
   public boolean secondStageSolenoidUp = false;
 
   /** Creates a new ExampleSubsystem. */
-  public ElevatorSubsystem() {}
+  public ElevatorSubsystem() {
+  }
 
   /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
+   * An example method querying a boolean state of the subsystem (for example, a
+   * digital sensor).
    *
    * @return the opposite of the value of said boolean state.
    */
   public void raiseFirstStage() {
     firstStageSolenoid.setPulseDuration(
-      HardwareConstants.kFirstStagePulseDurationSeconds
-    );
+        HardwareConstants.kFirstStagePulseDurationSeconds);
     firstStageSolenoid.set(true);
 
     firstStageSolenoidUp = true;
   }
+
   public void raiseSecondStage() {
     secondStageSolenoid.setPulseDuration(
-      HardwareConstants.kSecondStagePulseDurationSeconds
-    );
+        HardwareConstants.kSecondStagePulseDurationSeconds);
     firstStageSolenoid.set(true);
-    
 
     firstStageSolenoidUp = true;
   }
+
   public void lowerFirstStage() {
     firstStageSolenoid.set(false);
 
     firstStageSolenoidUp = false;
   }
+
   public void lowerSecondStage() {
     secondStageSolenoid.set(false);
 

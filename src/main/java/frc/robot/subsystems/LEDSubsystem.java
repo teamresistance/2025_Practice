@@ -34,19 +34,19 @@ public class LedSubsystem extends SubsystemBase {
     public void strobeBetween(int frame, int[]... colors) {
         int cycleLength = length / (colors.length - 1); // Avoid out-of-bounds
         AddressableLEDBuffer buffer = new AddressableLEDBuffer(length);
-    
+
         for (int i = 0; i < length; i++) {
             int shiftedIndex = (i + frame) % length; // Shift the gradient by 'frame' Leds
-    
+
             int colorsBetween = shiftedIndex / cycleLength;
             int nextColor = Math.min(colorsBetween + 1, colors.length - 1); // Prevent out-of-bounds
-    
+
             double ratio = (shiftedIndex % cycleLength) / (double) cycleLength; // Use double for smooth interpolation
-    
+
             int red = (int) (colors[colorsBetween][0] * (1 - ratio) + colors[nextColor][0] * ratio);
             int grn = (int) (colors[colorsBetween][1] * (1 - ratio) + colors[nextColor][1] * ratio);
             int blu = (int) (colors[colorsBetween][2] * (1 - ratio) + colors[nextColor][2] * ratio);
-    
+
             buffer.setRGB(i, red, grn, blu);
         }
     }
@@ -65,7 +65,7 @@ public class LedSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        delayTracker ++;
+        delayTracker++;
 
         if (delayTracker * 20 >= animationDelay) {
             animationFrame = (animationFrame + 1) % length;
@@ -78,10 +78,9 @@ public class LedSubsystem extends SubsystemBase {
                 break;
             case kSTROBE:
                 strobeBetween(animationFrame,
-                    RobotConstants.kLedStrobeColor1,
-                    RobotConstants.kLedStrobeColor2,
-                    RobotConstants.kLedStrobeColor3
-                );
+                        RobotConstants.kLedStrobeColor1,
+                        RobotConstants.kLedStrobeColor2,
+                        RobotConstants.kLedStrobeColor3);
                 break;
             case kOFF:
                 turnOff();
