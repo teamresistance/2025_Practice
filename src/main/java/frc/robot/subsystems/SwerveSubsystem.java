@@ -34,8 +34,8 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.spline.Spline.ControlVector;
 import java.util.ArrayList;
 public class SwerveSubsystem extends SubsystemBase {
-  
-
+    Trajectory trajectory;
+    Trajectory.State theStateOfTheTrajectory;
   /** Creates a new FlipperSubsystem. */
   public SwerveSubsystem() {
     Pose2d BlueATarget= new Pose2d(4.073, 3.306, new Rotation2d(Math.atan(3.306/4.073)));
@@ -61,16 +61,17 @@ public class SwerveSubsystem extends SubsystemBase {
     for(PoseWithCurvature curvedPose: pathway){
       twoDimensionalPoints.add(curvedPose.poseMeters);
     }
-    Trajectory trajectory= TrajectoryGenerator.generateTrajectory(twoDimensionalPoints, trajectoryConfiguration);
+    trajectory= TrajectoryGenerator.generateTrajectory(twoDimensionalPoints, trajectoryConfiguration);
     SwerveModule frontLeft= new SwerveModule(1,2,3);
     SwerveModule frontRight= new SwerveModule(4,5,6);
     SwerveModule backLeft= new SwerveModule(7,8,9);
     SwerveModule backRight= new SwerveModule(10,11,12);
-    SwerveModule swerveModules[]= new SwerveModule[4];
+    SwerveModule[] swerveModules= new SwerveModule[4];
     swerveModules[0]=frontLeft;
     swerveModules[1]=frontRight;
     swerveModules[2]= backLeft;
     swerveModules[3]= backRight;
+    swerveModules[0].setDesiredState(theStateOfTheTrajectory);
   }
 
 
@@ -83,10 +84,8 @@ public class SwerveSubsystem extends SubsystemBase {
   }
   @Override
   public void simulationPeriodic() {
-    //Scan for coral using DigitalInput.
-    //If coral found, grip it after 200ms.
-    
-
+    double millisecondsTime= System.currentTimeMillis()/1000;
+      theStateOfTheTrajectory= trajectory.sample(millisecondsTime);
     
   }
 }
