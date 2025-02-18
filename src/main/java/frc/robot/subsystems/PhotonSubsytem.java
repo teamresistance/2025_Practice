@@ -3,15 +3,14 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import static edu.wpi.first.units.Units.Rotation;
-
 import java.util.Optional;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
-import org.photonvision.proto.Photon;
 import org.photonvision.targeting.PhotonPipelineResult;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
@@ -21,12 +20,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
-
-import java.util.Map;
-import java.util.Optional;
-import java.util.HashMap;
-
-
 
 public class PhotonSubsytem extends SubsystemBase {
     // PhotonVision cameras
@@ -40,51 +33,58 @@ public class PhotonSubsytem extends SubsystemBase {
     // AprilTag Field Layout
     AprilTagFieldLayout aprilTagLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
-    // Map of camera transforms (X, Y in inches, converted to meters)
-    Map<PhotonCamera, double[]> cameraTransforms = Map.of(
-        FRcam, new double[]{12.0, 6.0},  // Example values in inches
-        FLcam, new double[]{12.0, -6.0},
-        BRcam, new double[]{-12.0, 6.0},
-        BLcam, new double[]{-12.0, -6.0},
-        FrontCam, new double[]{16.0, 0.0},
-        BackCam, new double[]{-16.0, 0.0}
-    );
+    // Camera transform map
+    Map<PhotonCamera, double[]> cameraTransforms = new HashMap<>();
 
-    public PhotonSubsytem() {}
+    public PhotonSubsytem() {
+        cameraTransforms.put(FRcam, new double[] { 12.0, 6.0 });
+        cameraTransforms.put(FLcam, new double[] { 12.0, -6.0 });
+        cameraTransforms.put(BRcam, new double[] { -12.0, 6.0 });
+        cameraTransforms.put(BLcam, new double[] { -12.0, -6.0 });
+        cameraTransforms.put(FrontCam, new double[] { 16.0, 0.0 });
+        cameraTransforms.put(BackCam, new double[] { -16.0, 0.0 });
+    }
 
     public Pose2d CameraToPose(PhotonCamera camera, double[] transform) {
+        if (aprilTagLayout == null)
+            return new Pose2d(); // Handle error case
+
         // Convert inches to meters
         double transformX = transform[0] * 0.0254;
         double transformY = transform[1] * 0.0254;
 
-        // Transform representing the camera’s offset from the robot center
+        // Camera offset from robot center
         Transform3d robotToCam = new Transform3d(
-            new Translation3d(transformX, transformY, 0.5),  // Assuming 0.5m height
-            new Rotation3d(0, 0, 0)  // Assuming no tilt
-        );
+                new Translation3d(transformX, transformY, 0.5),
+                new Rotation3d(0, 0, 0));
 
         // Create PhotonPoseEstimator
         PhotonPoseEstimator photonPoseEstimator = new PhotonPoseEstimator(
-            aprilTagLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, camera, robotToCam
-        );
+                aprilTagLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam); // Constructor is in the
+                                                                                        // following format:
+                                                                                        // AprilTagFieldLayout
+                                                                                        // fieldTags, PoseStrategy
+                                                                                        // strategy, Transform3d
+                                                                                        // robotToCamera.
 
         // Get latest camera result
         PhotonPipelineResult PPLR = camera.getLatestResult();
         Optional<EstimatedRobotPose> estimatedPose = photonPoseEstimator.update(PPLR);
 
-        // Get Pose3d and convert to Pose2d
-        return estimatedPose.map(EstimatedRobotPose::estimatedPose).map(Pose3d::toPose2d).orElse(new Pose2d());
+        return estimatedPose.map(p -> p.estimatedPose)
+                .map(Pose3d::toPose2d)
+                .orElse(new Pose2d());
+
     }
 
     public Pose2d AveragePose() {
         double avgX = 0, avgY = 0, sumCos = 0, sumSin = 0;
         int validPoseCount = 0;
 
-        // Loop through all cameras and transforms
         for (Map.Entry<PhotonCamera, double[]> entry : cameraTransforms.entrySet()) {
             Pose2d pose = CameraToPose(entry.getKey(), entry.getValue());
 
-            if (pose.getX() != 0 || pose.getY() != 0) { // Ensure the pose is valid
+            if (pose.getX() != 0 || pose.getY() != 0) { // Ensure valid pose
                 avgX += pose.getX();
                 avgY += pose.getY();
                 sumCos += pose.getRotation().getCos();
@@ -93,7 +93,8 @@ public class PhotonSubsytem extends SubsystemBase {
             }
         }
 
-        if (validPoseCount == 0) return new Pose2d(); // No valid poses
+        if (validPoseCount == 0)
+            return new Pose2d(); // No valid poses
 
         avgX /= validPoseCount;
         avgY /= validPoseCount;
