@@ -61,12 +61,15 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.FlipperSubsystem;
 import frc.robot.subsystems.InterfaceSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.PhotonSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
+// Drive
+import frc.robot.drive.Swerve;
 
 //    .oooooo.   ooooo 
 //   d8P'  `Y8b  `888' 
@@ -98,9 +101,11 @@ public class RobotContainer {
         private final FlipperSubsystem m_flipperSubsystem = new FlipperSubsystem();
         private final InterfaceSubsystem m_interfaceSubsystem = new InterfaceSubsystem();
         private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+        private final PhotonSubsystem m_photonSubsystem = new PhotonSubsystem();
         private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-        private final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
         private final LedSubsystem m_ledSubsystem = new LedSubsystem();
+
+        private final Swerve drive = new Swerve();
 
         private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
         private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,
@@ -197,8 +202,13 @@ public class RobotContainer {
                                 () -> {
                                         m_ledSubsystem.setMode(LedMode.kSOLID);
                                 }));
+                // If PhotonVision has a current pose, set drive's currentPose to that pose.
+                new Trigger(() -> m_photonSubsystem.avgPose.isPresent()).onTrue(new InstantCommand(
+                                () -> {
+                                        drive.setCurrentPose(m_photonSubsystem.avgPose.get());
+                                }));
 
-                // If drive subsystem is in the ideal pose, set isSeekingAlignment to false.
+                // If drive is in the ideal pose, set isSeekingAlignment to false.
                 new Trigger(() -> m_limelightSubsystem.isWithinErrorThreshold()).onTrue(new InstantCommand(
                                 () -> {
                                         m_limelightSubsystem.setSeekingAlignment(false);

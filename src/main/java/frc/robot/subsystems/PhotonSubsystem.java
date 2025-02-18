@@ -21,7 +21,7 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 
-public class PhotonSubsytem extends SubsystemBase {
+public class PhotonSubsystem extends SubsystemBase {
     // PhotonVision cameras
     PhotonCamera FRcam = new PhotonCamera("front_right");
     PhotonCamera FLcam = new PhotonCamera("front_left");
@@ -36,7 +36,10 @@ public class PhotonSubsytem extends SubsystemBase {
     // Camera transform map
     Map<PhotonCamera, double[]> cameraTransforms = new HashMap<>();
 
-    public PhotonSubsytem() {
+    // Current pose
+    public Optional<Pose2d> avgPose = Optional.empty();
+
+    public PhotonSubsystem() {
         cameraTransforms.put(FRcam, new double[] { 12.0, 6.0 });
         cameraTransforms.put(FLcam, new double[] { 12.0, -6.0 });
         cameraTransforms.put(BRcam, new double[] { -12.0, 6.0 });
@@ -105,9 +108,9 @@ public class PhotonSubsytem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Pose2d avgPose = AveragePose();
-        SmartDashboard.putNumber("Average Pose X", avgPose.getX());
-        SmartDashboard.putNumber("Average Pose Y", avgPose.getY());
-        SmartDashboard.putNumber("Average Rotation (Degrees)", avgPose.getRotation().getDegrees());
+        avgPose = Optional.ofNullable(AveragePose());
+        SmartDashboard.putNumber("Average Pose X", avgPose.get().getX());
+        SmartDashboard.putNumber("Average Pose Y", avgPose.get().getY());
+        SmartDashboard.putNumber("Average Rotation (Degrees)", avgPose.get().getRotation().getDegrees());
     }
 }

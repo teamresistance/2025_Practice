@@ -39,10 +39,11 @@ import java.util.ArrayList;
 public class Swerve extends SubsystemBase {
     Trajectory trajectory;
     Trajectory.State theStateOfTheTrajectory;
+    Pose2d currentPose2d;
 
     /** Creates a new FlipperSubsystem. */
     public Swerve() {
-        Pose2d currentPose2d = new Pose2d(0, 0, new Rotation2d(0));
+        currentPose2d = new Pose2d(0, 0, new Rotation2d(0));
         Trajectory BlueAtrajectory;
         TrajectoryConfig trajectoryConfiguration = new TrajectoryConfig(1, 1);
         Spline.ControlVector controlVectorStart = new Spline.ControlVector(new double[] { 0, 0, 0 },
@@ -73,6 +74,10 @@ public class Swerve extends SubsystemBase {
         swerveModules[2] = backLeft;
         swerveModules[3] = backRight;
         swerveModules[0].setDesiredState(theStateOfTheTrajectory);
+    }
+
+    public void setCurrentPose(Pose2d changeTo) {
+        currentPose2d = changeTo;
     }
 
     @Override
