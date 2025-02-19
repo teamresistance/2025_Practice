@@ -1,21 +1,44 @@
 package frc.robot.subsystems;
 
+// Command based imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+// Hardware imports
 import frc.robot.Constants.RobotConstants;
 import frc.robot.Constants.HardwareConstants;
 import frc.robot.Constants.HardwareConstants.LedMode;
-
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 
 public class LedSubsystem extends SubsystemBase {
+    // Variables
+
+    /**
+    * An LED strip with length as specified by {@code RobotConstants.kLedLength}
+    */
     AddressableLED ledstrip = new AddressableLED(HardwareConstants.kLed_portNumber);
+    
+    /**
+    * The length of the LED strip
+    */
     int length = RobotConstants.kLedLength;
+
+    // These variables are necessary for the strobe animation to function.
+
     int animationFrame = 0;
+
+    /**
+    * The amount of time to  advance to the next strobe animation frame.
+    * Can only be 20ms or greater multiples of 20ms.
+    * A higher value means a slower animation.
+    */
     int animationDelay = RobotConstants.kLedAnimationDelayMilliseconds;
+    
     int delayTracker = 0;
 
+    /**
+    * An enum value specifying how the LED lights up.
+    */
     public LedMode mode = HardwareConstants.LedMode.kOFF;
 
     public LedSubsystem() {
@@ -23,6 +46,12 @@ public class LedSubsystem extends SubsystemBase {
         ledstrip.start();
     }
 
+    /**
+    * This method sets all LEDs to an RGB value specified by the {@code int[] color}.
+    * This array MUST be of length 3.
+    * @param color An array starting the intended color in RGB format.
+    * @return Void
+    */
     public void setLEDColor(int[] color) {
         AddressableLEDBuffer buffer = new AddressableLEDBuffer(length);
         for (var i = 0; i < buffer.getLength(); i++) {
@@ -30,7 +59,12 @@ public class LedSubsystem extends SubsystemBase {
         }
         ledstrip.setData(buffer);
     }
-
+    
+    /**
+    * Creates an animated gradient effect between any number of distinct colors.
+    * @param colors a bunch of int[]s of length 3, each a color in RGB format.
+    * @return void
+    */
     public void strobeBetween(int frame, int[]... colors) {
         int cycleLength = length / (colors.length - 1); // Avoid out-of-bounds
         AddressableLEDBuffer buffer = new AddressableLEDBuffer(length);
@@ -50,7 +84,10 @@ public class LedSubsystem extends SubsystemBase {
             buffer.setRGB(i, red, grn, blu);
         }
     }
-
+    
+    /**
+    * Turns off the led strip.
+    */
     public void turnOff() {
         AddressableLEDBuffer buffer = new AddressableLEDBuffer(length);
         for (var i = 0; i < buffer.getLength(); i++) {
@@ -59,6 +96,10 @@ public class LedSubsystem extends SubsystemBase {
         ledstrip.setData(buffer);
     }
 
+    /**
+    *Changes LEDSubsystem.mode.
+    * @param changeTo The intended mode to change to. Can only be kSOLID, kSTROBE, or kOFF.
+    */
     public void setMode(LedMode changeTo) {
         mode = changeTo;
     }
