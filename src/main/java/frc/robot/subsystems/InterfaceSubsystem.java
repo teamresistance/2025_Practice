@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.littletonrobotics.junction.Logger;
+
 public class InterfaceSubsystem extends SubsystemBase {
   public String currentBranchID;
   public String currentBranchLR = "M";
@@ -73,6 +75,11 @@ public class InterfaceSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putData("Reef Branch Chooser", reefBranchChooser);
     SmartDashboard.putData("Reef Level Chooser", reefLevelChooser);
+
+    Logger.recordOutput("Interface/Current Branch ID", currentBranchID);
+    Logger.recordOutput("Interface/Current Branch LR", currentBranchLR);
+    Logger.recordOutput("Interface/Current Branch Level", currentBranchLevel);
+    
   }
 
   @Override
