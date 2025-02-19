@@ -21,17 +21,31 @@ public class ElevatorSubsystem extends SubsystemBase {
   /*
   * This solenoid  controls the first (lower) stage of the elevator.
   * It must be set to true before {@code secondStageSolenoid} is.
-  * If it is on, L2 scoring is enabled.
+  * If it is on, L3 scoring is enabled.
   */
   public Solenoid firstStageSolenoid = new Solenoid(
       HardwareConstants.pneumaticsModuleType,
       HardwareConstants.kSolenoid_firstStage_portNumber);
-
+  
+  /*
+  * This solenoid  controls the first (lower) stage of the elevator.
+  * It must be set to true ONLY IF {@code firstStageSolenoid} is.
+  * If it is on, then the first stage solenoid must also be on. Therefore, L4 scoring is enabled.
+  */
   public Solenoid secondStageSolenoid = new Solenoid(
       HardwareConstants.pneumaticsModuleType,
       HardwareConstants.kSolenoid_secondStage_portNumber);
-
+  
+  /*
+  * This variable records the state of the first stage solenoid.
+  * It should be changed when its corresponding solenoid's state is changed.
+  */
   public boolean firstStageSolenoidUp = false;
+
+  /*
+  * This variable records the state of the second stage solenoid.
+  * It should be changed when its corresponding solenoid's state is changed.
+  */
   public boolean secondStageSolenoidUp = false;
 
   /** Creates a new ExampleSubsystem. */
@@ -39,10 +53,9 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   /**
-   * An example method querying a boolean state of the subsystem (for example, a
-   * digital sensor).
+   * This method sets the first stage's solenoid to the up position.
    *
-   * @return the opposite of the value of said boolean state.
+   * @return Void
    */
   public void raiseFirstStage() {
     firstStageSolenoid.setPulseDuration(
@@ -51,7 +64,12 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     firstStageSolenoidUp = true;
   }
-
+  
+  /**
+   * This method sets the second stage's solenoid to the up position.
+   *
+   * @return Void
+   */
   public void raiseSecondStage() {
     secondStageSolenoid.setPulseDuration(
         HardwareConstants.kSecondStagePulseDurationSeconds);
@@ -59,13 +77,23 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     firstStageSolenoidUp = true;
   }
-
+  
+  /**
+   * This method sets the first stage's solenoid to the down position.
+   *
+   * @return Void
+   */
   public void lowerFirstStage() {
     firstStageSolenoid.set(false);
 
     firstStageSolenoidUp = false;
   }
-
+  
+  /**
+   * This method sets the  second stage's solenoid to the down position.
+   *
+   * @return Void
+   */
   public void lowerSecondStage() {
     secondStageSolenoid.set(false);
 
