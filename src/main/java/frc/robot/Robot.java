@@ -47,12 +47,6 @@ public class Robot extends LoggedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
   }
-
-  @Override
-  public void robotInit() {
-
-  }
-
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items
    * like diagnostics

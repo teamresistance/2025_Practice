@@ -134,6 +134,12 @@ public final class Constants {
     public static final double reefIJangle = 1.0 / 3.0 * Math.PI;
     public static final double[] reefKLmidpoint = { 11.97, 16.50 };
     public static final double reefKLangle = 2.0 / 3.0 * Math.PI;
+    
+    public static final double[] reefCDmidpoint = { 13.26, 9.17 };
+    public static final double[] reefEFmidpoint = { 17.49, 9.92 };
+    public static final double[] reefGHmidpoint = { 18.96, 13.96 };
+    public static final double[] reefIJmidpoint = { 16.19, 17.25 };
+    public static final double[] reefKLmidpoint = { 11.97, 16.50 };
   }
 
 }
