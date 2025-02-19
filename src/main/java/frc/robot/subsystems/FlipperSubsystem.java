@@ -5,15 +5,18 @@
 
 package frc.robot.subsystems;
 
+//  Command based imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+// Hardware Imports
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
-
-import org.littletonrobotics.junction.Logger;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants.RobotConstants;
+
+// Logging and Testing Imports
+import org.littletonrobotics.junction.Logger;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 
 public class FlipperSubsystem extends SubsystemBase {
   private final Solenoid gripper = new Solenoid(PneumaticsModuleType.REVPH, 6);
