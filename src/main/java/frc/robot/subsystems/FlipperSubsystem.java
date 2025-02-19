@@ -25,7 +25,6 @@ public class FlipperSubsystem extends SubsystemBase {
   public FlipperSubsystem() {}
 
   public void grip() {
-    gripper.setPulseDuration(1.0);
     hasCoral = coralDetector.get();
     gripper.set(hasCoral);
     isGripped = gripper.get();
@@ -37,19 +36,16 @@ public class FlipperSubsystem extends SubsystemBase {
   }
 
   public void letGo() {
-    gripper.setPulseDuration(1.0);
     gripper.set(false);
     isGripped = false;
   }
 
   public void extend() {
-    flipper.setPulseDuration(1.0);
     flipper.set(true);
     isInScoringPosition = true;
   }
 
   public void retract() {
-    flipper.setPulseDuration(1.0);
     flipper.set(false);
     isInScoringPosition = false;
   }
