@@ -79,7 +79,7 @@ public class InterfaceSubsystem extends SubsystemBase {
     Logger.recordOutput("Interface/Current Branch ID", currentBranchID);
     Logger.recordOutput("Interface/Current Branch LR", currentBranchLR);
     Logger.recordOutput("Interface/Current Branch Level", currentBranchLevel);
-    
+
   }
 
   @Override
