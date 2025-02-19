@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
+import org.littletonrobotics.junction.Logger;
+
 import frc.robot.Constants.HardwareConstants;
 
 import com.fasterxml.jackson.core.base.GeneratorBase;
@@ -71,6 +73,9 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putBoolean("First Stage Up?", firstStageSolenoidUp);
     SmartDashboard.putBoolean("Second Stage Up?", secondStageSolenoidUp);
+
+    Logger.recordOutput("Elevator/First Stage Up", firstStageSolenoidUp);
+    Logger.recordOutput("Elevator/Second Stage Up", secondStageSolenoidUp);
   }
 
   @Override

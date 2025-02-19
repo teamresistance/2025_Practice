@@ -7,6 +7,8 @@ import frc.robot.LimelightHelpers;
 import frc.robot.Constants.RobotConstants;
 import frc.robot.Constants.FieldConstants;
 
+import org.littletonrobotics.junction.Logger;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.apriltag.AprilTagFields;
@@ -224,6 +226,10 @@ public class LimelightSubsystem extends SubsystemBase {
             setFDTBI();
             setHOTBI();
         }
+
+        Logger.recordOutput("Limelight/Aligned Pose", alignedPose);
+        Logger.recordOutput("Limelight/Current Pose", currentPose);
+        Logger.recordOutput("Limelight/Reef Branch Combinations", reefBranchCombinations.toString());
     }
 
     @Override
