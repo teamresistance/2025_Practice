@@ -1,20 +1,31 @@
 package frc.robot.subsystems;
 
+// Command based imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+// Hardware Imports
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+// Limelight Helpers
 import frc.robot.LimelightHelpers;
+
+// Constants
 import frc.robot.Constants.RobotConstants;
 import frc.robot.Constants.FieldConstants;
 
+// Logging and Testing Imports
 import org.littletonrobotics.junction.Logger;
 
+// Geometry Imports
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+
+// AprilTag Imports
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 
 public class LimelightSubsystem extends SubsystemBase {
+    // Variables
+    
     // BOTH APRILTAG BASED and REEF BRANCH BASED variables
     public Pose2d currentPose;
     public Pose2d alignedPose;
@@ -26,13 +37,24 @@ public class LimelightSubsystem extends SubsystemBase {
     double forwardDistanceToBranchInches;
     double horizontalOffsetToBranchInches;
 
+    /** Creates a new LimelightSubsystem. */
     public LimelightSubsystem() {
     }
 
+    /**
+     * Sets the seeking alignment state.
+     * 
+     * @param changeTo the new state of seeking alignment
+     */
     public void setSeekingAlignment(boolean changeTo) {
         this.isSeekingAlignment = changeTo;
     }
 
+    /**
+     * Checks if the current pose is within the error threshold of the aligned pose.
+     * 
+     * @return true if within the error threshold, false otherwise
+     */
     public boolean isWithinErrorThreshold() {
         boolean inXThreshold = Math
                 .abs(currentPose.getX() - alignedPose.getX()) < RobotConstants.kXdirectionErrorThresholdInches;
@@ -43,6 +65,8 @@ public class LimelightSubsystem extends SubsystemBase {
     }
 
     // APRILTAG BASED STRATEGY
+
+
     public int getNearestVisibleAprilTagID() { // Should only be called when target is visible
         return (int) LimelightHelpers.getT2DArray(limelightName)[9];
     }
@@ -54,6 +78,12 @@ public class LimelightSubsystem extends SubsystemBase {
         return field.getTagPose(id).get().getRotation().getZ();
     }
 
+    /**
+     * Gets the reef XY coordinates based on the branch ID.
+     * 
+     * @param id the branch ID
+     * @return the XY coordinates of the reef
+     */
     public double[] getReefXY(String id) {
         if (!id.equals("M")) {
             switch (id) {
@@ -144,11 +174,18 @@ public class LimelightSubsystem extends SubsystemBase {
     }
 
     // REEF BRANCH BASED STRATEGY
+
+    /**
+     * Updates the perceived branch width in pixels.
+     */
     public void setPBWP() {
         perceivedBranchWidthPixels = LimelightHelpers.getT2DArray(
                 RobotConstants.limelightName)[13];
     }
 
+    /**
+     * Updates the forward distance to the branch in inches.
+     */
     public void setFDTBI() {
         forwardDistanceToBranchInches = (RobotConstants.kLimelightWindowResolutionWidthPixels)
                 * (FieldConstants.kReefBranchWidthInches)
@@ -160,6 +197,9 @@ public class LimelightSubsystem extends SubsystemBase {
                         * 2);
     }
 
+    /**
+     * Updates the horizontal offset to the branch in inches.
+     */
     public void setHOTBI() {
         horizontalOffsetToBranchInches = forwardDistanceToBranchInches
                 * Math.tan(
@@ -227,6 +267,7 @@ public class LimelightSubsystem extends SubsystemBase {
             setHOTBI();
         }
 
+        // Logging
         Logger.recordOutput("Limelight/Aligned Pose", alignedPose);
         Logger.recordOutput("Limelight/Current Pose", currentPose);
         Logger.recordOutput("Limelight/Reef Branch Combinations", reefBranchCombinations.toString());

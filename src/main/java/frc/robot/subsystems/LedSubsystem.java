@@ -3,6 +3,10 @@ package frc.robot.subsystems;
 // Command based imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+// Logging and Testing Imports
+import org.littletonrobotics.junction.Logger;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 // Hardware imports
 import frc.robot.Constants.RobotConstants;
 import frc.robot.Constants.HardwareConstants;
@@ -106,6 +110,7 @@ public class LedSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+        // Update animation frame
         delayTracker++;
 
         if (delayTracker * 20 >= animationDelay) {
@@ -113,6 +118,7 @@ public class LedSubsystem extends SubsystemBase {
             delayTracker = 0;
         }
 
+        // Color the LED strip according to the mode.
         switch (mode) {
             case kSOLID:
                 setLEDColor(RobotConstants.kLedSolidColor);
@@ -127,6 +133,12 @@ public class LedSubsystem extends SubsystemBase {
                 turnOff();
                 break;
         }
+
+        // Reporting
+        SmartDashboard.putString("LED Mode", mode.toString());
+
+        // Logging
+        Logger.recordOutput("LED/Mode", mode.toString());
 
     }
 

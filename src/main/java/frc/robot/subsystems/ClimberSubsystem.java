@@ -38,7 +38,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public ClimberSubsystem() {
     }
     
-    /*
+    /**
     * Sets the climberSV solenoid to the positon expressed by {@code state}.
     * Also changes {@code isActivated} to that state.
     * @param state The intended state you want to set the climber solenoid.
@@ -51,9 +51,6 @@ public class ClimberSubsystem extends SubsystemBase {
         isActivated = climberSV.get();
     }
     
-    /*
-    * This method is called every 20 ms.
-    */
     @Override
     public void periodic() {
         // SmartDashboard reporting

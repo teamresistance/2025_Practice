@@ -16,7 +16,7 @@ import frc.robot.Constants.RobotConstants;
 
 // Logging and Testing Imports
 import org.littletonrobotics.junction.Logger;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FlipperSubsystem extends SubsystemBase {
   // Variables
