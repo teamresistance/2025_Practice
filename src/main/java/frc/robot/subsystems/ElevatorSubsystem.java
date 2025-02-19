@@ -54,7 +54,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   /**
    * This method sets the first stage's solenoid to the up position.
-   *
+   * It also sets the corresponding boolean variable {@code firstStageSolenoidUp) accordingly.
    * @return Void
    */
   public void raiseFirstStage() {
@@ -67,7 +67,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   
   /**
    * This method sets the second stage's solenoid to the up position.
-   *
+   * It also sets the corresponding boolean variable {@code secondStageSolenoidUp) accordingly.
    * @return Void
    */
   public void raiseSecondStage() {
@@ -80,7 +80,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   
   /**
    * This method sets the first stage's solenoid to the down position.
-   *
+   * It also sets the corresponding boolean variable {@code firstStageSolenoidUp) accordingly.
    * @return Void
    */
   public void lowerFirstStage() {
@@ -91,7 +91,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   
   /**
    * This method sets the  second stage's solenoid to the down position.
-   *
+   * It also sets the corresponding boolean variable {@code secondStageSolenoidUp) accordingly.
    * @return Void
    */
   public void lowerSecondStage() {
@@ -100,15 +100,22 @@ public class ElevatorSubsystem extends SubsystemBase {
     firstStageSolenoidUp = false;
   }
 
+  /**
+  * This method returns whether the first stage solenoid is up.
+  * By consequence, this also returns whether any elevator solenoid is active,
+  * because the second stage can only be up if the first is already up.
+  */
   public boolean getFirstStageSolenoidUp() {
     return firstStageSolenoidUp;
   }
 
   @Override
   public void periodic() {
+    // Reporting
     SmartDashboard.putBoolean("First Stage Up?", firstStageSolenoidUp);
     SmartDashboard.putBoolean("Second Stage Up?", secondStageSolenoidUp);
-
+    
+    // Logging
     Logger.recordOutput("Elevator/First Stage Up", firstStageSolenoidUp);
     Logger.recordOutput("Elevator/Second Stage Up", secondStageSolenoidUp);
   }
