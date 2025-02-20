@@ -33,9 +33,9 @@ public class LimelightSubsystem extends SubsystemBase {
     public Object[] reefBranchCombinations = { "", "", 0 };
     String limelightName = RobotConstants.limelightName;
     // REEF BRANCH BASED variables
-    double perceivedBranchWidthPixels;
-    double forwardDistanceToBranchInches;
-    double horizontalOffsetToBranchInches;
+    double perceivedBranchWidthPixels = 0.0;
+    double forwardDistanceToBranchInches = 0.0;
+    double horizontalOffsetToBranchInches = 0.0;
 
     /** Creates a new LimelightSubsystem. */
     public LimelightSubsystem() {
@@ -265,11 +265,12 @@ public class LimelightSubsystem extends SubsystemBase {
             setPBWP();
             setFDTBI();
             setHOTBI();
-
-            System.out.println(perceivedBranchWidthPixels + " width in pixels");
-            System.out.println(forwardDistanceToBranchInches + " distance to branch inches");
-            System.out.println(horizontalOffsetToBranchInches + " horizontal to branch inches");
         }
+
+        // Debug
+        System.out.println(perceivedBranchWidthPixels + " width in pixels");
+        System.out.println(forwardDistanceToBranchInches + " distance to branch inches");
+        System.out.println(horizontalOffsetToBranchInches + " horizontal to branch inches");
 
         // Logging
         Logger.recordOutput("Limelight/Aligned Pose", alignedPose);
