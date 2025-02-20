@@ -106,7 +106,7 @@ public class RobotContainer {
         private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
         private final LedSubsystem m_ledSubsystem = new LedSubsystem();
 
-        private final Swerve drive = new Swerve();
+        // private final Swerve drive = new Swerve();
 
         private final Level2CommandGroup m_level2CommandGroup = new Level2CommandGroup(m_flipperSubsystem);
         private final Level3CommandGroup m_level3CommandGroup = new Level3CommandGroup(m_elevatorSubsystem,
@@ -204,11 +204,12 @@ public class RobotContainer {
                                         m_ledSubsystem.setMode(LedMode.kSOLID);
                                 }));
                 // If PhotonVision has a current pose, set drive's currentPose to that pose.
+                /*
                 new Trigger(() -> m_photonSubsystem.avgPose.isPresent()).onTrue(new InstantCommand(
                                 () -> {
                                         drive.setCurrentPose(m_photonSubsystem.avgPose.get());
                                 }));
-
+                */
                 // If drive is in the ideal pose, set isSeekingAlignment to false.
                 new Trigger(() -> m_limelightSubsystem.isWithinErrorThreshold()).onTrue(new InstantCommand(
                                 () -> {

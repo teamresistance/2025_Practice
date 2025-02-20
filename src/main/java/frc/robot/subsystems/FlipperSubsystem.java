@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
+import frc.robot.Constants.HardwareConstants;
 import frc.robot.Constants.RobotConstants;
 
 // Logging and Testing Imports
@@ -25,7 +26,7 @@ public class FlipperSubsystem extends SubsystemBase {
   *  This solenoid controls the gripper mechanism on the robot.
   * it directly interacts with the coral, and locks it in place with pressure applied to it.
   */
-  private final Solenoid gripper = new Solenoid(PneumaticsModuleType.REVPH, 6);
+  private final Solenoid gripper = new Solenoid(HardwareConstants.pneumaticsModuleType, 6);
 
   /**
   * This solenoid controls the flipper. The flipper swivels out to prime the gripper to score or

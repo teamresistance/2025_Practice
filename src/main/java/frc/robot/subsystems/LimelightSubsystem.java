@@ -27,8 +27,8 @@ public class LimelightSubsystem extends SubsystemBase {
     // Variables
     
     // BOTH APRILTAG BASED and REEF BRANCH BASED variables
-    public Pose2d currentPose;
-    public Pose2d alignedPose;
+    public Pose2d currentPose = new Pose2d(4, 4, new Rotation2d(4));
+    public Pose2d alignedPose = new Pose2d(4, 4, new Rotation2d(4));;
     public boolean isSeekingAlignment = false;
     public Object[] reefBranchCombinations = { "", "", 0 };
     String limelightName = RobotConstants.limelightName;
