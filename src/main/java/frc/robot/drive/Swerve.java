@@ -64,10 +64,10 @@ public class Swerve extends SubsystemBase {
             twoDimensionalPoints.add(curvedPose.poseMeters);
         }
         trajectory = TrajectoryGenerator.generateTrajectory(twoDimensionalPoints, trajectoryConfiguration);
-        SwerveModule frontLeft = new SwerveModule(1, 2, 3);
-        SwerveModule frontRight = new SwerveModule(4, 5, 6);
-        SwerveModule backLeft = new SwerveModule(7, 8, 9);
-        SwerveModule backRight = new SwerveModule(10, 11, 12);
+        SwerveModule frontLeft = new SwerveModule(1, 2);
+        SwerveModule frontRight = new SwerveModule(4, 5);
+        SwerveModule backLeft = new SwerveModule(7, 8);
+        SwerveModule backRight = new SwerveModule(10, 11);
         SwerveModule[] swerveModules = new SwerveModule[4];
         swerveModules[0] = frontLeft;
         swerveModules[1] = frontRight;

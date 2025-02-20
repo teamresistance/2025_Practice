@@ -11,10 +11,9 @@ public class SwerveModule {
     SparkMax driveMotor;
     SparkMax turningMotor;
 
-    public SwerveModule(int driveMotorID, int turningMotorID, int turningEncoderID) {
+    public SwerveModule(int driveMotorID, int turningMotorID) {
         driveMotor_ID = driveMotorID;
         turningMotor_ID = turningMotorID;
-        turningEncoder_ID = turningEncoderID;
         SparkMax driveMotor = new SparkMax(driveMotor_ID, MotorType.kBrushless);
         SparkMax turningMotor = new SparkMax(turningMotor_ID, MotorType.kBrushless);
 
