@@ -11,15 +11,17 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants.RobotConstants;
+import edu.wpi.first.wpilibj.Timer;
 
 public class FlipperSubsystem extends SubsystemBase {
-  private final Solenoid gripper = new Solenoid(PneumaticsModuleType.REVPH, 6);
-  private final Solenoid flipper = new Solenoid(PneumaticsModuleType.REVPH, 9);
+  private final Solenoid gripper = new Solenoid(PneumaticsModuleType.CTREPCM, 6);
+  private final Solenoid flipper = new Solenoid(PneumaticsModuleType.CTREPCM, 9);
+  private final Solenoid centeringSolenoid= new Solenoid(PneumaticsModuleType.CTREPCM, 7);
   private final DigitalInput coralDetector = new DigitalInput(0);
-  
   private boolean hasCoral = false;
   private boolean isGripped = false;
   private boolean isInScoringPosition = false;
+  private boolean isCentered= false;
 
   /** Creates a new FlipperSubsystem. */
   public FlipperSubsystem() {}
@@ -33,6 +35,10 @@ public class FlipperSubsystem extends SubsystemBase {
   public boolean updateHasCoral() {
     hasCoral = coralDetector.get();
     return hasCoral;
+  }
+  public void center(){
+    centeringSolenoid.set(true);
+    isCentered= centeringSolenoid.get();
   }
 
   public void letGo() {
@@ -51,11 +57,7 @@ public class FlipperSubsystem extends SubsystemBase {
   }
 
   public void score() {
-    try {
-      Thread.sleep(RobotConstants.kScoreTimeoutMilliseconds);
-    } catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
-    }
+    Timer.delay(RobotConstants.kScoreTimeoutMilliseconds/1000);
     hasCoral = false;
   }
 
@@ -63,17 +65,14 @@ public class FlipperSubsystem extends SubsystemBase {
   public void periodic() {
     //Scan for coral using DigitalInput.
     //If coral found, grip it after 200ms.
+   if(isCentered==true){ 
     if (gripper.get() == false) {
       if (coralDetector.get() == true) {
-        try {
-            Thread.sleep(RobotConstants.kGripperDelayMilliseconds);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+          Timer.delay(RobotConstants.kGripperDelayMilliseconds/1000);
         gripper.set(true);
       }
     }
-
+  }
     SmartDashboard.putBoolean("Has Coral?", hasCoral);
     SmartDashboard.putBoolean("Is Gripped?", isGripped);
     SmartDashboard.putBoolean("In Scoring Position?", isInScoringPosition);
@@ -83,15 +82,14 @@ public class FlipperSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     //Scan for coral using DigitalInput.
     //If coral found, grip it after 200ms.
-    if (gripper.get() == false) {
-      if (coralDetector.get() == true) {
-        try {
-            Thread.sleep(RobotConstants.kGripperDelayMilliseconds);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        gripper.set(true);
+    if(isCentered==true){
+      if (gripper.get() == false) {
+        if (coralDetector.get() == true) {
+          
+              Timer.delay(RobotConstants.kGripperDelayMilliseconds/1000);
+              gripper.set(true);
       }
+    }
     }
 
     SmartDashboard.putBoolean("Has Coral?", hasCoral);
