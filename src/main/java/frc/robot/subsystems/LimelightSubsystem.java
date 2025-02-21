@@ -45,7 +45,7 @@ public class LimelightSubsystem extends SubsystemBase {
     double horizontalOffsetToBranchInches = 0.0;
     double tX;
     double tShort;
-    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable(limelightName);
 
     /** Creates a new LimelightSubsystem. */
     public LimelightSubsystem() {
