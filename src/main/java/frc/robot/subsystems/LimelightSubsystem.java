@@ -34,18 +34,56 @@ public class LimelightSubsystem extends SubsystemBase {
     // Variables
     
     // BOTH APRILTAG BASED and REEF BRANCH BASED variables
+    
+    /**
+    * The current pose of the robot.
+    */
     public Pose2d currentPose = new Pose2d(4, 4, new Rotation2d(4));
+    /**
+    * The ideal pose of the robot when aligned to score.
+    */
     public Pose2d alignedPose = new Pose2d(4, 4, new Rotation2d(4));;
+    /**
+    * This boolean is {@code true} when the interface subsystem presses the execute button.
+    * This is because, if the execute button is pressed, it's up to vision and drive to align the robot.
+    * False at all other times.
+    */
     public boolean isSeekingAlignment = false;
+    /**
+    * This is the array containing the {@code String} id of the branch as per the game manual
+    * and the {@code int} of the level of the branch that is intended to score in.
+    */
     public Object[] reefBranchCombinations = { "", "", 0 };
+    /**
+    *  Name of the limelight as per RobotConstants
+    */
     String limelightName = RobotConstants.limelightName;
     // REEF BRANCH BASED variables
     double perceivedBranchWidthPixels = 0.0;
     double forwardDistanceToBranchInches = 0.0;
     double horizontalOffsetToBranchInches = 0.0;
+    
+    /**
+    * Returns the x-coordinate of the center of the target in the limelight's  video output.
+    * It MUST BE UPDATED IN PERIODIC.
+    */
     double tX;
+    /**
+    *  This technically returns the shortest side of the bounding box of the target,
+    * but since the reef is viewed as a rectangle from all viewing angles,
+    * the shortest side of this rectangle ends up being the width of the branch.
+    * So, this is the detected width of the branch, in pixels. it MUST BE UPDATED IN PERIODIC!
+    */
     double tShort;
+<<<<<<< HEAD
     NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable(limelightName);
+=======
+    /**
+    * This is a NetworkTable that reports data obtained from the limelight to this subsystem.
+    * It updates {@code tX} and {@code tShort}. The limelight's pipeline must be set to 0.
+    */
+    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+>>>>>>> 75c67587884307dd7890bf3e2822325c87928f64
 
     /** Creates a new LimelightSubsystem. */
     public LimelightSubsystem() {
