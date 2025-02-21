@@ -18,10 +18,17 @@ import org.littletonrobotics.junction.Logger;
 // Geometry Imports
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 // AprilTag Imports
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
+
+//NetworkTable Imports
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.NetworkTableEntry;
+
 
 public class LimelightSubsystem extends SubsystemBase {
     // Variables
@@ -36,9 +43,18 @@ public class LimelightSubsystem extends SubsystemBase {
     double perceivedBranchWidthPixels = 0.0;
     double forwardDistanceToBranchInches = 0.0;
     double horizontalOffsetToBranchInches = 0.0;
+    double tX;
+    double tShort;
+    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
     /** Creates a new LimelightSubsystem. */
     public LimelightSubsystem() {
+        if (limelightName == null || limelightName.isEmpty()) {
+            throw new IllegalArgumentException("Limelight name is not set in RobotConstants.");
+        }
+
+        // Set the Limelight's pipeline to 0
+        LimelightHelpers.setPipelineIndex(limelightName, 0);;
     }
 
     /**
@@ -179,8 +195,7 @@ public class LimelightSubsystem extends SubsystemBase {
      * Updates the perceived branch width in pixels.
      */
     public void setPBWP() {
-        perceivedBranchWidthPixels = LimelightHelpers.getT2DArray(
-                RobotConstants.limelightName)[13];
+        perceivedBranchWidthPixels = tShort;
     }
 
     /**
@@ -204,8 +219,7 @@ public class LimelightSubsystem extends SubsystemBase {
         horizontalOffsetToBranchInches = forwardDistanceToBranchInches
                 * Math.tan(
                         Math.toRadians(
-                                LimelightHelpers.getTX(
-                                        RobotConstants.limelightName)));
+                                tX));
     }
 
     /**
@@ -261,11 +275,15 @@ public class LimelightSubsystem extends SubsystemBase {
         }
 
         // REEF BRANCH BASED STRATEGY
-        if (LimelightHelpers.getTV(limelightName)) {
-            setPBWP();
-            setFDTBI();
-            setHOTBI();
-        }
+    boolean targetVisible = limelightTable.getEntry("tv").getDouble(0) == 1.0;
+    tShort = limelightTable.getEntry("tshort").getDouble(0);
+    tX = limelightTable.getEntry("tx").getDouble(0);
+
+    if (targetVisible) {
+        setPBWP();
+        setFDTBI();
+        setHOTBI();
+    }
 
         // Debug
         System.out.println(perceivedBranchWidthPixels + " width in pixels");
