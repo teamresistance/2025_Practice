@@ -76,7 +76,8 @@ public class LimelightSubsystem extends SubsystemBase {
     */
     double tShort;
     /**
-    *
+    * This is a NetworkTable that reports data obtained from the limelight to this subsystem.
+    * It updates {@code tX} and {@code tShort}. The limelight's pipeline must be set to 0.
     */
     NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
