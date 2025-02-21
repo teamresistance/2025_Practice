@@ -75,15 +75,11 @@ public class LimelightSubsystem extends SubsystemBase {
     * So, this is the detected width of the branch, in pixels. it MUST BE UPDATED IN PERIODIC!
     */
     double tShort;
-<<<<<<< HEAD
-    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable(limelightName);
-=======
     /**
     * This is a NetworkTable that reports data obtained from the limelight to this subsystem.
     * It updates {@code tX} and {@code tShort}. The limelight's pipeline must be set to 0.
     */
     NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
->>>>>>> 75c67587884307dd7890bf3e2822325c87928f64
 
     /** Creates a new LimelightSubsystem. */
     public LimelightSubsystem() {
