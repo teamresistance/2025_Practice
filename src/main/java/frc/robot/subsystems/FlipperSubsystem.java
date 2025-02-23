@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 // Hardware Imports
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants.HardwareConstants;
@@ -26,19 +25,25 @@ public class FlipperSubsystem extends SubsystemBase {
   *  This solenoid controls the gripper mechanism on the robot.
   * it directly interacts with the coral, and locks it in place with pressure applied to it.
   */
-  private final Solenoid gripper = new Solenoid(HardwareConstants.pneumaticsModuleType, 6);
+  private final Solenoid gripper = new Solenoid(HardwareConstants.pneumaticsModuleType, HardwareConstants.kSolenoid_gripper_portNumber);
 
   /**
   * This solenoid controls the flipper. The flipper swivels out to prime the gripper to score or
   * receive coral.
   */
-  private final Solenoid flipper = new Solenoid(PneumaticsModuleType.REVPH, 9);
+  private final Solenoid flipper = new Solenoid(HardwareConstants.pneumaticsModuleType, HardwareConstants.kSolenoid_flipper_portNumber);
+
+  /**
+  * This solenoid controls the centering mechanism. If a coral enters the gripper with some part of it outside the domain of the grippr,
+  * the centerer will push the coral fully into the gripper.
+  */
+  private final Solenoid centerer = new Solenoid(HardwareConstants.pneumaticsModuleType, HardwareConstants.kSolenoid_centerer_portNumber);
 
   /**
   * This is a banner sensor which detects coral. when placed in the gripper, 
   * coral detected by the sensor will set its output to {@code true}.
   */
-  private final DigitalInput coralDetector = new DigitalInput(0);
+  private final DigitalInput coralDetector = new DigitalInput(HardwareConstants.kCoralDetector_portNumber);
 
   /**
   * This boolean variable is set to {@code true} when a coral is detected by the banner sensor
@@ -55,6 +60,11 @@ public class FlipperSubsystem extends SubsystemBase {
   * This boolean variable is set according to the state of the flipper solenoid.
   */
   private boolean isInScoringPosition = false;
+
+  /**
+  * This boolean variable is set according to the state of the centerer solenoid.
+  */
+  private boolean centered = false;
 
   /** Creates a new FlipperSubsystem. */
   public FlipperSubsystem() {
@@ -129,17 +139,30 @@ public class FlipperSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // Scan for coral using DigitalInput.
-    // If coral found, grip it after kGripperDelayMilliseconds milliseconds.
-    if (gripper.get() == false) {
-      if (coralDetector.get() == true) {
+    // If coral found and is not gripped nor centered, center it.
+    if ((gripper.get() == false)
+        && (coralDetector.get() == true)
+        && (centered == false)) {
+        centerer.set(true);
+        centered = true;
+    }
+
+    // Scan for coral using DigitalInput.
+    // If coral found and is centered, grip it after kGripperDelayMilliseconds milliseconds.
+    // Then, release the centering solenoid.
+    if ((gripper.get() == false)
+        && (coralDetector.get() == true)
+        && (centered == true)) {
         try {
           Thread.sleep(RobotConstants.kGripperDelayMilliseconds);
         } catch (InterruptedException e) {
           Thread.currentThread().interrupt();
         }
         gripper.set(true);
-      }
+        centerer.set(false);
     }
+
+    updateHasCoral();
 
     // Reporting
     SmartDashboard.putBoolean("Has Coral?", hasCoral);

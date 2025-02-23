@@ -77,11 +77,14 @@ public final class Constants {
   public static class HardwareConstants {
     public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
 
-    // Arm
-    public static final int kSolenoid_wristRotator_portNumber = 2;
-    public static final int kWristRotatorPulseDurationSeconds = 1;
-    public static final int kSolenoid_armLifter_portNumber = 0;
-    public static final int kArmLifterPulseDurationSeconds = 1;
+    // Flipper
+    public static final int kSolenoid_flipper_portNumber = 2;
+    public static final int kFlipperPulseDurationSeconds = 1;
+    public static final int kSolenoid_gripper_portNumber = 0;
+    public static final int kGripperPulseDurationSeconds = 1;
+    public static final int kCoralDetector_portNumber = 3;
+    public static final int kSolenoid_centerer_portNumber = 6;
+    public static final int kCentererPulseDurationSeconds = 1;
 
     // Elevator
     public static final int kSolenoid_firstStage_portNumber = 1;
