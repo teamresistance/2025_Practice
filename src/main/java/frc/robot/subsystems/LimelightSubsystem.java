@@ -93,7 +93,7 @@ public class LimelightSubsystem extends SubsystemBase {
     * This is a NetworkTable that reports data obtained from the limelight to this subsystem.
     * It updates {@code tX} and {@code tShort}. The limelight's pipeline must be set to 0.
     */
-    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable(limelightName);
 
     /** Creates a new LimelightSubsystem. */
     public LimelightSubsystem() {
@@ -324,20 +324,22 @@ public class LimelightSubsystem extends SubsystemBase {
 
         // REEF BRANCH BASED STRATEGY
     tV = limelightTable.getEntry("tv").getDouble(0) == 1.0;
-    tShort = limelightTable.getEntry("tshort").getDouble(0);
     tX = limelightTable.getEntry("tx").getDouble(0);
 
     if (tV) {
         setPBWP();
         setFDTBI();
         setHOTBI();
+        tShort = limelightTable.getEntry("t2d").getDoubleArray(new double[0])[13];
     }
 
         // Debug
         System.out.println(perceivedBranchWidthPixels + " width in pixels");
         System.out.println(forwardDistanceToBranchInches + " distance to branch inches");
         System.out.println(horizontalOffsetToBranchInches + " horizontal to branch inches");
-        System.out.println(NetworkTableInstance.getDefault().getTable("limelight").getKeys());
+        SmartDashboard.putBoolean("tv", tV);
+        SmartDashboard.putNumber("tshort", tShort);
+        SmartDashboard.putNumber("tx", tX);
 
         // Logging
         Logger.recordOutput("Limelight/Aligned Pose", alignedPose);
