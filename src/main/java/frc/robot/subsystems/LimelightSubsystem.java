@@ -337,6 +337,7 @@ public class LimelightSubsystem extends SubsystemBase {
         System.out.println(perceivedBranchWidthPixels + " width in pixels");
         System.out.println(forwardDistanceToBranchInches + " distance to branch inches");
         System.out.println(horizontalOffsetToBranchInches + " horizontal to branch inches");
+        System.out.println(NetworkTableInstance.getDefault().getTable("limelight").getKeys());
 
         // Logging
         Logger.recordOutput("Limelight/Aligned Pose", alignedPose);
