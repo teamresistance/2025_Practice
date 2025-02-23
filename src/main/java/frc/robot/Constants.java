@@ -53,7 +53,7 @@ public final class Constants {
     public static final int kScoreTimeoutMilliseconds = 3000; // Milliseconds
     public static final int kGripperDelayMilliseconds = 200; // Milliseconds
 
-    public static final String limelightName = "limelight";
+    public static final String limelightName = "limelight-skibidi";
     public static final double kLimelightWindowResolutionWidthPixels = 960;
     public static final double kLimelightHorizontalFOVdegrees = 62.5;
 
