@@ -59,10 +59,24 @@ public class LimelightSubsystem extends SubsystemBase {
     */
     String limelightName = RobotConstants.limelightName;
     // REEF BRANCH BASED variables
+    
+     /**
+     * The perceived width of the branch in pixels.
+     */
     double perceivedBranchWidthPixels = 0.0;
+    /**
+     * The forward distance to the branch in inches.
+     */
     double forwardDistanceToBranchInches = 0.0;
+    /**
+     * The horizontal offset to the branch in inches.
+     */
     double horizontalOffsetToBranchInches = 0.0;
     
+    /**
+     * Returns whether the limelight has a reef branch that it can see (0 or 1).
+     */
+    boolean tV;
     /**
     * Returns the x-coordinate of the center of the target in the limelight's  video output.
     * It MUST BE UPDATED IN PERIODIC.
@@ -309,11 +323,11 @@ public class LimelightSubsystem extends SubsystemBase {
         }
 
         // REEF BRANCH BASED STRATEGY
-    boolean targetVisible = limelightTable.getEntry("tv").getDouble(0) == 1.0;
+    tV = limelightTable.getEntry("tv").getDouble(0) == 1.0;
     tShort = limelightTable.getEntry("tshort").getDouble(0);
     tX = limelightTable.getEntry("tx").getDouble(0);
 
-    if (targetVisible) {
+    if (tV) {
         setPBWP();
         setFDTBI();
         setHOTBI();
