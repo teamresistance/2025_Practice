@@ -14,7 +14,7 @@ import java.util.Optional;
 import org.littletonrobotics.junction.Logger;
 
 public class InterfaceSubsystem extends SubsystemBase {
-  public String currentBranchID;
+  public char currentBranchID;
   public String currentBranchLR = "M";
   public boolean lrButtonToggleState = true;
   public int currentBranchLevel;
@@ -26,7 +26,7 @@ public class InterfaceSubsystem extends SubsystemBase {
   public InterfaceSubsystem() {
   }
 
-  public void storeBranchID(String branchID) {
+  public void storeBranchID(char branchID) {
     currentBranchID = branchID;
     System.out.println(currentBranchID);
   }

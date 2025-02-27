@@ -47,6 +47,8 @@ public final class Constants {
     public static final int klvl4Button_Kybd1_ID = 0;
     public static final int kSelectBranchAndAddButton_Kybd1_ID = 0;
 
+    public static final int kButtonBox_portNumber = 0;
+
   }
 
   public static class RobotConstants {

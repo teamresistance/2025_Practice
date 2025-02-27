@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class InterfaceBranchIDCommand extends Command {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final InterfaceSubsystem m_subsystem;
-  private final String id;
+  private final char id;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public InterfaceBranchIDCommand(InterfaceSubsystem subsystem, String id) {
+  public InterfaceBranchIDCommand(InterfaceSubsystem subsystem, char id) {
     m_subsystem = subsystem;
     this.id = id;
     // Use addRequirements() here to declare subsystem dependencies.

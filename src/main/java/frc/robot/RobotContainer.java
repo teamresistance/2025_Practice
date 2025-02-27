@@ -15,9 +15,11 @@ package frc.robot;
 // Constants
 import frc.robot.Constants.OperatorConstants.JoystickType;
 import frc.robot.Constants.HardwareConstants.LedMode;
+import frc.robot.Constants.OperatorConstants;
 
 // Operator Input
 import frc.robot.OperatorInput;
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 
 //  .oooooo.                                                                             .o8           
 // d8P'  `Y8b                                                                           "888           
@@ -39,7 +41,6 @@ import frc.robot.commandgroups.Level4CommandGroup;
 // NONE YET!
 
 // Interface Commands
-import frc.robot.commands.InterfaceStoreBranchesCommand;
 import frc.robot.commands.InterfaceToggleLeftRightCommand;
 import frc.robot.commands.InterfaceBranchIDCommand;
 import frc.robot.commands.InterfaceBranchLevelCommand;
@@ -113,10 +114,10 @@ public class RobotContainer {
                         m_flipperSubsystem);
         private final Level4CommandGroup m_level4CommandGroup = new Level4CommandGroup(m_elevatorSubsystem,
                         m_flipperSubsystem);
-
-        private final InterfaceStoreBranchesCommand m_interfaceStoreBranchesCommand = new InterfaceStoreBranchesCommand(
-                        m_interfaceSubsystem);
         private final ActivateClimberCommand m_ActivateClimberCommand = new ActivateClimberCommand(m_climberSubsystem);
+
+        // Button box
+        CommandGenericHID button_box = new CommandGenericHID(OperatorConstants.kButtonBox_portNumber);
 
         /**
          * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -146,35 +147,20 @@ public class RobotContainer {
          * joysticks}.
          */
         private void configureBindings() {
-                if (m_operatorInput.joystickType != JoystickType.k2JoysticksAndReefSelector) {
-                        m_operatorInput.lvl2Button.onTrue(m_level2CommandGroup);
-                        m_operatorInput.lvl3Button.onTrue(m_level3CommandGroup);
-                        m_operatorInput.lvl4Button.onTrue(m_level4CommandGroup);
-                        m_operatorInput.selectBranchAndAddButton.onTrue(m_interfaceStoreBranchesCommand);
-                } else {
-                        m_operatorInput.buttonA.onTrue(
-                                        new InterfaceBranchIDCommand(m_interfaceSubsystem, "A"));
-                        m_operatorInput.buttonB.onTrue(
-                                        new InterfaceBranchIDCommand(m_interfaceSubsystem, "B"));
-                        m_operatorInput.buttonC.onTrue(
-                                        new InterfaceBranchIDCommand(m_interfaceSubsystem, "C"));
-                        m_operatorInput.buttonD.onTrue(
-                                        new InterfaceBranchIDCommand(m_interfaceSubsystem, "D"));
-                        m_operatorInput.buttonE.onTrue(
-                                        new InterfaceBranchIDCommand(m_interfaceSubsystem, "E"));
-                        m_operatorInput.buttonF.onTrue(
-                                        new InterfaceBranchIDCommand(m_interfaceSubsystem, "F"));
+                Trigger[] buttonBoxTriggers = new Trigger[16];
+                for (int i = 0; i < 12; i++) {
+                        buttonBoxTriggers[i] = new Trigger(button_box.button(i));
 
-                        m_operatorInput.buttonRL.onTrue(
-                                        new InterfaceToggleLeftRightCommand(m_interfaceSubsystem));
-
-                        m_operatorInput.button4.onTrue(
-                                        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 4));
-                        m_operatorInput.button3.onTrue(
-                                        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 3));
-                        m_operatorInput.button2_1.onTrue(
-                                        new InterfaceBranchLevelCommand(m_interfaceSubsystem, 2));
+                        buttonBoxTriggers[i].onTrue(
+                                new InterfaceBranchIDCommand(m_interfaceSubsystem, (char) (i + 65))
+                        );
                 }
+                for (int i = 11; i < 16; i++) {
+                        buttonBoxTriggers[i].onTrue(
+                                new InterfaceBranchLevelCommand(m_interfaceSubsystem, (i - 10))
+                        );
+                }
+                
                 m_operatorInput.climbButton.onTrue(m_ActivateClimberCommand);
 
                 // ------------------Non-button Triggers for Subsystem Interaction
