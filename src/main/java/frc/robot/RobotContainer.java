@@ -149,18 +149,20 @@ public class RobotContainer {
         private void configureBindings() {
                 Trigger[] buttonBoxTriggers = new Trigger[16];
                 for (int i = 0; i < 12; i++) {
-                        buttonBoxTriggers[i] = new Trigger(button_box.button(i));
-
-                        buttonBoxTriggers[i].onTrue(
+                        Trigger trigger = new Trigger(button_box.button(i)).onTrue(
                                 new InterfaceBranchIDCommand(m_interfaceSubsystem, (char) (i + 65))
                         );
+
+                        buttonBoxTriggers[i] = trigger;
                 }
                 for (int i = 11; i < 16; i++) {
-                        buttonBoxTriggers[i].onTrue(
+                        Trigger trigger = new Trigger(button_box.button(i)).onTrue(
                                 new InterfaceBranchLevelCommand(m_interfaceSubsystem, (i - 10))
                         );
+
+                        buttonBoxTriggers[i] = trigger;
                 }
-                
+
                 m_operatorInput.climbButton.onTrue(m_ActivateClimberCommand);
 
                 // ------------------Non-button Triggers for Subsystem Interaction

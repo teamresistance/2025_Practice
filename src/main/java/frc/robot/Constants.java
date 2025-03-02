@@ -56,7 +56,7 @@ public final class Constants {
     public static final int kGripperDelayMilliseconds = 200; // Milliseconds
 
     public static final String limelightName = "limelight-skibidi";
-    public static final double kLimelightWindowResolutionWidthPixels = 1280;
+    public static final double kLimelightWindowResolutionWidthPixels = 640;
     public static final double kLimelightHorizontalFOVdegrees = 62.5;
 
     public static final double[] kCameraToCenterOffsetInches = { 0, 0 }; // {x, y}
